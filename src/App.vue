@@ -1,12 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <transition name="layout" mode="out-in">
+      <component :is="currentLayout">
+        <router-view/>
+      </component>
+    </transition>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      layout: 'base'
+    }
+  },
+
+  methods: {
+    onRouteUpdate (newRoute, oldRoute) {
+      this.layout = newRoute.meta.layout || 'base'
+    },
+    upperCasePrefix (key) {
+      return key.replace(/^[a-z]/, key => key.toUpperCase())
+    }
+  },
+
+  watch: {
+    '$route': 'onRouteUpdate'
+  },
+
+  computed: {
+    currentLayout () {
+      return () => import(
+        /* webpackChunkName: 'layout-[request]' */
+        `LAYOUT/${this.upperCasePrefix(this.layout)}.vue`
+      )
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

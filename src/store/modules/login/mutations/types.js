@@ -1,0 +1,4 @@
+export default {
+  SET_USERNAME: 'SET_USERNAME',
+  SET_ACCESS_TOKEN: 'SET_ACCESS_TOKEN'
+}

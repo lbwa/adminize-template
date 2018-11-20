@@ -68,13 +68,8 @@ export default {
     onSubmit () {
       this.$refs.login.validate(isValid => {
         if (!isValid) return
-        this.loading = true
-        // this.pushLogin({
-        //   userInfo: this.loginForm,
-        //   replace: this.$router.replace.bind(this.$router)
-        // })
-        //   .finally(() => { this.loading = false })
-        this.$router.push('/')
+        this.$store.dispatch('login/userLogin', this.userInfo)
+          .then(() => this.$router.push('/'))
       })
     }
   }

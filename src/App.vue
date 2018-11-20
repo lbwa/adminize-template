@@ -12,16 +12,16 @@
 export default {
   data () {
     return {
-      layout: 'material' // Default layout file name
+      layout: ''
     }
   },
 
   methods: {
-    onRouteUpdate (newRoute, oldRoute) {
-      this.layout = newRoute.meta.layout || 'material'
+    onRouteUpdate (to, from) {
+      this.setCurrentLayout(to.meta.layout)
     },
-    upperCasePrefix (key) {
-      return key.replace(/^[a-z]/, key => key.toUpperCase())
+    setCurrentLayout (layout = 'material') {
+      this.layout = layout
     }
   },
 
@@ -31,11 +31,18 @@ export default {
 
   computed: {
     currentLayout () {
+      const formatLayoutKey = this.layout
+        .replace(/^[a-z]/, key => key.toUpperCase())
+
       return () => import(
         /* webpackChunkName: 'layout-[request]' */
-        `LAYOUT/${this.upperCasePrefix(this.layout)}`
+        `LAYOUT/${formatLayoutKey}`
       )
     }
+  },
+
+  created () {
+    this.setCurrentLayout(this.$route.meta.layout)
   }
 }
 </script>
@@ -58,4 +65,14 @@ export default {
     }
   }
 }
+
+.layout {
+  &-enter, &-leave-to {
+    opacity: 0;
+  }
+  &-enter-active, &-leave-active {
+    transition: opacity .3s;
+  }
+}
+
 </style>

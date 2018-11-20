@@ -10,6 +10,14 @@ export default new Router({
       path: '/',
       name: 'home',
       component: constantComponents.pagesHome
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: constantComponents.pagesLogin,
+      meta: {
+        layout: 'plain'
+      }
     }
   ]
 })

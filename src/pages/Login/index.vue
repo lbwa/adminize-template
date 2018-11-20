@@ -1,5 +1,5 @@
 <template>
-  <section class="layout__login">
+  <section class="login">
     <el-form
       class="login__form"
       label-position="right"
@@ -9,7 +9,6 @@
       <h1 class="login__form__title">admin template</h1>
       <el-form-item prop="username">
         <el-input
-          icon="el-icon-menu"
           v-model="userInfo.name"
           placeholder="请输入用户名"
         >
@@ -61,8 +60,9 @@ export default {
 
   methods: {
     onSubmit () {
-      if (!this.userInfo.username || !this.userInfo.password) return
+      // if (!this.userInfo.username || !this.userInfo.password) return
       console.info('activate submit')
+      this.$router.push('/')
     }
   }
 }
@@ -79,7 +79,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    height: calc(100vh - 60px - 60px);
+    height: calc(100vh - 60px);
     max-width: 400px;
 
     &__title {
@@ -97,6 +97,7 @@ export default {
     .author__info {
       margin: 0;
       text-align: center;
+      line-height: 60px;
     }
   }
 }

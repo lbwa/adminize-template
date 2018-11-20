@@ -12,7 +12,7 @@ export default {
         commit(types.SET_USERNAME, username)
         commit(types.SET_ACCESS_TOKEN, res.access_token)
         setTokenToLocal(res.access_token)
-        vm.$router.replace('/')
+        vm.$router.replace('/home')
       })
       .catch(e => {
         if (e.code === 5000) {

@@ -14,7 +14,7 @@ export default function createImporters (components) {
 
 /**
  * @description lowerCase prefix letter and uppercase every words excluded
- * prefix letter
+ * first word
  * @param {String} path vue component path, based on `/src`
  * @return {String} A name used to import vue component
  */

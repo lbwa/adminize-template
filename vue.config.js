@@ -12,7 +12,8 @@ module.exports = {
         'STYLE': path.resolve(PATH.SOURCE_PATH, './style'),
         'STATIC': PATH.STATIC_PATH,
         'ROUTER': path.resolve(PATH.SOURCE_PATH, './router'),
-        'UTILS': path.resolve(PATH.SOURCE_PATH, './utils')
+        'UTILS': path.resolve(PATH.SOURCE_PATH, './utils'),
+        'API': path.resolve(PATH.SOURCE_PATH, './api')
       }
     }
   }

@@ -1,10 +1,11 @@
 <template>
-  <el-container class="layout__base">
+  <el-container class="layout__material">
     <!-- Dynamic aside rendering area -->
 
     <el-container>
       <el-header>header</el-header>
       <el-main>main</el-main>
+      <el-footer>footer</el-footer>
     </el-container>
   </el-container>
 </template>
@@ -12,10 +13,7 @@
 <script>
 export default {
   data () {
-    return {
-      username: '',
-      password: ''
-    }
+    return {}
   }
 }
 </script>

@@ -12,13 +12,13 @@
 export default {
   data () {
     return {
-      layout: 'base'
+      layout: 'Login'
     }
   },
 
   methods: {
     onRouteUpdate (newRoute, oldRoute) {
-      this.layout = newRoute.meta.layout || 'base'
+      this.layout = newRoute.meta.layout || 'material'
     },
     upperCasePrefix (key) {
       return key.replace(/^[a-z]/, key => key.toUpperCase())

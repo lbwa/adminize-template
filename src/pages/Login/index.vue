@@ -5,12 +5,16 @@
       label-position="right"
       :model="userInfo"
       :rules="rules"
+      ref="login"
+      status-icon
+      @keyup.enter.native="onSubmit"
     >
       <h1 class="login__form__title">admin template</h1>
       <el-form-item prop="username">
         <el-input
-          v-model="userInfo.name"
+          v-model="userInfo.username"
           placeholder="请输入用户名"
+          clearable
         >
           <i slot="prefix" class="el-icon-service"></i>
         </el-input>
@@ -19,6 +23,8 @@
         <el-input
           v-model="userInfo.password"
           placeholder="请输入密码"
+          type="password"
+          clearable
         >
           <i slot="prefix" class="el-icon-goods"></i>
         </el-input>
@@ -45,7 +51,7 @@ export default {
   data () {
     return {
       userInfo: {
-        name: '',
+        username: '',
         password: ''
       },
       rules
@@ -60,9 +66,16 @@ export default {
 
   methods: {
     onSubmit () {
-      // if (!this.userInfo.username || !this.userInfo.password) return
-      console.info('activate submit')
-      this.$router.push('/')
+      this.$refs.login.validate(isValid => {
+        if (!isValid) return
+        this.loading = true
+        // this.pushLogin({
+        //   userInfo: this.loginForm,
+        //   replace: this.$router.replace.bind(this.$router)
+        // })
+        //   .finally(() => { this.loading = false })
+        this.$router.push('/')
+      })
     }
   }
 }

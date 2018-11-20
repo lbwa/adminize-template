@@ -1,5 +1,5 @@
 import { userLogin } from 'API'
-import { setTokenToLocal } from 'UTILS/storage'
+import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'
 import types from './mutations/types'
 
 export default {
@@ -24,5 +24,10 @@ export default {
         }
         console.error(`[Login error]: ${e.code}, ${e.msg}`)
       })
+  },
+  userLogout ({ commit }) {
+    commit(types.SET_USERNAME, '')
+    commit(types.SET_ACCESS_TOKEN, '')
+    removeTokenFromLocal()
   }
 }

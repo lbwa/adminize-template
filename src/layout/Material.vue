@@ -3,7 +3,13 @@
     <!-- Dynamic aside rendering area -->
 
     <el-container>
-      <el-header>header</el-header>
+      <el-header>
+        <el-button
+          class="logout"
+          type="text"
+          @click="onLogout"
+        >Logout</el-button>
+      </el-header>
       <router-view/>
       <el-footer>footer</el-footer>
     </el-container>
@@ -14,6 +20,12 @@
 export default {
   data () {
     return {}
+  },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('login/userLogout')
+        .then(() => this.$router.replace('/login'))
+    }
   }
 }
 </script>

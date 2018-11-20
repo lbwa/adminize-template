@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getTokenFromLocal } from 'UTILS/storage'
 
 const request = axios.create({
   // Env variables is defined by .env.[mode] files.
@@ -8,6 +9,11 @@ const request = axios.create({
 
 request.interceptors.request.use(req => {
   req.headers['content-type'] = 'application/json'
+  req.headers['app_key'] = process.env.VUE_APP_KEY
+  req.headers['app_secret'] = process.env.VUE_APP_SECRET
+
+  const token = getTokenFromLocal()
+  if (token) req.headers['access_token'] = token
 
   return req
 }, err => {

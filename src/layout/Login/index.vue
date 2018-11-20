@@ -1,0 +1,103 @@
+<template>
+  <section class="layout__login">
+    <el-form
+      class="login__form"
+      label-position="right"
+      :model="userInfo"
+      :rules="rules"
+    >
+      <h1 class="login__form__title">admin template</h1>
+      <el-form-item prop="username">
+        <el-input
+          icon="el-icon-menu"
+          v-model="userInfo.name"
+          placeholder="请输入用户名"
+        >
+          <i slot="prefix" class="el-icon-service"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          v-model="userInfo.password"
+          placeholder="请输入密码"
+        >
+          <i slot="prefix" class="el-icon-goods"></i>
+        </el-input>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button
+          type="primary"
+          @click="onSubmit"
+          class="login__controller__submit"
+        >登陆</el-button>
+      </el-form-item>
+    </el-form>
+    <el-footer class="login__footer">
+      <p class="author__info">Copyright &copy; {{currentYear}}</p>
+    </el-footer>
+  </section>
+</template>
+
+<script>
+import rules from './rules'
+
+export default {
+  data () {
+    return {
+      userInfo: {
+        name: '',
+        password: ''
+      },
+      rules
+    }
+  },
+
+  computed: {
+    currentYear () {
+      return new Date().getFullYear()
+    }
+  },
+
+  methods: {
+    onSubmit () {
+      if (!this.userInfo.username || !this.userInfo.password) return
+      console.info('activate submit')
+    }
+  }
+}
+</script>
+
+<style lang='scss' scoped>
+.layout__login {
+  min-height: 100vh;
+}
+
+.login {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    height: calc(100vh - 60px - 60px);
+    max-width: 400px;
+
+    &__title {
+      text-transform: capitalize;
+    }
+  }
+
+  &__controller {
+    &__submit {
+      width: 100%;
+    }
+  }
+
+  &__footer {
+    .author__info {
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
+</style>

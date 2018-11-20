@@ -33,7 +33,7 @@ export default {
     currentLayout () {
       return () => import(
         /* webpackChunkName: 'layout-[request]' */
-        `LAYOUT/${this.upperCasePrefix(this.layout)}.vue`
+        `LAYOUT/${this.upperCasePrefix(this.layout)}`
       )
     }
   }

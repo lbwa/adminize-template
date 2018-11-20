@@ -68,8 +68,8 @@ export default {
     onSubmit () {
       this.$refs.login.validate(isValid => {
         if (!isValid) return
-        this.$store.dispatch('login/userLogin', this.userInfo)
-          .then(() => this.$router.push('/'))
+        // This action has included routes replacement
+        this.$store.dispatch('login/userLogin', { ...this.userInfo, vm: this })
       })
     }
   }

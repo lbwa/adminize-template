@@ -1,4 +1,5 @@
 import { vueUsing } from 'UTILS'
+import Vue from 'vue'
 import {
   Button,
   Container,
@@ -7,9 +8,14 @@ import {
   Footer,
   Form,
   FormItem,
-  Input
+  Input,
+  MessageBox
 } from 'element-ui'
 
+// Prototype functions
+Vue.prototype.$messageBox = MessageBox
+
+// components using
 vueUsing([
   Button,
   Container,

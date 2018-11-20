@@ -16,12 +16,9 @@ request.interceptors.request.use(req => {
 })
 
 request.interceptors.response.use(({ data }) => {
-  if (data.code !== 2000) {
-    throw new Error(
-      `[Fetch err]: ${data.code}, ${data.msg}`
-    )
-  }
-  return data
+  return data.code !== 2000
+    ? Promise.reject(data)
+    : data
 }, err => {
   err && console.error(`[Response error]: ${err}`)
   return Promise.reject(err)

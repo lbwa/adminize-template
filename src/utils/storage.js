@@ -1,11 +1,18 @@
 const TOKEN_KEY = '__token__'
 
+function setValueToLocal (key, val) {
+  const normalizeVal = typeof val === 'string'
+    ? val
+    : JSON.stringify(val)
+  localStorage.setItem(key, normalizeVal)
+}
+
 export function setTokenToLocal (token) {
-  localStorage.setItem(TOKEN_KEY, token)
+  setValueToLocal(TOKEN_KEY, token)
 }
 
 export function getTokenFromLocal () {
-  localStorage.getItem(TOKEN_KEY)
+  return localStorage.getItem(TOKEN_KEY)
 }
 
 export function removeTokenFromLocal () {

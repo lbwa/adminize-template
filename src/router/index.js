@@ -4,6 +4,11 @@ import { constantComponents } from './components'
 
 Vue.use(Router)
 
+/**
+ * ! NOTICE
+ * This router instance should not be added directly without
+ * `PERMISSION/index` processing.
+ */
 export default new Router({
   routes: [
     {

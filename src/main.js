@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
 import 'normalize.css'
+import App from './App.vue'
+// Shouldn't use Router instance directly without 'PERMISSION/index' processing.
+import router from './permission'
+import store from './store'
 import './plugins/element.js'
 
 Vue.config.productionTip = false

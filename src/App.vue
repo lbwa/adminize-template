@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-      layout: 'Login'
+      layout: 'material' // Default layout file name
     }
   },
 

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { constantComponents } from './components'
 
 Vue.use(Router)
 
@@ -8,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: 'home' */ `PAGES/Home`)
+      component: constantComponents.pagesHome
     }
   ]
 })

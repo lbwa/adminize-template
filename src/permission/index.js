@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
           type: 'error'
         })
           .then(() => next({
-            path: `/login?redirect=${from.path}`,
+            path: `/login?redirect=${to.path}`,
             replace: true
           }))
         NProgress.done()

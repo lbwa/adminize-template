@@ -1,5 +1,6 @@
 import { userLogin, fetchDynamicRoutes } from 'API'
 import types from './mutations/types'
+import router from 'ROUTER'
 
 export default {
   userLogin ({ commit }, { username, password, vm }) {
@@ -34,8 +35,9 @@ export default {
     })
       .then(({ routes }) => routes)
   },
-  createGlobalRoutes ({ commit }, routes) {
+  createGlobalRoutes ({ commit, getters }, routes) {
     commit(types.SET_DYNAMIC_ROUTES, routes)
     commit(types.SET_ALL_ROUTES)
+    router.addRoutes(getters.dynamicRoutes)
   }
 }

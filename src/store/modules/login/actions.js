@@ -1,4 +1,4 @@
-import { userLogin } from 'API'
+import { userLogin, fetchDynamicRoutes } from 'API'
 import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'
 import types from './mutations/types'
 
@@ -29,5 +29,15 @@ export default {
     commit(types.SET_USERNAME, '')
     commit(types.SET_ACCESS_TOKEN, '')
     removeTokenFromLocal()
+  },
+  fetchDynamicRoutes ({ commit, dispatch, state }) {
+    return fetchDynamicRoutes({
+      username: state.username,
+      accessToken: state.accessToken
+    })
+      .then(({ routes }) => {
+        commit(types.SET_DYNAMIC_ROUTES, routes)
+        commit(types.SET_ALL_ROUTES)
+      })
   }
 }

@@ -1,4 +1,6 @@
 export default {
   username: '',
-  accessToken: ''
+  accessToken: '',
+  dynamicRoutes: [],
+  allRoutes: []
 }

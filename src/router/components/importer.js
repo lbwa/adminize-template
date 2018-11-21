@@ -1,3 +1,7 @@
+/**
+ * @description create a object including all async components.
+ * @param {Array} components Components path based on `/src`
+ */
 export default function createImporters (components) {
   const importers = {}
   components.forEach(path => {
@@ -18,7 +22,7 @@ export default function createImporters (components) {
  * @param {String} path vue component path, based on `/src`
  * @return {String} A name used to import vue component
  */
-function createChunkName (path) {
+export function createChunkName (path) {
   const normalizePathSection = path.split('/').map((pathSection, index) => {
     return index === 0
       ? pathSection.replace(/^[A-Z]/, matchKey => matchKey.toLowerCase())

@@ -10,3 +10,13 @@ export function userLogin ({
     password
   })
 }
+
+export function fetchDynamicRoutes ({
+  username,
+  accessToken
+}) {
+  return request.post(routes.DYNAMIC_ROUTES, {
+    username,
+    accessToken
+  })
+}

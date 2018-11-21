@@ -3,6 +3,7 @@ import store from 'STORE'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getTokenFromLocal } from 'UTILS/storage'
+import { MessageBox } from 'element-ui'
 
 NProgress.configure({ showSpinner: false })
 
@@ -22,11 +23,24 @@ router.beforeEach((to, from, next) => {
     return
   }
 
+  // fetching user private routes
   if (getTokenFromLocal()) { // User has been logged in
     store.dispatch('login/fetchDynamicRoutes')
       .then(routes => store.dispatch('login/createGlobalRoutes', routes))
-      .catch(console.error)
-      .finally(() => next())
+      .then(() => next())
+      .catch(e => {
+        MessageBox({
+          title: 'Error',
+          message: 'We got a error when fetching user access.',
+          type: 'error'
+        })
+          .then(() => next({
+            path: `/login?redirect=${from.path}`,
+            replace: true
+          }))
+        NProgress.done()
+        console.error(e)
+      })
   } else {
     next({
       path: `/login?redirect=${to.path}`,

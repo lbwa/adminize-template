@@ -9,6 +9,21 @@
           type="text"
           @click="onLogout"
         >Logout</el-button>
+        <el-button
+          class="logout"
+          type="text"
+          @click="$router.push('/pages/admin/dashboard')"
+        >dashboard</el-button>
+        <el-button
+          class="logout"
+          type="text"
+          @click="$router.push('/pages/admin/table')"
+        >table</el-button>
+        <el-button
+          class="logout"
+          type="text"
+          @click="$router.push('/pages/common/user')"
+        >user info</el-button>
       </el-header>
 
       <el-main class="layout__material__placeholder-main">

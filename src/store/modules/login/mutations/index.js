@@ -18,7 +18,7 @@ export default {
     const components = createImporters(dynamicRoutes)
     state.dynamicRoutes = dynamicRoutes.map(path => {
       // eg. Routes: {
-      //   path: 'page/dashboard',
+      //   path: '/page/dashboard',
       //   component: components.pageDashboard
       // }
       return {
@@ -27,7 +27,7 @@ export default {
       }
     })
   },
-  [types.SET_ALL_ROUTES] (state, allRoutes) {
-    state.allRoutes = allRoutes || [...constantRoutes, ...state.dynamicRoutes]
+  [types.SET_ALL_ROUTES] (state) {
+    state.allRoutes = [...constantRoutes, ...state.dynamicRoutes]
   }
 }

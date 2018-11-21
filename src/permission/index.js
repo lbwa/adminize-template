@@ -25,22 +25,29 @@ router.beforeEach((to, from, next) => {
 
   // fetching user private routes
   if (getTokenFromLocal()) { // User has been logged in
-    store.dispatch('login/fetchDynamicRoutes')
-      .then(routes => store.dispatch('login/createGlobalRoutes', routes))
-      .then(() => next())
-      .catch(e => {
-        MessageBox({
-          title: 'Error',
-          message: 'We got a error when fetching user access.',
-          type: 'error'
+    if (
+      !store.state.login.dynamicRoutes.length ||
+      !store.state.login.dynamicRoutes[0].component
+    ) {
+      store.dispatch('login/fetchDynamicRoutes')
+        .then(routes => store.dispatch('login/createGlobalRoutes', routes))
+        .catch(e => {
+          MessageBox({
+            title: 'Error',
+            message: 'We got a error when fetching user access.',
+            type: 'error',
+            showClose: false
+          })
+            .then(() => store.dispatch('login/userLogout'))
+            .then(() => next({
+              path: `/login?redirect=${to.path}`,
+              replace: true
+            }))
+          NProgress.done()
+          console.error(e)
         })
-          .then(() => next({
-            path: `/login?redirect=${to.path}`,
-            replace: true
-          }))
-        NProgress.done()
-        console.error(e)
-      })
+    }
+    next()
   } else {
     next({
       path: `/login?redirect=${to.path}`,

@@ -16,8 +16,8 @@ export default {
       .catch(e => {
         if (e.code === 5000) {
           vm.$messageBox({
-            title: '错误',
-            message: '用户名或密码错误',
+            title: 'Error',
+            message: 'Wrong username or password',
             type: 'error'
           })
         }

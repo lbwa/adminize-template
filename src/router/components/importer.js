@@ -23,12 +23,13 @@ export default function createImporters (components) {
  * @return {String} A name used to import vue component
  */
 export function createChunkName (path) {
-  const normalizePathSection = path.split('/').map((pathSection, index) => {
-    return index === 0
-      ? pathSection.replace(/^[A-Z]/, matchKey => matchKey.toLowerCase())
-      : pathSection.replace(/^[a-z]/, matchKey => matchKey.toUpperCase())
-  })
-  return normalizePathSection.join('')
+  return path.replace(/^\//, '').split('/')
+    .map((pathSection, index) => {
+      return index === 0
+        ? pathSection.replace(/^[A-Z]/, matchKey => matchKey.toLowerCase())
+        : pathSection.replace(/^[a-z]/, matchKey => matchKey.toUpperCase())
+    })
+    .join('')
 }
 
 /**

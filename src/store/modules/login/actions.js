@@ -1,5 +1,4 @@
 import { userLogin, fetchDynamicRoutes } from 'API'
-import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'
 import types from './mutations/types'
 
 export default {
@@ -11,7 +10,6 @@ export default {
       .then(res => {
         commit(types.SET_USERNAME, username)
         commit(types.SET_ACCESS_TOKEN, res.access_token)
-        setTokenToLocal(res.access_token)
         vm.$router.replace('/home')
       })
       .catch(e => {
@@ -28,7 +26,6 @@ export default {
   userLogout ({ commit }) {
     commit(types.SET_USERNAME, '')
     commit(types.SET_ACCESS_TOKEN, '')
-    removeTokenFromLocal()
   },
   fetchDynamicRoutes ({ state }) {
     return fetchDynamicRoutes({

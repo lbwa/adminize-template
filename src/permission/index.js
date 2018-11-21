@@ -21,13 +21,18 @@ router.beforeEach((to, from, next) => {
     next()
     return
   }
-  if (getTokenFromLocal()) {
+
+  if (getTokenFromLocal()) { // User has been logged in
     store.dispatch('login/fetchDynamicRoutes')
       .then(routes => store.dispatch('login/createGlobalRoutes', routes))
       .catch(console.error)
+      .finally(() => next())
+  } else {
+    next({
+      path: `/login?redirect=${to.path}`,
+      replace: true
+    })
   }
-
-  next()
 })
 
 router.afterEach((to, from) => {

@@ -10,7 +10,11 @@
           @click="onLogout"
         >Logout</el-button>
       </el-header>
-      <router-view class="layout__material__placeholder-main"/>
+
+      <el-main class="layout__material__placeholder-main">
+        <router-view/>
+      </el-main>
+
       <el-footer class="layout__material__footer">
         Copyright &copy; {{currentYear}}
       </el-footer>
@@ -20,10 +24,6 @@
 
 <script>
 export default {
-  data () {
-    return {}
-  },
-
   methods: {
     onLogout () {
       this.$store.dispatch('login/userLogout')

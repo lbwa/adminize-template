@@ -1,6 +1,7 @@
 <template>
   <el-container class="layout__material">
     <!-- Dynamic aside rendering area -->
+    <material-aside/>
 
     <el-container class="layout__material__placeholder">
       <el-header>
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import MaterialAside from './Aside'
+
 export default {
   methods: {
     onLogout () {
@@ -50,6 +53,10 @@ export default {
     currentYear () {
       return new Date().getFullYear()
     }
+  },
+
+  components: {
+    MaterialAside
   }
 }
 </script>

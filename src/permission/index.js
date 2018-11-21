@@ -22,7 +22,9 @@ router.beforeEach((to, from, next) => {
     return
   }
   if (getTokenFromLocal()) {
-    store.dispatch('login/fetchDynamicRoutes').catch(console.error)
+    store.dispatch('login/fetchDynamicRoutes')
+      .then(routes => store.dispatch('login/createGlobalRoutes', routes))
+      .catch(console.error)
   }
 
   next()

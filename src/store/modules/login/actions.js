@@ -30,14 +30,15 @@ export default {
     commit(types.SET_ACCESS_TOKEN, '')
     removeTokenFromLocal()
   },
-  fetchDynamicRoutes ({ commit, dispatch, state }) {
+  fetchDynamicRoutes ({ state }) {
     return fetchDynamicRoutes({
       username: state.username,
       accessToken: state.accessToken
     })
-      .then(({ routes }) => {
-        commit(types.SET_DYNAMIC_ROUTES, routes)
-        commit(types.SET_ALL_ROUTES)
-      })
+      .then(({ routes }) => routes)
+  },
+  createGlobalRoutes ({ commit }, routes) {
+    commit(types.SET_DYNAMIC_ROUTES, routes)
+    commit(types.SET_ALL_ROUTES)
   }
 }

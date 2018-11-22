@@ -11,6 +11,7 @@ export default {
       .then(res => {
         commit(types.SET_USERNAME, username)
         commit(types.SET_ACCESS_TOKEN, res.access_token)
+        vm.toggleLoading(false)
         vm.$router.replace('/home')
       })
       .catch(e => {

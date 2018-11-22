@@ -35,6 +35,7 @@
           type="primary"
           @click="onSubmit"
           class="login__controller__submit"
+          :loading="isLoading"
         >登陆</el-button>
       </el-form-item>
     </el-form>
@@ -54,7 +55,8 @@ export default {
         username: '',
         password: ''
       },
-      rules
+      rules,
+      isLoading: false
     }
   },
 
@@ -66,11 +68,15 @@ export default {
 
   methods: {
     onSubmit () {
+      this.toggleLoading(true)
       this.$refs.login.validate(isValid => {
         if (!isValid) return
         // This action has included routes replacement
         this.$store.dispatch('login/userLogin', { ...this.userInfo, vm: this })
       })
+    },
+    toggleLoading (state) {
+      this.isLoading = state
     }
   }
 }

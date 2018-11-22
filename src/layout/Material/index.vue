@@ -4,28 +4,7 @@
     <material-aside/>
 
     <el-container class="layout__material__placeholder">
-      <el-header>
-        <el-button
-          class="logout"
-          type="text"
-          @click="onLogout"
-        >Logout</el-button>
-        <el-button
-          class="logout"
-          type="text"
-          @click="$router.push('/pages/admin/dashboard')"
-        >dashboard</el-button>
-        <el-button
-          class="logout"
-          type="text"
-          @click="$router.push('/pages/admin/table')"
-        >table</el-button>
-        <el-button
-          class="logout"
-          type="text"
-          @click="$router.push('/pages/common/user')"
-        >user info</el-button>
-      </el-header>
+      <material-header/>
 
       <el-main class="layout__material__placeholder-main">
         <router-view/>
@@ -39,16 +18,10 @@
 </template>
 
 <script>
+import MaterialHeader from './Header'
 import MaterialAside from './Aside'
 
 export default {
-  methods: {
-    onLogout () {
-      this.$store.dispatch('login/userLogout')
-        .then(() => this.$router.replace('/login'))
-    }
-  },
-
   computed: {
     currentYear () {
       return new Date().getFullYear()
@@ -56,6 +29,7 @@ export default {
   },
 
   components: {
+    MaterialHeader,
     MaterialAside
   }
 }
@@ -75,6 +49,7 @@ export default {
 
   &__footer {
     line-height: 60px;
+    text-align: center;
   }
 }
 </style>

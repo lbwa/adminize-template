@@ -1,1 +1,3 @@
-export default {}
+export default {
+  SET_ASIDE_COLLAPSE: 'SET_ASIDE_COLLAPSE'
+}

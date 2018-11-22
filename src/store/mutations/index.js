@@ -1,3 +1,7 @@
-// import types from './types'
+import types from './types'
 
-export default {}
+export default {
+  [types.SET_ASIDE_COLLAPSE] (state) {
+    state.isAsideCollapse = !state.isAsideCollapse
+  }
+}

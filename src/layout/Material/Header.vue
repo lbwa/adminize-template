@@ -7,11 +7,6 @@
     <el-button
       class="logout"
       type="text"
-      @click="onLogout"
-    >Logout</el-button>
-    <el-button
-      class="logout"
-      type="text"
       @click="$router.push('/pages/admin/dashboard')"
     >dashboard</el-button>
     <el-button
@@ -24,6 +19,11 @@
       type="text"
       @click="$router.push('/pages/common/user')"
     >user info</el-button>
+    <el-button
+      class="logout"
+      type="text"
+      @click="onLogout"
+    >Logout</el-button>
   </el-header>
 </template>
 

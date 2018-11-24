@@ -14,7 +14,8 @@ module.exports = {
         'ROUTER': path.resolve(PATH.SOURCE_PATH, './router'),
         'STORE': path.resolve(PATH.SOURCE_PATH, './store'),
         'UTILS': path.resolve(PATH.SOURCE_PATH, './utils'),
-        'API': path.resolve(PATH.SOURCE_PATH, './api')
+        'API': path.resolve(PATH.SOURCE_PATH, './api'),
+        'PERMISSION': path.resolve(PATH.SOURCE_PATH, './permission')
       }
     }
   }

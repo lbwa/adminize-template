@@ -18,37 +18,39 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
 
   // Jump to target path directly If target path has been included by white list
+  // or common routes
+  // if (WHITELIST.includes(to.path) || !to.meta.roles) {
   if (WHITELIST.includes(to.path)) {
-    next()
-    return
+    return next()
   }
 
-  // fetching user private routes
-  if (getTokenFromLocal()) { // User has been logged in
-    if (
-      !store.state.login.dynamicRoutes.length ||
-      !store.state.login.dynamicRoutes[0].component
-    ) {
-      store.dispatch('login/fetchDynamicRoutes')
-        .then(routes => store.dispatch('login/createGlobalRoutes', routes))
-        .catch(e => {
-          MessageBox({
-            title: 'Error',
-            message: 'We got a error when fetching user access.',
-            type: 'error',
-            showClose: false
-          })
-            .then(() => store.dispatch('login/userLogout'))
-            .then(() => next({
-              path: `/login?redirect=${to.path}`,
-              replace: true
-            }))
-          NProgress.done()
-          console.error(e)
-        })
+  // ! State: User has been logged in.
+  if (getTokenFromLocal()) {
+    // 1. fetch rolesMap if necessary (when rolesMap stored by back-end)
+
+    // 2. confirm route access by user role
+    if (!store.getters['login/role']) {
+      // 2.1 No roles: fetch user role
+      return store.dispatch(
+        'login/fetchUserAccess',
+        store.getters['login/username']
+      )
+        .catch(e => errorHandler(e, next, to.path))
+        .finally(() => next())
     }
-    next()
+
+    // 2.2 filter route
+    if (!to.meta.roles ||
+      to.meta.roles.includes(store.getters['login/role'][0])) {
+      next()
+    } else {
+      next({
+        path: `/403?redirect=${to.path}`,
+        replace: true
+      })
+    }
   } else {
+    // ! State: user logout
     next({
       path: `/login?redirect=${to.path}`,
       replace: true
@@ -61,3 +63,19 @@ router.afterEach((to, from) => {
 })
 
 export default router
+
+function errorHandler (e, next, redirectPath) {
+  MessageBox({
+    title: 'Error',
+    message: 'We got a error when fetching user access.',
+    type: 'error',
+    showClose: false
+  })
+    .then(() => store.dispatch('login/userLogout'))
+    .then(() => next({
+      path: `/login?redirect=${redirectPath}`,
+      replace: true
+    }))
+  NProgress.done()
+  console.error(e)
+}

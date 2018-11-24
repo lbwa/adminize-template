@@ -1,4 +1,4 @@
-import { userLogin, fetchDynamicRoutes } from 'API'
+import { userLogin, fetchUserAccess, fetchDynamicRoutes } from 'API'
 import types from './mutations/types'
 import router from 'ROUTER'
 
@@ -27,7 +27,12 @@ export default {
   },
   userLogout ({ commit }) {
     commit(types.SET_USERNAME, '')
+    commit(types.SET_USER_ROLE, '')
     commit(types.SET_ACCESS_TOKEN, '')
+  },
+  fetchUserAccess ({ commit }, username) {
+    return fetchUserAccess({ username })
+      .then(({ roles }) => commit(types.SET_USER_ROLE, roles))
   },
   fetchDynamicRoutes ({ state }) {
     return fetchDynamicRoutes({

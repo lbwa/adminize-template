@@ -14,6 +14,9 @@ export default {
       : removeTokenFromLocal()
     state.accessToken = accessToken
   },
+  [types.SET_USER_ROLE] (state, role) {
+    state.role = role
+  },
   [types.SET_DYNAMIC_ROUTES] (state, dynamicRoutes) {
     const components = createImporters(dynamicRoutes)
     state.dynamicRoutes = dynamicRoutes.map(path => {

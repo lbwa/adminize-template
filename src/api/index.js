@@ -11,12 +11,16 @@ export function userLogin ({
   })
 }
 
+export function fetchUserAccess ({ username }) {
+  return request.post(routes.ACCESS, {
+    username
+  })
+}
+
 export function fetchDynamicRoutes ({
-  username,
-  accessToken
+  username
 }) {
   return request.post(routes.DYNAMIC_ROUTES, {
-    username,
-    accessToken
+    username
   })
 }

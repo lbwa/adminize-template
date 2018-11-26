@@ -3,17 +3,16 @@
  * @param {Array} components Components path based on `/src`
  */
 export default function createImporters (components) {
-  const importers = {}
-  components.forEach(path => {
-    const chunkName = createChunkName(path)
-    if (!importers[chunkName]) {
-      importers[chunkName] = () => import(
+  return components.reduce((accumulator, currentPath) => {
+    const chunkName = createChunkName(currentPath)
+    if (!accumulator[chunkName]) {
+      accumulator[chunkName] = () => import(
         /* webpackChunkName: 'async/[request][index]' */
-        `SOURCE/${createCamelPath(path.replace(/^\//, ''), 1)}`
+        `SOURCE/${createCamelPath(currentPath.replace(/^\//, ''), 1)}`
       )
     }
-  })
-  return importers
+    return accumulator
+  }, {})
 }
 
 /**

@@ -1,5 +1,5 @@
 import types from './types'
-import { constantRoutes } from 'ROUTER'
+import constantRoutes from 'ROUTER/routes/constant'
 import createImporters, { createChunkName } from 'ROUTER/components/importer'
 import { isAbsolute } from 'path'
 import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'

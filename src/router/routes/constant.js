@@ -50,6 +50,10 @@ export default [
     ]
   },
   {
+    path: '/403',
+    component: constantComponents.pagesUnauthorized
+  },
+  {
     path: '/404',
     component: constantComponents.pagesNotFound
   }

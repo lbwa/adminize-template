@@ -1,9 +1,12 @@
 import router from 'ROUTER'
 import store from 'STORE'
+import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getTokenFromLocal } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
+import dynamicRoutes from 'ROUTER/routes/dynamic'
+import constantRoutes from 'ROUTER/routes/constant'
 
 NProgress.configure({ showSpinner: false })
 
@@ -28,13 +31,22 @@ router.beforeEach((to, from, next) => {
   if (getTokenFromLocal()) {
     // 1. fetch rolesMap if necessary (when rolesMap stored by back-end)
 
-    // 2. confirm route access by user role
+    // 2. confirm route access by user role, including global routes creation.
     if (!store.getters['login/role']) {
       // 2.1 No roles: fetch user role
       return store.dispatch(
         'login/fetchUserAccess',
         store.getters['login/username']
       )
+        .then(setDynamicRoutesToStorage)
+        .then(setGlobalRoutesToStorage)
+        .then(() => {
+          router.addRoutes(store.getters['login/dynamicRoutes'])
+          console.log(
+            '[Routes creation]: routes has been added!',
+            store.getters['login/dynamicRoutes']
+          )
+        })
         .catch(e => errorHandler(e, next, to.path))
         .finally(() => next())
     }
@@ -78,4 +90,60 @@ function errorHandler (e, next, redirectPath) {
     }))
   NProgress.done()
   console.error(e)
+}
+
+/**
+ * @param {String} role User access
+ */
+function createDynamicRoutes (role) {
+  if (typeof role !== 'string') throw new Error('[Dynamic routes]: Wrong role.')
+
+  return filterRoutes(dynamicRoutes, role)
+  // ! ADMINISTRATOR has all route access if necessary.
+  // return role === ADMINISTRATOR
+  //   ? dynamicRoutes
+  //   : filterRoutes(dynamicRoutes, role)
+}
+
+/**
+ * @param {Object[]} routes Original routes
+ * @param {String} role User access
+ */
+function filterRoutes (routes, role) {
+  return routes.reduce((accumulator, route) => {
+    const routeCopy = { ...route } // shallow copy
+    if (hasAccess(route, role)) {
+      if (routeCopy.children) {
+        // filter original children routes, **override** all children routes.
+        routeCopy.children = filterRoutes(routeCopy.children, role)
+      }
+
+      // Skip `push` operation if all the route children has been filtered.
+      if (!(routeCopy.children && !routeCopy.children.length)) {
+        accumulator.push(routeCopy)
+      }
+    }
+    return accumulator
+  }, [])
+}
+
+function hasAccess (route, role) {
+  return route.meta && route.meta.roles
+    ? route.meta.roles.includes(role)
+    : true
+}
+
+function setDynamicRoutesToStorage (roles) {
+  const currentRole = Array.isArray(roles) ? roles[0] : roles
+  store.commit(
+    `login/${loginTypes.SET_DYNAMIC_ROUTES}`,
+    createDynamicRoutes(currentRole)
+  )
+}
+
+function setGlobalRoutesToStorage () {
+  store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
+    ...constantRoutes,
+    ...store.getters['login/dynamicRoutes']
+  ])
 }

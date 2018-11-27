@@ -23,6 +23,21 @@ export default [
       }
     ]
   },
+  // Should be hide all /private/* routes when user access exclude 'admin'
+  // Because the only child route can only be accessed by admin
+  {
+    path: '/private',
+    component: plainExport,
+    children: [
+      {
+        path: 'admin',
+        component: dynamicComponents.pagesAccess,
+        meta: {
+          roles: permission.access.admin
+        }
+      }
+    ]
+  },
   {
     path: '*',
     redirect: '/404'

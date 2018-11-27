@@ -6,6 +6,6 @@ export default [
   'pages/Admin/Table',
   'pages/Common/User',
   'pages/Login',
-  'pages/NotFound',
-  'pages/Unauthorized'
+  'pages/Error/NotFound',
+  'pages/Error/Unauthorized'
 ]

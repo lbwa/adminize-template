@@ -1,6 +1,6 @@
 <template>
   <section class="access__static">
-    this is static route for {{$route.meta.role}} role.
+    Current user role is {{$store.getters['login/role']}}
   </section>
 </template>
 

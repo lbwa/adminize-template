@@ -1,24 +1,24 @@
 import { dynamicComponents, plainExport } from 'ROUTER/components'
-import permission from 'PERMISSION/rolesMap'
+import permission from 'PERMISSION/RolesMap'
 
 export default [
   {
-    path: '/access',
-    name: 'access',
+    path: '/private',
+    name: 'private',
     component: plainExport,
     children: [
       {
         path: 'admin',
-        component: dynamicComponents.pagesAccess,
+        component: dynamicComponents.pagesPrivate,
         meta: {
-          roles: permission.access.admin
+          roles: permission.private.admin
         }
       },
       {
         path: 'user',
-        component: dynamicComponents.pagesAccess,
+        component: dynamicComponents.pagesPrivate,
         meta: {
-          roles: permission.access.user
+          roles: permission.private.user
         }
       }
     ]
@@ -26,14 +26,14 @@ export default [
   // Should be hide all /private/* routes when user access exclude 'admin'
   // Because the only child route can only be accessed by admin
   {
-    path: '/private',
+    path: '/single',
     component: plainExport,
     children: [
       {
         path: 'admin',
-        component: dynamicComponents.pagesAccess,
+        component: dynamicComponents.pagesPrivate,
         meta: {
-          roles: permission.access.admin
+          roles: permission.private.admin
         }
       }
     ]

@@ -7,7 +7,7 @@ export default {
     dashboard: ['sudo', 'admin'],
     table: ['sudo', 'admin']
   },
-  access: {
+  private: {
     admin: ['super admin', 'admin'],
     user: ['user']
   }

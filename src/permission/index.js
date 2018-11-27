@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
 
   // ! State: User has been logged in.
   if (getTokenFromLocal()) {
-    // 1. fetch rolesMap if necessary (when rolesMap stored by back-end)
+    // 1. fetch RolesMap if necessary (when RolesMap stored by back-end)
 
     // 2. confirm route access by user role, including global routes creation.
     if (!store.getters['login/role']) {

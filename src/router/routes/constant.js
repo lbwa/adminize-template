@@ -1,5 +1,5 @@
 import { constantComponents, plainExport } from 'ROUTER/components'
-import permission from 'PERMISSION/rolesMap'
+import permission from 'PERMISSION/RolesMap'
 
 export default [
   {

@@ -31,6 +31,10 @@ export default {
     commit(types.SET_ACCESS_TOKEN, '')
     commit(types.SET_DYNAMIC_ROUTES, [])
     commit(types.SET_ALL_ROUTES, [])
+    // https://github.com/PanJiaChen/vue-element-admin/issues/416
+    // location.reload() is used to reset all dynamic routes.
+    // All routes records should be synced with vuex-persistedstate.
+    location.reload()
   },
   fetchUserAccess ({ commit }, username) {
     return fetchUserAccess({ username })

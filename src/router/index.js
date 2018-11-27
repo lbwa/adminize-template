@@ -10,5 +10,7 @@ Vue.use(Router)
  * `PERMISSION/index` processing.
  */
 export default new Router({
+  mode: 'hash',
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

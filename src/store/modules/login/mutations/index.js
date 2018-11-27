@@ -1,7 +1,4 @@
 import types from './types'
-import constantRoutes from 'ROUTER/routes/constant'
-import createImporters, { createChunkName } from 'ROUTER/components/importer'
-import { isAbsolute } from 'path'
 import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'
 
 export default {
@@ -18,19 +15,9 @@ export default {
     state.role = role
   },
   [types.SET_DYNAMIC_ROUTES] (state, dynamicRoutes) {
-    const components = createImporters(dynamicRoutes)
-    state.dynamicRoutes = dynamicRoutes.map(path => {
-      // eg. Routes: {
-      //   path: '/page/dashboard',
-      //   component: components.pageDashboard
-      // }
-      return {
-        path: isAbsolute(path) ? path : `/${path}`,
-        component: components[createChunkName(path)]
-      }
-    })
+    state.dynamicRoutes = dynamicRoutes
   },
-  [types.SET_ALL_ROUTES] (state) {
-    state.allRoutes = [...constantRoutes, ...state.dynamicRoutes]
+  [types.SET_ALL_ROUTES] (state, allRoutes) {
+    state.allRoutes = allRoutes
   }
 }

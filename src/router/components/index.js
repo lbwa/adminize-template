@@ -1,6 +1,6 @@
 import createImporters from './importer'
-import constant from './ConstantConfig'
-import dynamic from './DynamicConfig'
+import constant from './constant-config'
+import dynamic from './dynamic-config'
 
 export const constantComponents = createImporters(constant)
 export const dynamicComponents = createImporters(dynamic)

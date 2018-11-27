@@ -16,11 +16,3 @@ export function fetchUserAccess ({ username }) {
     username
   })
 }
-
-export function fetchDynamicRoutes ({
-  username
-}) {
-  return request.post(routes.DYNAMIC_ROUTES, {
-    username
-  })
-}

@@ -29,10 +29,15 @@ export default {
     commit(types.SET_USERNAME, '')
     commit(types.SET_USER_ROLE, '')
     commit(types.SET_ACCESS_TOKEN, '')
+    commit(types.SET_DYNAMIC_ROUTES, [])
+    commit(types.SET_ALL_ROUTES, [])
   },
   fetchUserAccess ({ commit }, username) {
     return fetchUserAccess({ username })
-      .then(({ roles }) => commit(types.SET_USER_ROLE, roles))
+      .then(({ roles }) => {
+        commit(types.SET_USER_ROLE, roles)
+        return roles
+      })
   },
   fetchDynamicRoutes ({ state }) {
     return fetchDynamicRoutes({

@@ -7,21 +7,6 @@
     <el-button
       class="logout"
       type="text"
-      @click="$router.push('/admin/dashboard')"
-    >dashboard</el-button>
-    <el-button
-      class="logout"
-      type="text"
-      @click="$router.push('/admin/table')"
-    >table</el-button>
-    <el-button
-      class="logout"
-      type="text"
-      @click="$router.push('/common/user')"
-    >user info</el-button>
-    <el-button
-      class="logout"
-      type="text"
       @click="onLogout"
     >Logout</el-button>
   </el-header>
@@ -60,6 +45,11 @@ export default {
       font-size: 20px;
       transition: all .3s, padding 0s;
     }
+  }
+
+  .logout {
+    float: right;
+    height: 60px;
   }
 }
 </style>

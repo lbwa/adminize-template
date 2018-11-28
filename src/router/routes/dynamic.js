@@ -7,7 +7,8 @@ export default [
     name: 'private',
     component: plainExport,
     meta: {
-      title: 'Private'
+      title: 'Private',
+      icon: 'el-icon-picture-outline'
     },
     children: [
       {
@@ -34,7 +35,8 @@ export default [
     path: '/single',
     component: plainExport,
     meta: {
-      title: 'Single'
+      title: 'Single',
+      icon: 'el-icon-mobile-phone'
     },
     children: [
       {

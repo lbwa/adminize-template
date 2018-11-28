@@ -31,7 +31,8 @@ export default [
     path: '/admin',
     component: plainExport,
     meta: {
-      title: 'Admin'
+      title: 'Admin',
+      icon: 'el-icon-view'
     },
     children: [
       {
@@ -47,6 +48,7 @@ export default [
         component: constantComponents.pagesAdminTable,
         meta: {
           title: 'Table',
+          icon: 'el-icon-tickets',
           roles: permission.admin.table
         }
       }
@@ -56,7 +58,8 @@ export default [
     path: '/common',
     component: plainExport,
     meta: {
-      title: 'Common'
+      title: 'Common',
+      icon: 'el-icon-document'
     },
     children: [
       {

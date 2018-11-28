@@ -3,7 +3,7 @@
   and no hidden setting. -->
   <div
     class="recursive__list__item"
-    v-if="!route.meta.hidden && route.meta.title"
+    v-if="(route.meta && !route.meta.hidden) && route.meta.title"
   >
 
     <!-- route rendering without child route -->
@@ -81,5 +81,15 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
+/* MUST be global style setting */
+.el-menu--collapse {
+  & .el-submenu {
+    & .el-submenu__title {
+      & .el-submenu__icon-arrow, .menu__item__title {
+        display: none
+      }
+    }
+  }
+}
 </style>

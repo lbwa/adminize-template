@@ -15,8 +15,8 @@
     <el-menu
       class="aside__menu"
       :collapse="isAsideCollapse"
-      :collapse-transition="true"
       :router="true"
+      :collapse-transition="true"
       :unique-opened="true"
       :default-active="$route.path"
       :active-text-color="activeTextColor"

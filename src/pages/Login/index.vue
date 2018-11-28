@@ -88,6 +88,10 @@ export default {
 }
 
 .login {
+  background-image: url('~ASSETS/animation.gif');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+
   &__form {
     display: flex;
     flex-direction: column;
@@ -97,6 +101,7 @@ export default {
     max-width: 400px;
 
     &__title {
+      text-align: center;
       text-transform: capitalize;
     }
   }

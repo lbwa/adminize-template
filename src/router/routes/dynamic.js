@@ -6,11 +6,15 @@ export default [
     path: '/private',
     name: 'private',
     component: plainExport,
+    meta: {
+      title: 'Private'
+    },
     children: [
       {
         path: 'admin',
         component: dynamicComponents.pagesPrivate,
         meta: {
+          title: 'Admin',
           roles: permission.private.admin
         }
       },
@@ -18,6 +22,7 @@ export default [
         path: 'user',
         component: dynamicComponents.pagesPrivate,
         meta: {
+          title: 'User',
           roles: permission.private.user
         }
       }
@@ -28,11 +33,15 @@ export default [
   {
     path: '/single',
     component: plainExport,
+    meta: {
+      title: 'Single'
+    },
     children: [
       {
         path: 'admin',
         component: dynamicComponents.pagesPrivate,
         meta: {
+          title: 'Admin',
           roles: permission.private.admin
         }
       }
@@ -40,6 +49,9 @@ export default [
   },
   {
     path: '*',
-    redirect: '/404'
+    redirect: '/404',
+    meta: {
+      hidden: true
+    }
   }
 ]

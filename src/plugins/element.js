@@ -10,7 +10,10 @@ import {
   Form,
   FormItem,
   Input,
-  MessageBox
+  MessageBox,
+  Menu,
+  Submenu,
+  MenuItem
 } from 'element-ui'
 
 // Prototype functions
@@ -26,5 +29,8 @@ vueUsing([
   Footer,
   Form,
   FormItem,
-  Input
+  Input,
+  Menu,
+  Submenu,
+  MenuItem
 ])

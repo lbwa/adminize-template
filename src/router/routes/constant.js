@@ -1,28 +1,29 @@
 import { constantComponents, plainExport } from 'ROUTER/components'
 import permission from 'PERMISSION/roles-map'
 
+/**
+ * meta: {
+ *   title: 'route title', // Route will be hidden if meta.title is falsy value
+ *   icon: '', // title text icon name
+ *   layout: '', // layout name, 'plain' or 'material'(default value)
+ *   roles: ['admin', 'user'] // current route access
+ * }
+ */
 export default [
   {
     path: '/',
-    redirect: '/home',
-    meta: {
-      hidden: true
-    }
+    redirect: '/home'
   },
   {
     path: '/home',
     name: 'home',
-    component: constantComponents.pagesHome,
-    meta: {
-      title: 'Home'
-    }
+    component: constantComponents.pagesHome
   },
   {
     path: '/login',
     name: 'login',
     component: constantComponents.pagesLogin,
     meta: {
-      title: 'Login',
       layout: 'plain'
     }
   },
@@ -69,16 +70,10 @@ export default [
   },
   {
     path: '/403',
-    component: constantComponents.pagesErrorUnauthorized,
-    meta: {
-      title: 'Unauthorized'
-    }
+    component: constantComponents.pagesErrorUnauthorized
   },
   {
     path: '/404',
-    component: constantComponents.pagesErrorNotFound,
-    meta: {
-      title: 'NotFound'
-    }
+    component: constantComponents.pagesErrorNotFound
   }
 ]

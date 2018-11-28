@@ -1,14 +1,19 @@
 <template>
-  <div class="recursive__list__item">
+  <!-- Component default behavior: route rendering when route has a title value
+  and no hidden setting. -->
+  <div
+    class="recursive__list__item"
+    v-if="!route.meta.hidden && route.meta.title"
+  >
 
-    <!-- route without child route -->
+    <!-- route rendering without child route -->
     <template v-if="!route.children">
       <el-menu-item
         :index="resolvePath(route.path)"
       >{{route.meta.title}}</el-menu-item>
     </template>
 
-    <!-- route with child route: recursive area -->
+    <!-- route rendering with child route: recursive area -->
     <el-submenu
       v-else
       :index="route.path"

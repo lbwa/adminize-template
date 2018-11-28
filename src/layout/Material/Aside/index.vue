@@ -3,7 +3,7 @@
     class="layout__material__aside"
     :width="isAsideCollapse ? `80px` : `254px`"
   >
-    <div class="aside__header">
+    <header class="aside__header">
       <img
         class="aside__header__logo"
         src="./logo.png"
@@ -11,7 +11,7 @@
         height="32"
         alt="App logo">
       <h1 class="aside__title">admin template</h1>
-    </div>
+    </header>
     <el-menu
       class="aside__menu"
       :collapse="isAsideCollapse"
@@ -100,11 +100,15 @@ export default {
   }
 }
 
-// /deep/ .el-submenu__title {
-//   &:hover, &:focus {
-//     background-color: $background-dark;
-//   }
-// }
+/deep/ .el-menu--collapse {
+  width: auto;
+}
+
+/deep/ .el-submenu__title {
+  &:hover, &:focus {
+    background-color: $background-dark;
+  }
+}
 
 /deep/ .el-menu-item {
   background-color: $background-dark;

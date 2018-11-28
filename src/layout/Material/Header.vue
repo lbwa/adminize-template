@@ -35,7 +35,7 @@ export default {
   padding: 0 24px 0 0;
   position: relative; // for box-shadow
   background-color: $background-lightest;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 
   .header {
     &__icon {

@@ -27,9 +27,6 @@ export default new Vuex.Store({
   actions,
   strict: __DEV__,
   plugins: __DEV__
-    ? [createLogger()]
-    : []
-  // plugins: __DEV__
-  //   ? [createLogger(), persistedState]
-  //   : [persistedState]
+    ? [createLogger(), persistedState]
+    : [persistedState]
 })

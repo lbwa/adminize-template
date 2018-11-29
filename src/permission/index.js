@@ -14,6 +14,9 @@ const WHITELIST = [
   '/login'
 ]
 
+// Used to determine whether private routes has been added
+let HAS_ROUTES_ADDED = false
+
 function setDynamicRoutesToStorage (roles) {
   const currentRole = Array.isArray(roles) ? roles[0] : roles
   store.commit(
@@ -48,7 +51,7 @@ function errorHandler (e, next, redirectPath) {
 function routesAddToRouter () {
   router.addRoutes(store.getters['login/dynamicRoutes'])
   console.log(
-    '[Routes creation]: routes has been added!',
+    '%c[Routes creation]: routes has been added!', 'color: yellow',
     store.getters['login/dynamicRoutes']
   )
 }
@@ -62,9 +65,13 @@ function createAllRoutes (to, redirectPath, next) {
     .then(setGlobalRoutesToStorage)
     .then(() => routesAddToRouter())
     .catch(e => errorHandler(e, next, redirectPath))
-    // MUST invoke `next({ ...to, replace: true })` to prevent route matching
+    // 1. MUST invoke `next({ ...to, replace: true })` to prevent route matching
     // from occurring before route is added
-    .finally(() => next({ ...to, replace: true }))
+    // 2. use `to` route to replace routes occurring before private routes is added
+    .finally(() => {
+      HAS_ROUTES_ADDED = true
+      next({ ...to, replace: true })
+    })
 }
 
 /**
@@ -74,22 +81,35 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
 
   // Jump to target path directly If target path has been included by white list
-  // or common routes
-  // if (WHITELIST.includes(to.path) || !to.meta.roles) {
   if (WHITELIST.includes(to.path)) {
     return next()
   }
 
-  // ! State: User has been logged in.
+  // ! State: User has been logged in (local token).
   if (getTokenFromLocal()) {
     // 1. fetch RolesMap if necessary (when RolesMap stored by back-end)
 
     // 2. confirm route access by user role, including global routes creation.
     if (!store.getters['login/role']) {
-      // 2.1.1 No roles: validate token (Ensure user info)
-
-      // 2.1.2 fetch user role
+      // 2.1 fetch user role, then routes creation based on user role.
       return createAllRoutes(to, to.path, next)
+    }
+
+    // (2.2 optional) re-create private routes based on user role when page
+    // reload.
+    if (store.getters['login/role'] && !HAS_ROUTES_ADDED) {
+      setDynamicRoutesToStorage(store.getters['login/role'])
+      setGlobalRoutesToStorage()
+      routesAddToRouter()
+      HAS_ROUTES_ADDED = true
+      console.log(
+        '%c[Routes creation]: Private routes has been regenerated !',
+        'color: yellow;'
+      )
+      // 1. MUST invoke `next({ ...to, replace: true })` to prevent route
+      // matching from occurring before route is added
+      // 2. use `to` route to replace routes occurring before private routes is added
+      return next({ ...to, replace: true })
     }
 
     // 2.2 filter route

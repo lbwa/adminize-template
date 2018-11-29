@@ -14,6 +14,57 @@ const WHITELIST = [
   '/login'
 ]
 
+function setDynamicRoutesToStorage (roles) {
+  const currentRole = Array.isArray(roles) ? roles[0] : roles
+  store.commit(
+    `login/${loginTypes.SET_DYNAMIC_ROUTES}`,
+    createDynamicRoutes(currentRole)
+  )
+}
+
+function setGlobalRoutesToStorage () {
+  store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
+    ...constantRoutes,
+    ...store.getters['login/dynamicRoutes']
+  ])
+}
+
+function errorHandler (e, next, redirectPath) {
+  MessageBox({
+    title: 'Error',
+    message: 'We got a error when fetching user access.',
+    type: 'error',
+    showClose: false
+  })
+    .then(() => store.dispatch('login/userLogout'))
+    .then(() => next({
+      path: `/login?redirect=${redirectPath}`,
+      replace: true
+    }))
+  NProgress.done()
+  console.error(e)
+}
+
+function routesAddToRouter () {
+  router.addRoutes(store.getters['login/dynamicRoutes'])
+  console.log(
+    '[Routes creation]: routes has been added!',
+    store.getters['login/dynamicRoutes']
+  )
+}
+
+function createAllRoutes (redirectPath, next) {
+  return store.dispatch(
+    'login/fetchUserAccess',
+    store.getters['login/username']
+  )
+    .then(setDynamicRoutesToStorage)
+    .then(setGlobalRoutesToStorage)
+    .then(() => routesAddToRouter())
+    .catch(e => errorHandler(e, next, redirectPath))
+    .finally(() => next())
+}
+
 /**
  * @description Login state validation
  */
@@ -33,22 +84,10 @@ router.beforeEach((to, from, next) => {
 
     // 2. confirm route access by user role, including global routes creation.
     if (!store.getters['login/role']) {
-      // 2.1 No roles: fetch user role
-      return store.dispatch(
-        'login/fetchUserAccess',
-        store.getters['login/username']
-      )
-        .then(setDynamicRoutesToStorage)
-        .then(setGlobalRoutesToStorage)
-        .then(() => {
-          router.addRoutes(store.getters['login/dynamicRoutes'])
-          console.log(
-            '[Routes creation]: routes has been added!',
-            store.getters['login/dynamicRoutes']
-          )
-        })
-        .catch(e => errorHandler(e, next, to.path))
-        .finally(() => next())
+      // 2.1.1 No roles: validate token (Ensure user info)
+
+      // 2.1.2 fetch user role
+      return createAllRoutes(to.path, next)
     }
 
     // 2.2 filter route
@@ -75,34 +114,3 @@ router.afterEach((to, from) => {
 })
 
 export default router
-
-function errorHandler (e, next, redirectPath) {
-  MessageBox({
-    title: 'Error',
-    message: 'We got a error when fetching user access.',
-    type: 'error',
-    showClose: false
-  })
-    .then(() => store.dispatch('login/userLogout'))
-    .then(() => next({
-      path: `/login?redirect=${redirectPath}`,
-      replace: true
-    }))
-  NProgress.done()
-  console.error(e)
-}
-
-function setDynamicRoutesToStorage (roles) {
-  const currentRole = Array.isArray(roles) ? roles[0] : roles
-  store.commit(
-    `login/${loginTypes.SET_DYNAMIC_ROUTES}`,
-    createDynamicRoutes(currentRole)
-  )
-}
-
-function setGlobalRoutesToStorage () {
-  store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
-    ...constantRoutes,
-    ...store.getters['login/dynamicRoutes']
-  ])
-}

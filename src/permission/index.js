@@ -96,7 +96,8 @@ router.beforeEach((to, from, next) => {
     }
 
     // (2.2 optional) re-create private routes based on user role when page
-    // reload.
+    // reload, because vuex state will be preserved by vuex-persistedstate when
+    // page reload.
     if (store.getters['login/role'] && !HAS_ROUTES_ADDED) {
       setDynamicRoutesToStorage(store.getters['login/role'])
       setGlobalRoutesToStorage()

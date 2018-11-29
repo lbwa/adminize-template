@@ -1,3 +1,3 @@
 export default {
-  isAsideCollapse: true
+  isAsideCollapse: false
 }

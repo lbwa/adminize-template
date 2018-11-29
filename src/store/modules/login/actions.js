@@ -35,8 +35,8 @@ export default {
     // All routes records should be synced with vuex-persistedstate.
     location.reload()
   },
-  fetchUserAccess ({ commit }, username) {
-    return fetchUserAccess({ username })
+  fetchUserAccess ({ commit }, token) {
+    return fetchUserAccess(token)
       .then(({ roles }) => {
         commit(types.SET_USER_ROLE, roles)
         return roles

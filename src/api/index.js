@@ -11,8 +11,8 @@ export function userLogin ({
   })
 }
 
-export function fetchUserAccess ({ username }) {
+export function fetchUserAccess (token) {
   return request.post(routes.ACCESS, {
-    username
+    token
   })
 }

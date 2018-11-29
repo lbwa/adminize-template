@@ -56,13 +56,13 @@ function routesAddToRouter () {
 function createAllRoutes (redirectPath, next) {
   return store.dispatch(
     'login/fetchUserAccess',
-    store.getters['login/username']
+    getTokenFromLocal()
   )
     .then(setDynamicRoutesToStorage)
     .then(setGlobalRoutesToStorage)
     .then(() => routesAddToRouter())
     .catch(e => errorHandler(e, next, redirectPath))
-    .finally(() => next())
+    .finally(next)
 }
 
 /**

@@ -53,7 +53,7 @@ function routesAddToRouter () {
   )
 }
 
-function createAllRoutes (redirectPath, next) {
+function createAllRoutes (to, redirectPath, next) {
   return store.dispatch(
     'login/fetchUserAccess',
     getTokenFromLocal()
@@ -62,7 +62,9 @@ function createAllRoutes (redirectPath, next) {
     .then(setGlobalRoutesToStorage)
     .then(() => routesAddToRouter())
     .catch(e => errorHandler(e, next, redirectPath))
-    .finally(next)
+    // MUST invoke `next({ ...to, replace: true })` to prevent route matching
+    // from occurring before route is added
+    .finally(() => next({ ...to, replace: true }))
 }
 
 /**
@@ -87,7 +89,7 @@ router.beforeEach((to, from, next) => {
       // 2.1.1 No roles: validate token (Ensure user info)
 
       // 2.1.2 fetch user role
-      return createAllRoutes(to.path, next)
+      return createAllRoutes(to, to.path, next)
     }
 
     // 2.2 filter route

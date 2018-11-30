@@ -72,6 +72,32 @@ export default [
     ]
   },
   {
+    path: '/nested',
+    component: constantComponents.pagesNested,
+    meta: {
+      title: 'Nested',
+      icon: 'el-icon-document'
+    },
+    children: [
+      {
+        path: 'nested-1',
+        component: constantComponents.pagesNested,
+        meta: {
+          title: 'nested-1'
+        },
+        children: [
+          {
+            path: 'nested-2',
+            component: constantComponents.pagesNested,
+            meta: {
+              title: 'nested-2'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
     path: '/403',
     component: constantComponents.pagesErrorUnauthorized
   },

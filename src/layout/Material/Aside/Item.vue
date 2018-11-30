@@ -29,13 +29,13 @@
       <!-- child route recursive rendering -->
       <template
         v-for="child of route.children"
-        v-if="!child.meta.hidden"
+        v-if="child.meta && !child.meta.hidden"
       >
         <recursive-item
           v-if="child.children && child.children.length"
           :route="child"
           :key="child.path"
-          :base-path="resolvePath(child.path)"
+          :basic-route="resolvePath(child.path)"
           class="recursive__nested-list"
         />
         <el-menu-item

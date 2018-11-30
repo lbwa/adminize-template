@@ -1,5 +1,5 @@
 import types from './types'
-import { setTokenToLocal, removeTokenFromLocal } from 'UTILS/storage'
+import { tokenFromLocal } from 'UTILS/storage'
 
 export default {
   [types.SET_USERNAME] (state, username) {
@@ -7,8 +7,8 @@ export default {
   },
   [types.SET_ACCESS_TOKEN] (state, accessToken) {
     accessToken
-      ? setTokenToLocal(accessToken)
-      : removeTokenFromLocal()
+      ? tokenFromLocal.setItem(accessToken)
+      : tokenFromLocal.removeItem()
     state.accessToken = accessToken
   },
   [types.SET_USER_ROLE] (state, role) {

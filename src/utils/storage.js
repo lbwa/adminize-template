@@ -1,20 +1,27 @@
-const TOKEN_KEY = '__token__'
+const TOKEN_KEY = '__tk__'
+const USERNAME_KEY = '__usn__'
 
-function setValueToLocal (key, val) {
+function setValueToLocal (key, val, storage) {
   const normalizeVal = typeof val === 'string'
     ? val
     : JSON.stringify(val)
-  localStorage.setItem(key, normalizeVal)
+  storage.setItem(key, normalizeVal)
 }
 
-export function setTokenToLocal (token) {
-  setValueToLocal(TOKEN_KEY, token)
+function createStorageUtils (key, storage = localStorage) {
+  return {
+    setItem (value) {
+      setValueToLocal(key, value, storage)
+    },
+    getItem () {
+      return storage.getItem(key)
+    },
+    removeItem () {
+      storage.removeItem(key)
+    }
+  }
 }
 
-export function getTokenFromLocal () {
-  return localStorage.getItem(TOKEN_KEY)
-}
+export const tokenFromLocal = createStorageUtils(TOKEN_KEY, localStorage)
 
-export function removeTokenFromLocal () {
-  localStorage.removeItem(TOKEN_KEY)
-}
+export const usernameFromStorage = createStorageUtils(USERNAME_KEY, localStorage)

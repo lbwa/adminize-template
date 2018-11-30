@@ -3,7 +3,7 @@ import store from 'STORE'
 import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { getTokenFromLocal } from 'UTILS/storage'
+import { tokenFromStorage, usernameFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
 import createDynamicRoutes from './create-routes'
 import constantRoutes from 'ROUTER/routes/constant'
@@ -48,7 +48,7 @@ function errorHandler (e, next, redirectPath) {
   console.error(e)
 }
 
-function routesAddToRouter () {
+function addRoutesToRouter () {
   router.addRoutes(store.getters['login/dynamicRoutes'])
   console.log(
     '%c[Routes creation]: routes has been added!', 'color: yellow',
@@ -56,22 +56,15 @@ function routesAddToRouter () {
   )
 }
 
-function createAllRoutes (to, redirectPath, next) {
-  return store.dispatch(
-    'login/fetchUserAccess',
-    getTokenFromLocal()
-  )
-    .then(setDynamicRoutesToStorage)
-    .then(setGlobalRoutesToStorage)
-    .then(() => routesAddToRouter())
-    .catch(e => errorHandler(e, next, redirectPath))
-    // 1. MUST invoke `next({ ...to, replace: true })` to prevent route matching
-    // from occurring before route is added
-    // 2. use `to` route to replace routes occurring before private routes is added
-    .finally(() => {
-      HAS_ROUTES_ADDED = true
-      next({ ...to, replace: true })
-    })
+function createRoutesMap (to, next) {
+  setDynamicRoutesToStorage(store.getters['login/role'])
+  setGlobalRoutesToStorage()
+  addRoutesToRouter()
+  HAS_ROUTES_ADDED = true
+  // 1. MUST invoke `next({ ...to, replace: true })` to prevent route matching
+  // from occurring before route is added
+  // 2. use `to` route to replace routes occurring before private routes is added
+  return next({ ...to, replace: true })
 }
 
 /**
@@ -86,31 +79,52 @@ router.beforeEach((to, from, next) => {
   }
 
   // ! State: User has been logged in (local token).
-  if (getTokenFromLocal()) {
+  if (tokenFromStorage.getItem()) {
     // 1. fetch RolesMap if necessary (when RolesMap stored by back-end)
+
+    // local storage has a accessToken record, but current `login/accessToken`
+    // vuex state is empty string when user activate a new session (eg. new
+    // browser tab)
+    if (!store.getters['login/accessToken']) {
+      return store.dispatch(
+        'login/fetchUserAccess',
+        tokenFromStorage.getItem()
+      )
+        .then(() => {
+          // fill vuex state with user information to prevent infinity loop.
+          store.commit(
+            `login/${loginTypes.SET_ACCESS_TOKEN}`,
+            tokenFromStorage.getItem()
+          )
+          store.commit(
+            `login/${loginTypes.SET_USERNAME}`,
+            usernameFromStorage.getItem()
+          )
+        })
+        .then(() => createRoutesMap(to, next))
+        .catch(e => errorHandler(e, next, to.path))
+    }
 
     // 2. confirm route access by user role, including global routes creation.
     if (!store.getters['login/role']) {
       // 2.1 fetch user role, then routes creation based on user role.
-      return createAllRoutes(to, to.path, next)
+      return store.dispatch(
+        'login/fetchUserAccess',
+        tokenFromStorage.getItem()
+      )
+        .then(() => createRoutesMap(to, next))
+        .catch(e => errorHandler(e, next, to.path))
     }
 
-    // (2.2 optional) re-create private routes based on user role when page
+    // (2.2 optional) Regenerate private routes based on user role when page
     // reload, because vuex state will be preserved by vuex-persistedstate when
     // page reload.
     if (store.getters['login/role'] && !HAS_ROUTES_ADDED) {
-      setDynamicRoutesToStorage(store.getters['login/role'])
-      setGlobalRoutesToStorage()
-      routesAddToRouter()
-      HAS_ROUTES_ADDED = true
       console.log(
-        '%c[Routes creation]: Private routes has been regenerated !',
+        '%c[Routes creation]: Activate private routes regeneration process !',
         'color: yellow;'
       )
-      // 1. MUST invoke `next({ ...to, replace: true })` to prevent route
-      // matching from occurring before route is added
-      // 2. use `to` route to replace routes occurring before private routes is added
-      return next({ ...to, replace: true })
+      return createRoutesMap(to, next)
     }
 
     // 2.2 filter route

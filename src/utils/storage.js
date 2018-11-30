@@ -22,6 +22,6 @@ function createStorageUtils (key, storage = localStorage) {
   }
 }
 
-export const tokenFromLocal = createStorageUtils(TOKEN_KEY, localStorage)
+export const tokenFromStorage = createStorageUtils(TOKEN_KEY, localStorage)
 
 export const usernameFromStorage = createStorageUtils(USERNAME_KEY, localStorage)

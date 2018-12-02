@@ -7,7 +7,9 @@
       <material-header/>
 
       <el-main class="layout__material__placeholder-main">
-        <router-view/>
+        <transition name="fade" mode="out-in">
+          <router-view/>
+        </transition>
       </el-main>
 
       <el-footer class="layout__material__footer">

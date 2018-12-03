@@ -1,7 +1,6 @@
 <template>
   <div class="admin__dashboard">
-    {{info}}
-    <router-link to="table">table</router-link>
+    Current routes is <strong>{{$route.path}}</strong>.
   </div>
 </template>
 

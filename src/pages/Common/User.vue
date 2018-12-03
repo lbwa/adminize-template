@@ -1,7 +1,6 @@
 <template>
   <div class="common__user">
-    {{info}}
-    <router-link to="/home">home</router-link>
+    Current route is <strong>{{$route.path}}</strong>.
   </div>
 </template>
 

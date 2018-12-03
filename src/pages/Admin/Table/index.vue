@@ -1,7 +1,6 @@
 <template>
   <div class="admin__table">
-    {{info}}
-    <router-link to="/pages/common/user">user center</router-link>
+    Current route is <strong>{{$route.path}}</strong>.
   </div>
 </template>
 

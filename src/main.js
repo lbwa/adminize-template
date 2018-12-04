@@ -9,6 +9,8 @@ import './plugins/element.js'
 import router from './permission'
 import store from './store'
 
+import 'STYLE/transition/index.scss'
+
 Vue.config.productionTip = false
 
 new Vue({

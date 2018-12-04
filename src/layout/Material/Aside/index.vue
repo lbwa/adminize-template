@@ -1,7 +1,10 @@
 <template>
   <el-aside
-    class="layout__material__aside"
-    :width="isAsideCollapse ? `80px` : `254px`"
+    :class="[
+      'layout__material__aside',
+      isAsideCollapse ? 'collapse' : 'expand'
+    ]"
+    :width="``"
   >
     <header class="aside__header">
       <img
@@ -63,11 +66,22 @@ export default {
 <style lang='scss' scoped>
 @import '~STYLE/color/background.scss';
 
+$aside-width: 254px;
+$aside-collapse-width: 80px;
+
 .layout__material__aside {
   min-height: 100vh;
   background-color: $background-dark;
   transition: width .3s;
   color: white;
+
+  &.expand {
+    width: $aside-width;
+  }
+
+  &.collapse {
+    width: $aside-collapse-width;
+  }
 
   .aside {
 

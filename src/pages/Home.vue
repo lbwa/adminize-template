@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    This is home page.
-    <router-link to="/pages/admin/dashboard">admin dashboard</router-link>
+    Current routes is <strong>{{$route.path}}</strong>.
   </div>
 </template>
 

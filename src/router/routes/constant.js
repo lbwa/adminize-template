@@ -17,7 +17,10 @@ export default [
   {
     path: '/home',
     name: 'home',
-    component: constantComponents.pagesHome
+    component: constantComponents.pagesHome,
+    meta: {
+      title: 'Home'
+    }
   },
   {
     path: '/login',

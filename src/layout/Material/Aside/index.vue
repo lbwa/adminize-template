@@ -65,6 +65,7 @@ export default {
 
 <style lang='scss' scoped>
 @import '~STYLE/color/background.scss';
+@import '~STYLE/color/font.scss';
 
 $aside-width: 254px;
 $aside-collapse-width: 80px;
@@ -134,7 +135,7 @@ $aside-collapse-width: 80px;
   // 当前激活路由背景色
   &.is-active {
     // 源 UI 样式为内联样式，故使用 important 提升权重
-    background-color: $background-hover !important
+    color: $font-blue-50 !important;
   }
 }
 </style>

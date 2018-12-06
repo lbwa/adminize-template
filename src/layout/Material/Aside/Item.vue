@@ -29,22 +29,23 @@
       <!-- child route recursive rendering -->
       <template
         v-for="child of route.children"
-        v-if="child.meta && !child.meta.hidden"
       >
-        <recursive-item
-          v-if="child.children && child.children.length"
-          :route="child"
-          :key="child.path"
-          :basic-route="resolvePath(child.path)"
-          class="recursive__nested-list"
-        />
-        <el-menu-item
-          v-else
-          :key="child.path"
-          :index="resolvePath(child.path)"
+        <template
+          v-if="child.meta && !child.meta.hidden"
         >
-          {{child.meta.title}}
-        </el-menu-item>
+          <recursive-item
+            v-if="child.children && child.children.length"
+            :route="child"
+            :key="child.path"
+            :basic-route="resolvePath(child.path)"
+            class="recursive__nested-list"
+          />
+          <el-menu-item
+            v-else
+            :key="child.path"
+            :index="resolvePath(child.path)"
+          >{{child.meta.title}}</el-menu-item>
+        </template>
       </template>
     </el-submenu>
 

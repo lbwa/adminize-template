@@ -47,26 +47,30 @@
   - Admin
 
 ## Usages
-```
+```bash
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
-```
+```bash
+# run development server and mock server
+yarn run dev
+
+# run development server
 yarn run serve
 ```
 
 ### Compiles and minifies for production
-```
+```bash
 yarn run build
 ```
 
 ### Run your tests
-```
+```bash
 yarn run test
 ```
 
 ### Lints and fixes files
-```
+```bash
 yarn run lint
 ```

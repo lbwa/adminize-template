@@ -3,8 +3,7 @@ module.exports = {
     const { username, password } = req.body
     if ((
       username === 'sudo' || username === 'admin' || username === 'user'
-    ) && password
-    ) {
+    ) && password) {
       return res.send({
         'code': 2000,
         'msg': 'OK',

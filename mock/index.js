@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8800
 // Notice: Keep correct sequences, otherwise request body would be empty object.
 const server = Server.create()
 const middleware = Server.defaults()
-const router = Server.router()
+const router = Server.router({})
 
 server.use(middleware)
 server.use(Server.bodyParser)

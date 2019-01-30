@@ -13,7 +13,7 @@
         width="32"
         height="32"
         alt="App logo">
-      <h1 class="aside__title">admin template</h1>
+      <h1 class="aside__title">{{$t('aside.header')}}</h1>
     </header>
     <el-menu
       class="aside__menu"
@@ -66,22 +66,20 @@ export default {
 <style lang='scss' scoped>
 @import '~STYLE/color/background.scss';
 @import '~STYLE/color/font.scss';
-
-$aside-width: 254px;
-$aside-collapse-width: 80px;
+@import '~STYLE/layout/aside.scss';
 
 .layout__material__aside {
   min-height: 100vh;
-  background-color: $background-dark;
   transition: width .3s;
   color: white;
+  overflow-x: hidden !important; // 隐藏横向滚动条
 
   &.expand {
-    width: $aside-width;
+    width: $expand-width;
   }
 
   &.collapse {
-    width: $aside-collapse-width;
+    width: $collapse-width;
   }
 
   .aside {

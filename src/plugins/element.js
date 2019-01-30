@@ -14,7 +14,8 @@ import {
   Message,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Scrollbar
 } from 'element-ui'
 
 // Prototype functions
@@ -34,5 +35,6 @@ vueUsing([
   Input,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Scrollbar
 ])

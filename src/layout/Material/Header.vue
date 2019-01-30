@@ -4,11 +4,19 @@
       class="el-icon-menu header__icon"
       @click="toggleAside"
     ></i>
+
+    <!-- 登出按钮 -->
     <el-button
       class="logout"
       type="text"
       @click="onLogout"
-    >Logout</el-button>
+    >{{$t('aside.bar.logout')}}</el-button>
+
+    <div class="user">
+      <!-- 此处用户头像地址应是与用户信息耦合，而不与静态文件耦合 -->
+      <img src="./logo.png" height="50%" alt="avatar" class="user__avatar">
+      <span class="user__name">{{username}}</span>
+    </div>
   </el-header>
 </template>
 
@@ -16,6 +24,14 @@
 import { mapMutations } from 'vuex'
 
 export default {
+  name: 'Header',
+
+  data () {
+    return {
+      username: 'default name'
+    }
+  },
+
   methods: {
     onLogout () {
       this.$store.dispatch('login/userLogout')
@@ -30,6 +46,11 @@ export default {
 
 <style lang='scss' scoped>
 @import '~STYLE/color/background.scss';
+
+@mixin user-area {
+  float: right;
+  height: 60px;
+}
 
 .layout__material__header {
   padding: 0 24px 0 0;
@@ -47,9 +68,17 @@ export default {
     }
   }
 
+  .user {
+    @include user-area;
+    margin-right: 15px;
+    &__name, &__avatar {
+      line-height: 60px;
+      vertical-align: middle;
+    }
+  }
+
   .logout {
-    float: right;
-    height: 60px;
+    @include user-area;
   }
 }
 </style>

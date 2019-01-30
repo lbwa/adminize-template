@@ -1,5 +1,8 @@
 export default {
-  username: '',
+  userInfo: {
+    userId: '',
+    username: ''
+  },
   accessToken: '',
   role: '',
   dynamicRoutes: [],

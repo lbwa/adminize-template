@@ -1,6 +1,6 @@
 export default {
   username (state) {
-    return state.username
+    return (state.userInfo && state.userInfo.username) || '无用户名'
   },
   accessToken (state) {
     return state.accessToken

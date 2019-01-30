@@ -1,5 +1,5 @@
-const TOKEN_KEY = '__tk__'
-const USERNAME_KEY = '__usn__'
+const TOKEN_KEY = '$_tk'
+const USER_INFO_KEY = '$_usn'
 
 function setValueToLocal (key, val, storage) {
   const normalizeVal = typeof val === 'string'
@@ -24,4 +24,4 @@ function createStorageUtils (key, storage = localStorage) {
 
 export const tokenFromStorage = createStorageUtils(TOKEN_KEY, localStorage)
 
-export const usernameFromStorage = createStorageUtils(USERNAME_KEY, localStorage)
+export const userInfoFromStorage = createStorageUtils(USER_INFO_KEY, localStorage)

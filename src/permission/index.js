@@ -3,7 +3,7 @@ import store from 'STORE'
 import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { tokenFromStorage, usernameFromStorage } from 'UTILS/storage'
+import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
 import createDynamicRoutes from './create-routes'
 import constantRoutes from 'ROUTER/routes/constant'
@@ -97,8 +97,8 @@ router.beforeEach((to, from, next) => {
             tokenFromStorage.getItem()
           )
           store.commit(
-            `login/${loginTypes.SET_USERNAME}`,
-            usernameFromStorage.getItem()
+            `login/${loginTypes.SET_USER_INFO}`,
+            JSON.parse(userInfoFromStorage.getItem()).username
           )
         })
         .then(() => createRoutesMap(to, next))

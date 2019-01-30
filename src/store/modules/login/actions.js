@@ -7,25 +7,27 @@ export default {
       username,
       password
     })
-      .then(res => {
-        commit(types.SET_USERNAME, username)
-        commit(types.SET_ACCESS_TOKEN, res.access_token)
-        vm.toggleLoading(false)
-        vm.$router.replace('/home')
+      // eslint-disable-next-line
+      .then(({ user_id, access_token }) => {
+        commit(types.SET_USER_INFO, {
+          username, /* 手机或者是邮箱 */
+          userId: user_id
+        })
+        commit(types.SET_ACCESS_TOKEN, access_token)
       })
       .catch(e => {
         if (e.code === 5000) {
-          vm.$messageBox({
-            title: 'Error',
-            message: 'Wrong username or password',
+          vm.$_plugins_messageBox({
+            title: '警告',
+            message: '错误的用户名或密码',
             type: 'error'
           })
         }
-        console.error(`[Login error]: ${e.code}, ${e.msg}`)
+        console.error(`[Login error]: ${JSON.stringify(e)}`)
       })
   },
   userLogout ({ commit }) {
-    commit(types.SET_USERNAME, '')
+    commit(types.SET_USER_INFO, {})
     commit(types.SET_USER_ROLE, '')
     commit(types.SET_ACCESS_TOKEN, '')
     commit(types.SET_DYNAMIC_ROUTES, [])
@@ -36,6 +38,7 @@ export default {
     location.reload()
   },
   fetchUserAccess ({ commit }, token) {
+    // ! 预留接口：请求用户的权限集合 roles，用于过滤用户的私有路由
     return fetchUserAccess(token)
       .then(({ roles }) => {
         commit(types.SET_USER_ROLE, roles)

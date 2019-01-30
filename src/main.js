@@ -2,7 +2,7 @@ import Vue from 'vue'
 import 'normalize.css'
 import App from './App'
 
-// Including Vue prototype functions (eg. this.$messageBox())
+// Including Vue prototype functions (eg. this.$_plugins_messageBox())
 import './plugins/element.js'
 
 // Shouldn't use Router instance directly without 'PERMISSION/index' processing.

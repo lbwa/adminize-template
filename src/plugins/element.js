@@ -11,13 +11,15 @@ import {
   FormItem,
   Input,
   MessageBox,
+  Message,
   Menu,
   Submenu,
   MenuItem
 } from 'element-ui'
 
 // Prototype functions
-Vue.prototype.$messageBox = MessageBox
+Vue.prototype.$_plugins_messageBox = MessageBox
+Vue.prototype.$_plugins_message = Message
 
 // components using
 vueUsing([

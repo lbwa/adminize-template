@@ -1,12 +1,12 @@
 import types from './types'
-import { tokenFromStorage, usernameFromStorage } from 'UTILS/storage'
+import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 
 export default {
-  [types.SET_USERNAME] (state, username) {
-    username
-      ? usernameFromStorage.setItem(username)
-      : usernameFromStorage.removeItem()
-    state.username = username
+  [types.SET_USER_INFO] (state, userInfo) {
+    userInfo
+      ? userInfoFromStorage.setItem(userInfo)
+      : userInfoFromStorage.removeItem()
+    state.userInfo = userInfo
   },
   [types.SET_ACCESS_TOKEN] (state, accessToken) {
     accessToken

@@ -14,7 +14,12 @@
 
     <div class="user">
       <!-- 此处用户头像地址应是与用户信息耦合，而不与静态文件耦合 -->
-      <img src="./logo.png" height="50%" alt="avatar" class="user__avatar">
+      <img
+        src="~../img/logo.png"
+        height="50%"
+        alt="avatar"
+        class="user__avatar"
+      >
       <span class="user__name">{{username}}</span>
     </div>
   </el-header>

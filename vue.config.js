@@ -2,6 +2,10 @@ const path = require('path')
 const PATH = require('./config/path')
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/admin-template/'
+    : '/',
+  productionSourceMap: false, // turn off source map
   configureWebpack: {
     resolve: {
       alias: {

@@ -13,7 +13,7 @@
       </el-main>
 
       <el-footer class="layout__material__footer">
-        Copyright &copy; {{currentYear}}
+        <page-footer/>
       </el-footer>
     </el-container>
   </el-container>
@@ -22,17 +22,13 @@
 <script>
 import MaterialHeader from './Header'
 import MaterialAside from './Aside'
+import PageFooter from 'COMPONENTS/PageFooter'
 
 export default {
-  computed: {
-    currentYear () {
-      return new Date().getFullYear()
-    }
-  },
-
   components: {
     MaterialHeader,
-    MaterialAside
+    MaterialAside,
+    PageFooter
   }
 }
 </script>

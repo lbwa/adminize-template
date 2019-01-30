@@ -40,12 +40,13 @@
       </el-form-item>
     </el-form>
     <el-footer class="login__footer">
-      <p class="author__info">Copyright &copy; {{currentYear}}</p>
+      <page-footer/>
     </el-footer>
   </section>
 </template>
 
 <script>
+import PageFooter from 'COMPONENTS/PageFooter'
 import rules from './rules'
 
 export default {
@@ -60,24 +61,28 @@ export default {
     }
   },
 
-  computed: {
-    currentYear () {
-      return new Date().getFullYear()
+  methods: {
+    onSubmit () {
+      this.switchLoading(true)
+      this.$refs.login.validate()
+        .then(valid => ({
+          ...this.userInfo,
+          vm: this
+        }))
+        // This action has included routes replacement
+        // dispatch() will return a Promise instance
+        .then(payload => this.$store.dispatch('login/userLogin', payload))
+        .then(() => this.$router.replace('/'))
+        .catch(e => console.error('[Login form]: validate failed !'))
+        .finally(() => this.switchLoading(false))
+    },
+    switchLoading (state) {
+      this.isLoading = state
     }
   },
 
-  methods: {
-    onSubmit () {
-      this.toggleLoading(true)
-      this.$refs.login.validate(isValid => {
-        if (!isValid) return
-        // This action has included routes replacement
-        this.$store.dispatch('login/userLogin', { ...this.userInfo, vm: this })
-      })
-    },
-    toggleLoading (state) {
-      this.isLoading = state
-    }
+  components: {
+    PageFooter
   }
 }
 </script>
@@ -88,9 +93,9 @@ export default {
 }
 
 .login {
-  background-image: url('~ASSETS/animation.gif');
+  background-image: url('~./img/animation.gif');
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
 
   &__form {
     display: flex;

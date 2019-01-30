@@ -1,9 +1,15 @@
+import './style/unauthorized.scss'
+
 export default {
   name: 'Unauthorized',
+
   render (h) {
     return (
       <section class="page-unauthorized">
-        You are unauthorized !
+        <h2>403</h2>
+        <p>This page is used for <strong>admin</strong> role.</p>
+        <p>Current role is <strong>{this.$store.getters['login/role']}</strong>.</p>
+        <p>You are unauthorized !</p>
       </section>
     )
   }

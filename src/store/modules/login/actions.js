@@ -23,6 +23,9 @@ export default {
             type: 'error'
           })
         }
+        // 仅用于触发 afterEach 后置导航守卫，使得顶部进度条 done()
+        // For invoking `router.afterEach` navigation guards including `NProgress.done()`
+        vm.$router.replace('/login')
         console.error(`[Login error]: ${JSON.stringify(e)}`)
       })
   },

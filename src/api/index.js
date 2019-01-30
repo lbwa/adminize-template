@@ -1,18 +1,20 @@
-import request from 'UTILS/request'
 import routes from './routes'
+import createBaseRequest from 'UTILS/request'
+
+const restBaseRequest = createBaseRequest(process.env.VUE_APP_XHR_REST)
 
 export function userLogin ({
   username,
   password
 }) {
-  return request.post(routes.LOGIN, {
+  return restBaseRequest.post(routes.LOGIN, {
     username,
     password
   })
 }
 
 export function fetchUserAccess (token) {
-  return request.post(routes.ACCESS, {
+  return restBaseRequest.post(routes.ACCESS, {
     token
   })
 }

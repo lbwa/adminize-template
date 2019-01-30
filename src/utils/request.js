@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { tokenFromStorage } from 'UTILS/storage'
-// import store from 'STORE'
+import store from 'STORE'
 
 /**
  * @description 创建一个 axios 基础请求实例，提示，环境变量可在 .env.[mode] files 中定义
@@ -34,9 +34,8 @@ export default function createBaseRequest (baseURL) {
       // 触发 router 的 beforeEach 导航守卫中的 token 检测并重定向至 login 页
       tokenFromStorage.setItem('')
       // 以下 action 用于用户登出，并重置 vuex 状态
-      return Promise.reject(data)
-      // return store.dispatch('login/userLogout')
-      //   .then(() => Promise.reject(data))
+      return store.dispatch('login/userLogout')
+        .then(() => Promise.reject(data))
     }
     // 1.2 登录失败
     if (data.code === 5000) {

@@ -9,11 +9,11 @@
       status-icon
       @keyup.enter.native="onSubmit"
     >
-      <h1 class="login__form__title">admin template</h1>
+      <h1 class="login__form__title">{{$t('login.header')}}</h1>
       <el-form-item prop="username">
         <el-input
           v-model="userInfo.username"
-          placeholder="请输入用户名"
+          :placeholder="$t('login.placeholder.username')"
           clearable
         >
           <i slot="prefix" class="el-icon-service"></i>
@@ -22,7 +22,7 @@
       <el-form-item prop="password">
         <el-input
           v-model="userInfo.password"
-          placeholder="请输入密码"
+          :placeholder="$t('login.placeholder.password')"
           type="password"
           clearable
         >
@@ -36,7 +36,7 @@
           @click="onSubmit"
           class="login__controller__submit"
           :loading="isLoading"
-        >登陆</el-button>
+        >{{$t('login.submitButton')}}</el-button>
       </el-form-item>
     </el-form>
     <el-footer class="login__footer">
@@ -47,7 +47,7 @@
 
 <script>
 import PageFooter from 'COMPONENTS/PageFooter'
-import rules from './rules'
+import createRules from './rules'
 
 export default {
   data () {
@@ -56,7 +56,7 @@ export default {
         username: '',
         password: ''
       },
-      rules,
+      rules: createRules.call(this),
       isLoading: false
     }
   },

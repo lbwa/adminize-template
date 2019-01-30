@@ -7,7 +7,7 @@ export default function createImporters (components) {
     const chunkName = createChunkName(currentPath)
     if (!accumulator[chunkName]) {
       accumulator[chunkName] = () => import(
-        /* webpackChunkName: 'async/[request][index]' */
+        /* webpackChunkName: 'async-[request][index]' */
         `SOURCE/${createCamelPath(currentPath.replace(/^\//, ''), 1)}`
       )
     }

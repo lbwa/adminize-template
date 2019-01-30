@@ -10,7 +10,12 @@
     <template v-if="!route.children">
       <el-menu-item
         :index="resolvePath(route.path)"
-      >{{route.meta.title}}</el-menu-item>
+      >
+        <item-title
+          :icon="route.meta.icon"
+          :title="route.meta.title"
+        />
+      </el-menu-item>
     </template>
 
     <!-- route rendering with child route: recursive area -->

@@ -4,7 +4,7 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: 'el-icon-news'
     },
     title: {
       type: String,

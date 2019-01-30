@@ -1,7 +1,15 @@
 <template>
-  <el-container class="layout__material">
+  <el-container :class="[
+    'layout__material',
+    isAsideCollapse ? 'collapse-aside' : 'expand-aside'
+  ]">
     <!-- Dynamic aside rendering area -->
-    <material-aside/>
+    <el-scrollbar
+      wrap-class="scrollbar-wrapper"
+      class="layout__material__aside-placeholder"
+    >
+      <material-aside/>
+    </el-scrollbar>
 
     <el-container class="layout__material__placeholder">
       <material-header/>
@@ -23,8 +31,17 @@
 import MaterialHeader from './Header'
 import MaterialAside from './Aside'
 import PageFooter from 'COMPONENTS/PageFooter'
+import { mapState } from 'vuex'
 
 export default {
+  name: 'LayoutMaterial',
+
+  computed: {
+    ...mapState([
+      'isAsideCollapse'
+    ])
+  },
+
   components: {
     MaterialHeader,
     MaterialAside,
@@ -34,11 +51,26 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import '~STYLE/color/background.scss';
+@import '~STYLE/layout/aside.scss';
+@import '~STYLE/transition/aside.scss';
+
 .layout__material {
+  &__aside {
+    &-placeholder {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1200;
+    }
+  }
+
   &__placeholder {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: margin $aside-transition-time;
 
     &-main {
       flex: 1;
@@ -49,5 +81,22 @@ export default {
     line-height: 60px;
     text-align: center;
   }
+}
+
+.collapse-aside {
+  .layout__material__placeholder {
+    margin-left: $collapse-width;
+  }
+}
+
+.expand-aside {
+  .layout__material__placeholder {
+    margin-left: $expand-width;
+  }
+}
+
+/deep/ .scrollbar-wrapper {
+  overflow-x: hidden !important; // 隐藏横向滚动条
+  background-color: $background-dark;
 }
 </style>

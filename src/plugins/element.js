@@ -14,7 +14,9 @@ import {
   Message,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Scrollbar,
+  Tooltip // menu 折叠时，弹出的小提示
 } from 'element-ui'
 
 // Prototype functions
@@ -34,5 +36,7 @@ vueUsing([
   Input,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Scrollbar,
+  Tooltip
 ])

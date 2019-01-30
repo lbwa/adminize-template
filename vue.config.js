@@ -20,7 +20,8 @@ module.exports = {
         'UTILS': path.resolve(PATH.SOURCE_PATH, './utils'),
         'API': path.resolve(PATH.SOURCE_PATH, './api'),
         'PERMISSION': path.resolve(PATH.SOURCE_PATH, './permission'),
-        'ASSETS': path.resolve(PATH.SOURCE_PATH, './assets')
+        'ASSETS': path.resolve(PATH.SOURCE_PATH, './assets'),
+        'LANG': path.resolve(PATH.SOURCE_PATH, './lang')
       }
     }
   }

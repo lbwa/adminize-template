@@ -1,4 +1,4 @@
-# Admin template
+# Admin template [![Build Status](https://travis-ci.org/lbwa/admin-template.svg?branch=master)](https://travis-ci.org/lbwa/admin-template)
 
 > An administrator dashboard, implemented by Vue.js.
 
@@ -53,10 +53,10 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```bash
-# run development server and mock server
+# run development server
 yarn run dev
 
-# run development server
+# run development server, same as `yarn run dev`
 yarn run serve
 ```
 

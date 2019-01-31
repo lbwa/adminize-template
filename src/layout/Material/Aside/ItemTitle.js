@@ -4,7 +4,9 @@ export default {
   props: {
     icon: {
       type: String,
-      default: 'el-icon-news'
+      // 在父级组件中判断为根路由是才存在默认图标
+      // Only root routes has a default icon
+      default: ''
     },
     title: {
       type: String,

@@ -11,8 +11,11 @@
       <el-menu-item
         :index="resolvePath(route.path)"
       >
+        <!-- 仅仅在根路由的情况下存在默认图标 `el-icon-news` -->
+        <!-- Only root routes has a default icon. -->
         <item-title
-          :icon="route.meta.icon"
+          :icon="route.meta.icon
+            || (isRootPath(route.path) ? 'el-icon-news' : '')"
           :title="route.meta.title"
         />
       </el-menu-item>
@@ -78,6 +81,9 @@ export default {
   methods: {
     resolvePath (targetPath) {
       return path.resolve(this.basicRoute, targetPath)
+    },
+    isRootPath (path) {
+      return /^\//.test(path)
     }
   },
 

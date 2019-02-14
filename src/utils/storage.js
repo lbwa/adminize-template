@@ -1,5 +1,5 @@
 const TOKEN_KEY = '$_tk'
-const USER_INFO_KEY = '$_usn'
+const USER_INFO_KEY = '$_usi'
 
 function setValueToLocal (key, val, storage) {
   const normalizeVal = typeof val === 'string'

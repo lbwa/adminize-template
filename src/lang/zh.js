@@ -2,15 +2,19 @@ export default {
   login: {
     header: 'Admin template',
     placeholder: {
-      username: '请输入用户名',
-      password: '请输入密码'
+      username: '用户名',
+      password: '密码'
     },
-    submitButton: '登 录'
+    tips: {
+      username: '请输入正确的用户名',
+      password: '请输入正确的密码'
+    },
+    submitButton: '登 陆'
   },
   aside: {
     header: 'Admin template',
     bar: {
-      logout: '登出'
+      logout: '登 出'
     }
   }
 }

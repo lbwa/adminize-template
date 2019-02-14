@@ -98,7 +98,7 @@ router.beforeEach((to, from, next) => {
           )
           store.commit(
             `login/${loginTypes.SET_USER_INFO}`,
-            JSON.parse(userInfoFromStorage.getItem()).username
+            JSON.parse(userInfoFromStorage.getItem())
           )
         })
         .then(() => createRoutesMap(to, next))

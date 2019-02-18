@@ -14,8 +14,8 @@ export default {
       : tokenFromStorage.removeItem()
     state.accessToken = accessToken
   },
-  [types.SET_USER_ROLE] (state, role) {
-    state.role = role
+  [types.SET_USER_ACCESSES] (state, accesses) {
+    state.accesses = accesses
   },
   [types.SET_DYNAMIC_ROUTES] (state, dynamicRoutes) {
     state.dynamicRoutes = dynamicRoutes

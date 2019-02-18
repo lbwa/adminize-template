@@ -1,12 +1,12 @@
 <template>
   <section class="access__static">
-    Current user role is <strong>{{$store.getters['login/role']}}</strong>
+    Current route is
+    <strong>{{$route.path}}</strong>
   </section>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang='scss' scoped>

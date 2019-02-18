@@ -1,3 +1,5 @@
+import { createAccessMap } from 'PERMISSION/filter-routes'
+
 export default {
   username (state) {
     return (state.userInfo && state.userInfo.username) || '无用户名'
@@ -5,8 +7,11 @@ export default {
   accessToken (state) {
     return state.accessToken
   },
-  role (state) {
-    return state.role
+  accesses (state) {
+    return state.accesses
+  },
+  accessMap (state) {
+    return createAccessMap(state.accesses)
   },
   // used to add user private routes (router.addRoutes) to global routes map.
   dynamicRoutes (state) {

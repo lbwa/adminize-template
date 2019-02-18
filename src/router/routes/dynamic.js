@@ -1,5 +1,4 @@
 import { dynamicComponents, plainExport } from 'ROUTER/components'
-import permission from 'PERMISSION/roles-map'
 
 export default [
   {
@@ -7,7 +6,7 @@ export default [
     name: 'private',
     component: plainExport,
     meta: {
-      title: 'Private',
+      title: 'Private Device',
       icon: 'el-icon-picture-outline'
     },
     children: [
@@ -16,7 +15,9 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'Admin',
-          roles: permission.private.admin
+          access: {
+            device: ['read', 'write', 'import']
+          }
         }
       },
       {
@@ -24,7 +25,9 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'User',
-          roles: permission.private.user
+          access: {
+            device: ['read']
+          }
         }
       }
     ]
@@ -32,10 +35,10 @@ export default [
   // Should be hide all /private/* routes when user access exclude 'admin'
   // Because the only child route can only be accessed by admin
   {
-    path: '/single',
+    path: '/app',
     component: plainExport,
     meta: {
-      title: 'Single',
+      title: 'Private App',
       icon: 'el-icon-mobile-phone'
     },
     children: [
@@ -44,7 +47,9 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'Admin',
-          roles: permission.private.admin
+          access: {
+            app: ['read', 'write']
+          }
         }
       }
     ]

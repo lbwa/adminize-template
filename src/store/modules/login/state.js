@@ -4,7 +4,7 @@ export default {
     username: ''
   },
   accessToken: '',
-  role: '',
+  accesses: [],
   dynamicRoutes: [],
   allRoutes: []
 }

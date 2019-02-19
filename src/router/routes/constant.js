@@ -1,5 +1,4 @@
 import { constantComponents, plainExport } from 'ROUTER/components'
-import permission from 'PERMISSION/roles-map'
 
 /**
  * meta: {
@@ -43,7 +42,9 @@ export default [
         component: constantComponents.pagesAdminDashboard,
         meta: {
           title: 'Dashboard',
-          roles: permission.admin.dashboard
+          access: {
+            device: ['read', 'write', 'import']
+          }
         }
       },
       {
@@ -52,7 +53,9 @@ export default [
         meta: {
           title: 'Table',
           icon: 'el-icon-tickets',
-          roles: permission.admin.table
+          access: {
+            device: ['read', 'write', 'import']
+          }
         }
       }
     ]

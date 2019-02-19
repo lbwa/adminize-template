@@ -10,17 +10,63 @@
 
 ## Features
 
-- ***Access control***: Global aside menu is rendered dynamically by global routes map which is made of common routes and dynamic routes, filtered by user access.
+- **_Access control_**: Global aside menu is rendered dynamically by global routes map which is made of common routes and dynamic routes, filtered by user access.
 
-- ***Roles map***: The route's [Roles map](./src/permission/roles-map.js) can be stored by the back-end to enable real-time modification of user access which is used to filter user private routes.
+- **_User access_**: [Routes filter](./src/permission/filter-routes.js) work with user access set which is made of user api access.
 
-- ***Mock development***: Easy to use mock development solution
+  - User access set
+
+    ```js
+    const userAccess = [
+      {
+        access: 'manage.device.read',
+        update_time: '2019-1-1'
+      },
+      {
+        access: 'manage.device.write',
+        update_time: '2019-1-1'
+      }
+      // ... more user access
+    ]
+    ```
+
+  - Routes filter
+
+    ```js
+    const routesMap = [
+      {
+        path: '/fist-routes',
+        components: firstComponent,
+        meta: {
+          access: {
+            // This route will be added to global routes map if user access set
+            // including 'device.read' and 'device.write' access.
+            device: ['read', 'write']
+          }
+        }
+      },
+      {
+        path: '/second-routes',
+        components: secondComponent,
+        meta: {
+          access: {
+            // This route will not be added to global routes map,
+            // because current user has no `import` access.
+            device: ['read', 'import']
+          }
+        }
+      }
+      // ... other routes
+    ]
+    ```
+
+- **_Mock development_**: Easy to use mock development solution
 
 ## Templates
 
 - Home
 
-- Admin (All page only can be accessed by `admin` role, otherwise redirect to 403 page.)
+- Admin (All pages only can be accessed by user named `admin`, otherwise routes will be redirected to **403** page.)
 
   - Dashboard
 
@@ -30,47 +76,49 @@
 
   - User
 
-- Nested (recursive rendering testing)
+- Nested (recursive rendering)
 
   - nested-1
 
     - nested-2
 
-- Private
+- Private Device
 
-  - Admin (Appears only when user access include `admin`)
+  - Admin (Appears only when user named `admin`)
 
-  - User (Appears only when user access include `user`)
+  - User (Appears only when user named `admin` or `user`)
 
-- Single (Appears only when user access include `admin`)
+- Private App (Appears only when user named `admin`)
 
   - Admin
 
 ## Usages
+
 ```bash
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```bash
 # run development server
 yarn run dev
-
-# run development server, same as `yarn run dev`
-yarn run serve
 ```
 
 ### Compiles and minifies for production
+
 ```bash
 yarn run build
 ```
 
 ### Run your tests
+
 ```bash
 yarn run test
 ```
 
 ### Lints and fixes files
+
 ```bash
 yarn run lint
 ```

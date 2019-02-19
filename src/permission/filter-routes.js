@@ -47,7 +47,7 @@ function filterRoutes (routes, accessMap) {
  * @param {Array} accessMap 一个对应当前用户各个模块权限的 hashmap
  */
 // ! 本质问题: 如何确定两个数组是否存在交集
-function validateAccess (route, accessMap) {
+export function validateAccess (route, accessMap) {
   if (route.meta && route.meta.access) {
     return Object.keys(route.meta.access).every(accessName => {
       // 在后端回传的权限表中不存在对应 route 所需的最低权限中的一项，

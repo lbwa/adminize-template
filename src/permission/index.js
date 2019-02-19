@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css'
 import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
 // import createDynamicRoutes from './create-routes'
-import createDynamicRoutes from './filter-routes'
+import createDynamicRoutes, { validateAccess } from './filter-routes'
 import constantRoutes from 'ROUTER/routes/constant'
 
 NProgress.configure({ showSpinner: false })
@@ -123,18 +123,21 @@ router.beforeEach((to, from, next) => {
       return createRoutesMap(to, next)
     }
 
-    next()
-
-    // step:  real-time routes filter
-    // ! 如有动态权限验证的需求
-    // if (!to.meta.access || validateAccess(route, to.meta.access)) {
-    //   next()
-    // } else {
-    //   next({
-    //     path: `/403?redirect=${to.path}`,
-    //     replace: true
-    //   })
-    // }
+    // Optional step:  real-time routes filter
+    // ! 动态权限验证，如在公有路由中的未参与 private routes 过滤的路由需要权限验证时
+    if (
+      // 当前路由不存在权限验证时
+      !to.meta.access ||
+      // 当前路由存在权限验证时
+      validateAccess(to, store.getters['login/accessMap'])
+    ) {
+      next()
+    } else {
+      next({
+        path: `/403?redirect=${to.path}`,
+        replace: true
+      })
+    }
   } else {
     // ! State: user logout
     next({

@@ -5,7 +5,6 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
-// import createDynamicRoutes from './create-routes'
 import createDynamicRoutes, { validateAccess } from './filter-routes'
 import constantRoutes from 'ROUTER/routes/constant'
 

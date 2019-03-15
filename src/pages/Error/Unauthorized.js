@@ -7,8 +7,9 @@ export default {
     return (
       <section class="page-unauthorized">
         <h2>403</h2>
-        <p>This page is used for <strong>admin</strong> role.</p>
-        <p>Current role is <strong>{this.$store.getters['login/role']}</strong>.</p>
+        <p>
+          This page is used for user named <strong>admin</strong>.
+        </p>
         <p>You are unauthorized !</p>
       </section>
     )

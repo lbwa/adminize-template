@@ -1,19 +1,20 @@
 <template functional>
-  <p class="author__info">Copyright &copy; {{new Date().getFullYear()}}
+  <p class="author__info">
+    Copyright &copy; {{new Date().getFullYear()}}
     <a
       class="author__name"
       href="https://github.com/lbwa"
       target="_blank"
-    >lbwa</a>&nbsp;版权所有 All rights reserved.</p>
+    >lbwa</a>&nbsp;Released under the MIT License
+  </p>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang='scss' scoped>
-@import '~STYLE/color/font.scss';
+@import "~STYLE/color/font.scss";
 
 $gap: 60px;
 

@@ -31,6 +31,8 @@ export default {
 
   computed: {
     currentLayout () {
+      // ! 必须将 formatLayoutKey 从字符串模板中抽离出来，否则 this.layout 变化时,
+      // 将不会触发 computed 的计算
       const formatLayoutKey = this.layout
         .replace(/^[a-z]/, key => key.toUpperCase())
 

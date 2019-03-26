@@ -13,12 +13,16 @@ import actions from './actions'
 import modules from './modules'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
+// https://github.com/robinvdvleuten/vuex-persistedstate
+// https://github.com/js-cookie/js-cookie
 const persistedState = createPersistedState({
   key: '$_VUEX_STORE',
-  storage: { // default: window.localStorage
+  // default: window.localStorage
+  storage: {
     getItem: key => Cookies.get(key),
-    setItem: (key, value) => Cookies.set(key, value, { expires: 3, secure: true }),
-    removeItem: key => Cookies.remove(key)
+    // `expires: default`: Cookie is removed when the user closes the browser.
+    setItem: (key, value) => Cookies.set(key, value, { secure: !__DEV__ }),
+    removeItem: key => Cookies.remove(key, Cookies.get(key))
   }
 })
 
@@ -31,7 +35,5 @@ export default new Vuex.Store({
   mutations,
   actions,
   strict: __DEV__,
-  plugins: __DEV__
-    ? [createLogger(), persistedState]
-    : [persistedState]
+  plugins: __DEV__ ? [createLogger(), persistedState] : [persistedState]
 })

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { tokenFromStorage } from 'UTILS/storage'
 import store from 'STORE'
+import { Notification } from 'element-ui'
 
 /**
  * @description 创建一个 axios 基础请求实例，提示，环境变量可在 .env.[mode] files 中定义
@@ -51,6 +52,14 @@ export default function createBaseRequest (baseURL) {
       }
       // 1.2 登录失败
       if (data.code === 5000) {
+        return Promise.reject(data)
+      }
+
+      if (data.code && data.code !== 2000) {
+        Notification.error({
+          title: 'Error',
+          message: 'Update data failed'
+        })
         return Promise.reject(data)
       }
       // 2. 其他错误

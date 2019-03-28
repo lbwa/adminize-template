@@ -64,7 +64,8 @@ export default {
   methods: {
     onSubmit () {
       this.switchLoading(true)
-      this.$refs.login.validate()
+      this.$refs.login
+        .validate()
         .then(valid => ({
           ...this.userInfo,
           vm: this
@@ -72,7 +73,6 @@ export default {
         // This action has included routes replacement
         // dispatch() will return a Promise instance
         .then(payload => this.$store.dispatch('login/userLogin', payload))
-        .then(() => this.$router.replace('/'))
         .catch(e => console.error('[Login form]: validate failed !'))
         .finally(() => this.switchLoading(false))
     },
@@ -93,7 +93,7 @@ export default {
 }
 
 .login {
-  background-image: url('~./img/animation.gif');
+  background-image: url("~./img/animation.gif");
   background-repeat: no-repeat;
   background-position: center center;
 

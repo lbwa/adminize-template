@@ -1,5 +1,6 @@
 import { userLogin, fetchUserAccess } from 'API'
 import types from './mutations/types'
+import router from 'ROUTER'
 
 export default {
   userLogin ({ commit }, { username, password, vm }) {
@@ -15,13 +16,13 @@ export default {
             userId: user_id
           })
           commit(types.SET_ACCESS_TOKEN, access_token)
+          router.replace('/')
         })
         .catch(e => {
           if (e.code === 5000) {
-            vm.$_plugins_messageBox({
-              title: '警告',
-              message: '错误的用户名或密码',
-              type: 'error'
+            vm.$_plugins_messageBox.alert('Wrong username or password', {
+              type: 'error',
+              title: 'Error'
             })
           }
           // 仅用于触发 afterEach 后置导航守卫，使得顶部进度条 done()

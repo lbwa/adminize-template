@@ -1,5 +1,6 @@
 import { userLogin, fetchUserAccess } from 'API'
 import types from './mutations/types'
+import router from 'ROUTER'
 
 export default {
   userLogin ({ commit }, { username, password, vm }) {
@@ -15,6 +16,7 @@ export default {
             userId: user_id
           })
           commit(types.SET_ACCESS_TOKEN, access_token)
+          router.replace('/')
         })
         .catch(e => {
           if (e.code === 5000) {

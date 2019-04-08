@@ -32,12 +32,8 @@ export default {
         })
     )
   },
-  userLogout ({ commit }) {
-    commit(types.SET_USER_INFO, {})
-    commit(types.SET_USER_ACCESSES, [])
-    commit(types.SET_ACCESS_TOKEN, '')
-    commit(types.SET_DYNAMIC_ROUTES, [])
-    commit(types.SET_ALL_ROUTES, [])
+  userLogout ({ dispatch }) {
+    dispatch('resetStore', null, { root: true })
     // https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
     // remove all routes which was added by router.addRoutes()
     resetRouter()

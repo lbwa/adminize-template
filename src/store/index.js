@@ -5,10 +5,7 @@ import createLogger from 'vuex/dist/logger'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 import state from './state'
-import getters from './getter'
-// sync operation
 import mutations from './mutations'
-// async operation
 import actions from './actions'
 import modules from './modules'
 
@@ -31,7 +28,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules,
   state,
-  getters,
   mutations,
   actions,
   strict: __DEV__,

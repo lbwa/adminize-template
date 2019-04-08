@@ -1,10 +1,9 @@
 const TOKEN_KEY = '$_tk'
 const USER_INFO_KEY = '$_usi'
+const STATE_SNAPSHOT = '$_snapshot'
 
 function setValueToLocal (key, val, storage) {
-  const normalizeVal = typeof val === 'string'
-    ? val
-    : JSON.stringify(val)
+  const normalizeVal = typeof val === 'string' ? val : JSON.stringify(val)
   storage.setItem(key, normalizeVal)
 }
 
@@ -23,5 +22,8 @@ function createStorageUtils (key, storage = localStorage) {
 }
 
 export const tokenFromStorage = createStorageUtils(TOKEN_KEY, localStorage)
-
-export const userInfoFromStorage = createStorageUtils(USER_INFO_KEY, localStorage)
+export const userInfoFromStorage = createStorageUtils(
+  USER_INFO_KEY,
+  localStorage
+)
+export const stateSnapshot = createStorageUtils(STATE_SNAPSHOT, sessionStorage)

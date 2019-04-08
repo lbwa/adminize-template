@@ -1,6 +1,6 @@
 import { userLogin, fetchUserAccess } from 'API'
 import types from './mutations/types'
-import router from 'ROUTER'
+import router, { resetRouter } from 'ROUTER'
 
 export default {
   userLogin ({ commit }, { username, password, vm }) {
@@ -38,10 +38,9 @@ export default {
     commit(types.SET_ACCESS_TOKEN, '')
     commit(types.SET_DYNAMIC_ROUTES, [])
     commit(types.SET_ALL_ROUTES, [])
-    // https://github.com/PanJiaChen/vue-element-admin/issues/416
-    // location.reload() is used to reset all dynamic routes.
-    // All routes records should be synced with vuex-persistedstate.
-    location.reload()
+    // https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+    // remove all routes which was added by router.addRoutes()
+    resetRouter()
   },
   fetchUserAccess ({ commit }, token) {
     // ! 预留接口：请求用户的权限集合 roles，用于过滤用户的私有路由

@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import PageFooter from 'COMPONENTS/PageFooter'
 import createRules from './rules'
 
@@ -78,7 +79,12 @@ export default {
     },
     switchLoading (state) {
       this.isLoading = state
-    }
+    },
+    ...mapActions('login', ['userLogout'])
+  },
+
+  created () {
+    this.userLogout()
   },
 
   components: {

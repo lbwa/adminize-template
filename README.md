@@ -1,4 +1,4 @@
-# Admin template [![Build Status](https://travis-ci.org/lbwa/adminize-template.svg?branch=master)](https://travis-ci.org/lbwa/adminize-template)
+# Adminize template [![Build Status](https://travis-ci.org/lbwa/adminize-template.svg?branch=master)](https://travis-ci.org/lbwa/adminize-template)
 
 > An administrator dashboard, implemented by Vue.js.
 
@@ -12,7 +12,7 @@
 
 - **_Access control_**: Global aside menu is rendered dynamically by global routes map which is made of common routes and dynamic routes, filtered by user access.
 
-- **_User access_**: [Routes filter](./src/permission/filter-routes.js) work with user access set which is made of user api access.
+- **_User access_**: [Routes filter](./src/permission/controller/routes.js) work with user access set which is made of user api access.
 
   - User access set
 

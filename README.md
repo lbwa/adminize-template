@@ -1,9 +1,9 @@
-# Admin template [![Build Status](https://travis-ci.org/lbwa/admin-template.svg?branch=master)](https://travis-ci.org/lbwa/admin-template)
+# Admin template [![Build Status](https://travis-ci.org/lbwa/adminize-template.svg?branch=master)](https://travis-ci.org/lbwa/adminize-template)
 
 > An administrator dashboard, implemented by Vue.js.
 
 <p align="center">
-  <a href="https://lbwa.github.io/admin-template">Online site</a>
+  <a href="https://lbwa.github.io/adminize-template">Online site</a>
 </p>
 
 > Username: admin or user, Password: any words

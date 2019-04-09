@@ -4,19 +4,20 @@ const PATH = require('./config/path')
 const __DEV__ = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/admin-template/' : '/',
+  publicPath:
+    process.env.NODE_ENV === 'production' ? '/adminize-template/' : '/',
   productionSourceMap: false, // turn off source map
-  configureWebpack (config) {
+  configureWebpack(config) {
     if (!__DEV__) {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
     }
   },
-  chainWebpack (chainConfig) {
+  chainWebpack(chainConfig) {
     aliasCreator(chainConfig)
   }
 }
 
-function aliasCreator (chainConfig) {
+function aliasCreator(chainConfig) {
   chainConfig.resolve.alias
     .set('SOURCE', PATH.SOURCE_PATH)
     .set('PAGES', path.resolve(PATH.SOURCE_PATH, './pages'))

@@ -9,7 +9,7 @@
       status-icon
       @keyup.enter.native="onSubmit"
     >
-      <h1 class="login__form__title">{{$t('login.header')}}</h1>
+      <h1 class="login__form__title">{{ $t('login.header') }}</h1>
       <el-form-item prop="username">
         <el-input
           v-model="userInfo.username"
@@ -36,11 +36,12 @@
           @click="onSubmit"
           class="login__controller__submit"
           :loading="isLoading"
-        >{{$t('login.submitButton')}}</el-button>
+          >{{ $t('login.submitButton') }}</el-button
+        >
       </el-form-item>
     </el-form>
     <el-footer class="login__footer">
-      <page-footer/>
+      <page-footer />
     </el-footer>
   </section>
 </template>
@@ -51,7 +52,7 @@ import PageFooter from 'COMPONENTS/PageFooter'
 import createRules from './rules'
 
 export default {
-  data () {
+  data() {
     return {
       userInfo: {
         username: '',
@@ -63,27 +64,27 @@ export default {
   },
 
   methods: {
-    onSubmit () {
+    onSubmit() {
       this.switchLoading(true)
       this.$refs.login
         .validate()
-        .then(valid => ({
+        .then(() => ({
           ...this.userInfo,
           vm: this
         }))
         // This action has included routes replacement
         // dispatch() will return a Promise instance
         .then(payload => this.$store.dispatch('login/userLogin', payload))
-        .catch(e => console.error('[Login form]: validate failed !'))
+        .catch(e => console.error('[Login form]: validate failed !', e))
         .finally(() => this.switchLoading(false))
     },
-    switchLoading (state) {
+    switchLoading(state) {
       this.isLoading = state
     },
     ...mapActions('login', ['userLogout'])
   },
 
-  created () {
+  created() {
     this.userLogout()
   },
 
@@ -93,13 +94,13 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .layout__login {
   min-height: 100vh;
 }
 
 .login {
-  background-image: url("~./img/animation.gif");
+  background-image: url('~./img/animation.gif');
   background-repeat: no-repeat;
   background-position: center center;
 

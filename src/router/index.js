@@ -4,7 +4,7 @@ import constantRoutes from './routes/constant'
 
 Vue.use(Router)
 
-function createRouter () {
+function createRouter() {
   return new Router({
     mode: 'hash',
     scrollBehavior: () => ({ y: 0 }),
@@ -18,7 +18,7 @@ const router = createRouter()
  * @description to implement addRoutes resetting
  * @ref https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
  */
-export function resetRouter () {
+export function resetRouter() {
   router.matcher = createRouter().matcher
 }
 

@@ -1,9 +1,9 @@
-# Admin template [![Build Status](https://travis-ci.org/lbwa/admin-template.svg?branch=master)](https://travis-ci.org/lbwa/admin-template)
+# Adminize template [![Build Status](https://travis-ci.org/lbwa/adminize-template.svg?branch=master)](https://travis-ci.org/lbwa/adminize-template)
 
 > An administrator dashboard, implemented by Vue.js.
 
 <p align="center">
-  <a href="https://lbwa.github.io/admin-template">Online site</a>
+  <a href="https://lbwa.github.io/adminize-template">Online site</a>
 </p>
 
 > Username: admin or user, Password: any words
@@ -12,7 +12,7 @@
 
 - **_Access control_**: Global aside menu is rendered dynamically by global routes map which is made of common routes and dynamic routes, filtered by user access.
 
-- **_User access_**: [Routes filter](./src/permission/filter-routes.js) work with user access set which is made of user api access.
+- **_User access_**: [Routes filter](./src/permission/controller/routes.js) work with user access set which is made of user api access.
 
   - User access set
 

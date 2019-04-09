@@ -10,7 +10,7 @@ const h = eventBus.$createElement.bind(eventBus)
  * @description 创建一个 axios 基础请求实例，提示，环境变量可在 .env.[mode] files 中定义
  * @param {String} baseURL 基础请求路径
  */
-export default function createBaseRequest (baseURL) {
+export default function createBaseRequest(baseURL) {
   if (!baseURL) throw new Error('[createRequestBase]: Wrong baseURL type !')
 
   const request = axios.create({
@@ -63,9 +63,9 @@ export default function createBaseRequest (baseURL) {
             'div',
             data.code === 3002
               ? [
-                'Unauthorized request',
-                h('div', { style: 'work-break: break-all' }, url)
-              ]
+                  'Unauthorized request',
+                  h('div', { style: 'work-break: break-all' }, url)
+                ]
               : 'Update data failed'
           ),
           position: 'bottom-right'

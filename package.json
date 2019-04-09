@@ -1,5 +1,5 @@
 {
-  "name": "admin-template",
+  "name": "adminize-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,7 +24,7 @@
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.5",
     "@vue/cli-service": "^3.3.1",
-    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.8.0",

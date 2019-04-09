@@ -2,20 +2,20 @@ const TOKEN_KEY = '$_tk'
 const USER_INFO_KEY = '$_usi'
 const STATE_SNAPSHOT = '$_snapshot'
 
-function setValueToLocal (key, val, storage) {
+function setValueToLocal(key, val, storage) {
   const normalizeVal = typeof val === 'string' ? val : JSON.stringify(val)
   storage.setItem(key, normalizeVal)
 }
 
-function createStorageUtils (key, storage = localStorage) {
+function createStorageUtils(key, storage = localStorage) {
   return {
-    setItem (value) {
+    setItem(value) {
       setValueToLocal(key, value, storage)
     },
-    getItem () {
+    getItem() {
       return storage.getItem(key)
     },
-    removeItem () {
+    removeItem() {
       storage.removeItem(key)
     }
   }

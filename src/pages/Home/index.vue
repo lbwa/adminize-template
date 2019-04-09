@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     Current routes is
-    <strong>{{$route.path}}</strong>.
+    <strong>{{ $route.path }}</strong
+    >.
   </div>
 </template>
 

@@ -3,7 +3,7 @@ import types from './mutations/types'
 import router, { resetRouter } from 'ROUTER'
 
 export default {
-  userLogin ({ commit }, { username, password, vm }) {
+  userLogin({ commit }, { username, password, vm }) {
     return (
       userLogin({
         username,
@@ -32,14 +32,13 @@ export default {
         })
     )
   },
-  userLogout ({ dispatch }) {
+  userLogout({ dispatch }) {
     dispatch('resetStore', null, { root: true })
     // https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
     // remove all routes which was added by router.addRoutes()
     resetRouter()
   },
-  fetchUserAccess ({ commit }, token) {
-    // ! 预留接口：请求用户的权限集合 roles，用于过滤用户的私有路由
+  fetchUserAccess({ commit }, token) {
     return fetchUserAccess(token).then(({ accesses }) => {
       commit(types.SET_USER_ACCESSES, accesses)
       return accesses

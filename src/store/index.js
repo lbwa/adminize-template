@@ -9,6 +9,20 @@ import mutations from './mutations'
 import actions from './actions'
 import modules from './modules'
 
+/**
+ * @description create a global state snapshot to save initial state which is
+ * used to reset global state
+ */
+import { stateSnapshot } from 'UTILS/storage'
+const initialState = Object.keys(modules).reduce((snapshot, moduleName) => {
+  snapshot[moduleName] = modules[moduleName].state
+  return snapshot
+}, {})
+stateSnapshot.setItem(initialState)
+
+/**
+ * @description Vuex persisted state
+ */
 const __DEV__ = process.env.NODE_ENV === 'development'
 // https://github.com/robinvdvleuten/vuex-persistedstate
 // https://github.com/js-cookie/js-cookie

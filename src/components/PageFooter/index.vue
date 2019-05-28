@@ -2,8 +2,8 @@
   <p class="author__info">
     Copyright &copy; {{ new Date().getFullYear() }}
     <a class="author__name" href="https://github.com/lbwa" target="_blank"
-      >lbwa</a
-    >&nbsp;Released under the MIT License
+      >Bowen</a
+    >. All rights reserved.
   </p>
 </template>
 

@@ -5,7 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
-import createDynamicRoutes, { validateAccess } from './filter-routes'
+import createDynamicRoutes, { validateAccess } from './controller/routes'
 import constantRoutes from 'ROUTER/routes/constant'
 
 NProgress.configure({ showSpinner: false })

@@ -1,4 +1,4 @@
-import { createAccessMap } from 'PERMISSION/filter-routes'
+import { createAccessMap } from 'PERMISSION/controller/routes'
 
 export default {
   username(state) {

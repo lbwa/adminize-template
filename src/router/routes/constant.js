@@ -4,7 +4,7 @@ import { constantComponents, plainExport } from 'ROUTER/components'
  * meta: {
  *   title: 'route title', // Route will be hidden if meta.title is falsy value
  *   icon: '', // title text icon name
- *   layout: '', // layout name, 'plain' or 'material'(default value)
+ *   layout: '', // layout name, 'plain' or 'dashboard'(default value)
  *   roles: ['admin', 'user'] // current route access
  * }
  */

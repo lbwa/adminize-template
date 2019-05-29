@@ -1,4 +1,4 @@
-import routes from 'ROUTER/routes/dynamic'
+import routes from 'ROUTER/routes/private'
 
 /**
  * @description 根据后端回传的当前用户权限表创建一个用于过滤 routes 的 hashmap

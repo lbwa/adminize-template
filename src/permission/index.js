@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css'
 import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
 import createDynamicRoutes, { validateAccess } from './controller/routes'
-import constantRoutes from 'ROUTER/routes/constant'
+import publicRoutes from 'ROUTER/routes/public'
 
 NProgress.configure({ showSpinner: false })
 
@@ -24,7 +24,7 @@ function setDynamicRoutesToStorage() {
 
 function setGlobalRoutesToStorage() {
   store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
-    ...constantRoutes,
+    ...publicRoutes,
     ...store.getters['login/dynamicRoutes']
   ])
 }

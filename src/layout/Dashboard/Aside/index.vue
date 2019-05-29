@@ -1,7 +1,7 @@
 <template>
   <el-aside
     :class="[
-      'layout__material__aside',
+      'layout__dashboard__aside',
       isAsideCollapse ? 'collapse' : 'expand'
     ]"
     :width="``"
@@ -67,7 +67,7 @@ export default {
 @import '~STYLE/color/font.scss';
 @import '~STYLE/layout/aside.scss';
 
-.layout__material__aside {
+.layout__dashboard__aside {
   min-height: 100vh;
   transition: width 0.3s;
   color: white;

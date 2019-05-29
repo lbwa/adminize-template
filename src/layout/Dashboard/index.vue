@@ -1,28 +1,28 @@
 <template>
   <el-container
     :class="[
-      'layout__material',
+      'layout__dashboard',
       isAsideCollapse ? 'collapse-aside' : 'expand-aside'
     ]"
   >
     <!-- Dynamic aside rendering area -->
     <el-scrollbar
       wrap-class="scrollbar-wrapper"
-      class="layout__material__aside-placeholder"
+      class="layout__dashboard__aside-placeholder"
     >
-      <material-aside />
+      <dashboard-aside />
     </el-scrollbar>
 
-    <el-container class="layout__material__placeholder">
-      <material-header />
+    <el-container class="layout__dashboard__placeholder">
+      <dashboard-header />
 
-      <el-main class="layout__material__placeholder-main">
+      <el-main class="layout__dashboard__placeholder-main">
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
       </el-main>
 
-      <el-footer class="layout__material__footer">
+      <el-footer class="layout__dashboard__footer">
         <page-footer />
       </el-footer>
     </el-container>
@@ -30,21 +30,21 @@
 </template>
 
 <script>
-import MaterialHeader from './Header'
-import MaterialAside from './Aside'
+import DashboardHeader from './Header'
+import DashboardAside from './Aside'
 import PageFooter from 'COMPONENTS/PageFooter'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'LayoutMaterial',
+  name: 'LayoutDashboard',
 
   computed: {
     ...mapState(['isAsideCollapse'])
   },
 
   components: {
-    MaterialHeader,
-    MaterialAside,
+    DashboardHeader,
+    DashboardAside,
     PageFooter
   }
 }
@@ -55,7 +55,7 @@ export default {
 @import '~STYLE/layout/aside.scss';
 @import '~STYLE/transition/aside.scss';
 
-.layout__material {
+.layout__dashboard {
   &__aside {
     &-placeholder {
       position: fixed;
@@ -84,13 +84,13 @@ export default {
 }
 
 .collapse-aside {
-  .layout__material__placeholder {
+  .layout__dashboard__placeholder {
     margin-left: $collapse-width;
   }
 }
 
 .expand-aside {
-  .layout__material__placeholder {
+  .layout__dashboard__placeholder {
     margin-left: $expand-width;
   }
 }

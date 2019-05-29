@@ -1,6 +1,6 @@
 export default {
   login: {
-    header: 'Admin template',
+    header: 'Adminize',
     placeholder: {
       username: '用户名',
       password: '密码'
@@ -12,7 +12,7 @@ export default {
     submitButton: '登 陆'
   },
   aside: {
-    header: 'Admin template',
+    header: 'Adminize',
     bar: {
       logout: '登 出'
     }

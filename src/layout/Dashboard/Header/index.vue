@@ -1,5 +1,5 @@
 <template>
-  <el-header class="layout__material__header">
+  <el-header class="layout__dashboard__header">
     <i class="el-icon-menu header__icon" @click="toggleAside"></i>
 
     <!-- 登出按钮 -->
@@ -53,7 +53,7 @@ export default {
   height: 60px;
 }
 
-.layout__material__header {
+.layout__dashboard__header {
   padding: 0 24px 0 0;
   position: relative; // for box-shadow
   background-color: $background-lightest;

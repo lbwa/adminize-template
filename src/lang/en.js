@@ -1,6 +1,6 @@
 export default {
   login: {
-    header: 'Admin template',
+    header: 'Adminize',
     placeholder: {
       username: 'Username',
       password: 'Password'
@@ -12,7 +12,7 @@ export default {
     submitButton: 'Log in'
   },
   aside: {
-    header: 'Admin template',
+    header: 'Adminize',
     bar: {
       logout: 'Log out'
     }

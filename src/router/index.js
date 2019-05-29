@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import constantRoutes from './routes/constant'
+import publicRoutes from './routes/public'
 
 Vue.use(Router)
 
@@ -8,7 +8,7 @@ function createRouter() {
   return new Router({
     mode: 'hash',
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes: publicRoutes
   })
 }
 

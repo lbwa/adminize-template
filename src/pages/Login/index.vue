@@ -1,45 +1,47 @@
 <template>
   <section class="login">
-    <el-form
-      class="login__form"
-      label-position="right"
-      :model="userInfo"
-      :rules="rules"
-      ref="login"
-      status-icon
-      @keyup.enter.native="onSubmit"
-    >
-      <h1 class="login__form__title">{{ $t('login.header') }}</h1>
-      <el-form-item prop="username">
-        <el-input
-          v-model="userInfo.username"
-          :placeholder="$t('login.placeholder.username')"
-          clearable
-        >
-          <i slot="prefix" class="el-icon-service"></i>
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
-          v-model="userInfo.password"
-          :placeholder="$t('login.placeholder.password')"
-          type="password"
-          clearable
-        >
-          <i slot="prefix" class="el-icon-goods"></i>
-        </el-input>
-      </el-form-item>
+    <div class="locator">
+      <el-form
+        class="login__form"
+        label-position="right"
+        :model="userInfo"
+        :rules="rules"
+        ref="login"
+        status-icon
+        @keyup.enter.native="onSubmit"
+      >
+        <h1 class="login__form__title">{{ $t('login.header') }}</h1>
+        <el-form-item prop="username">
+          <el-input
+            v-model="userInfo.username"
+            :placeholder="$t('login.placeholder.username')"
+            clearable
+          >
+            <i slot="prefix" class="el-icon-service"></i>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            v-model="userInfo.password"
+            :placeholder="$t('login.placeholder.password')"
+            type="password"
+            clearable
+          >
+            <i slot="prefix" class="el-icon-goods"></i>
+          </el-input>
+        </el-form-item>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          @click="onSubmit"
-          class="login__controller__submit"
-          :loading="isLoading"
-          >{{ $t('login.submitButton') }}</el-button
-        >
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="onSubmit"
+            class="login__controller__submit"
+            :loading="isLoading"
+            >{{ $t('login.submitButton') }}</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </div>
     <el-footer class="login__footer">
       <page-footer />
     </el-footer>
@@ -94,42 +96,45 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.layout__login {
-  min-height: 100vh;
-}
+<style lang="sass" scoped>
+.layout__login
+  min-height: 100vh
 
-.login {
-  background-image: url('~./img/animation.gif');
-  background-repeat: no-repeat;
-  background-position: center center;
+.login
+  background-image: url('~./img/bg.jpg')
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: cover
 
-  &__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    height: calc(100vh - 60px);
-    max-width: 400px;
+  .locator
+    position: relative
+    height: calc(100vh - 60px)
 
-    &__title {
-      text-align: center;
-      text-transform: capitalize;
-    }
-  }
+  &__form
+    display: flex
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    flex-direction: column
+    justify-content: center
+    margin: 0 auto
+    padding: 1.25rem
+    width: 25rem
+    background-color: white
+    border-radius: 5px
 
-  &__controller {
-    &__submit {
-      width: 100%;
-    }
-  }
+    &__title
+      text-align: center
+      text-transform: capitalize
 
-  &__footer {
-    .author__info {
-      margin: 0;
-      text-align: center;
-      line-height: 60px;
-    }
-  }
-}
+  &__controller
+    &__submit
+      width: 100%
+
+  &__footer
+    .author__info
+      margin: 0
+      text-align: center
+      line-height: 60px
 </style>

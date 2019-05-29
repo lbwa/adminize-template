@@ -15,20 +15,6 @@ const WHITELIST = ['/login']
 // Used to determine whether private routes has been added
 let HAS_ROUTES_ADDED = false
 
-function setDynamicRoutesToStorage() {
-  store.commit(
-    `login/${loginTypes.SET_DYNAMIC_ROUTES}`,
-    createDynamicRoutes(store.getters['login/accessMap'])
-  )
-}
-
-function setGlobalRoutesToStorage() {
-  store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
-    ...publicRoutes,
-    ...store.getters['login/dynamicRoutes']
-  ])
-}
-
 async function errorHandler(e, next, redirectPath) {
   try {
     await MessageBox({
@@ -50,19 +36,23 @@ async function errorHandler(e, next, redirectPath) {
   }
 }
 
-function addRoutesToRouter() {
-  router.addRoutes(store.getters['login/dynamicRoutes'])
+function addRoutesToRouter(privateRoutes) {
+  router.addRoutes(privateRoutes)
   console.log(
     '%c[Routes creation]: routes has been added!',
     'color: yellow',
-    store.getters['login/dynamicRoutes']
+    privateRoutes
   )
 }
 
 function createRoutesMap(to, next) {
-  setDynamicRoutesToStorage()
-  setGlobalRoutesToStorage()
-  addRoutesToRouter()
+  const privateRoutes = createDynamicRoutes(store.getters['login/accessMap'])
+  // To create dashboard aside, store all global routes
+  store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
+    ...publicRoutes,
+    ...privateRoutes
+  ])
+  addRoutesToRouter(privateRoutes)
   HAS_ROUTES_ADDED = true
   // 1. MUST invoke `next({ ...to, replace: true })` to prevent route matching
   // from occurring before route is added
@@ -84,11 +74,15 @@ router.beforeEach(async (to, from, next) => {
 
   // ! State: User has been logged in (local token).
   if (tokenFromStorage.getItem()) {
-    // (Optional) local storage has a accessToken record, but current `login/accessToken`
+    // step: 1.
+    // create all routes map when no token or no accessMap
     // vuex state is empty string when user activate a new session (eg. new
     // browser tab)
 
-    if (!store.getters['login/accessToken']) {
+    if (
+      !store.getters['login/accessToken'] ||
+      !store.getters['login/accesses'].length
+    ) {
       try {
         await store.dispatch(
           'login/fetchUserAccess',
@@ -102,23 +96,9 @@ router.beforeEach(async (to, from, next) => {
         )
         store.commit(
           `login/${loginTypes.SET_USER_INFO}`,
-          JSON.parse(userInfoFromStorage.getItem())
+          JSON.parse(userInfoFromStorage.getItem() || JSON.stringify(''))
         )
 
-        createRoutesMap(to, next)
-      } catch (e) {
-        errorHandler(e, next, to.path)
-      }
-    }
-
-    // step: 1. confirm route access by user access, including global routes creation.
-    if (!store.getters['login/accesses'].length) {
-      // 2.1 fetch user role, then routes creation based on user role.
-      try {
-        await store.dispatch(
-          'login/fetchUserAccess',
-          tokenFromStorage.getItem()
-        )
         createRoutesMap(to, next)
       } catch (e) {
         errorHandler(e, next, to.path)
@@ -136,7 +116,7 @@ router.beforeEach(async (to, from, next) => {
       return createRoutesMap(to, next)
     }
 
-    // Optional step:  real-time routes filter
+    // Optional step:  real-time access control for routes
     // ! 动态权限验证，如在公有路由中的未参与 private routes 过滤的路由需要权限验证时
     if (
       // 当前路由不存在权限验证时

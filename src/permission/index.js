@@ -29,22 +29,25 @@ function setGlobalRoutesToStorage() {
   ])
 }
 
-function errorHandler(e, next, redirectPath) {
-  MessageBox({
-    title: 'Error',
-    message: 'We got a error when fetching user access.',
-    type: 'error',
-    showClose: false
-  })
-    .then(() => store.dispatch('login/userLogout'))
-    .then(() =>
-      next({
-        path: `/login?redirect=${redirectPath}`,
-        replace: true
-      })
-    )
-  NProgress.done()
-  console.error(e)
+async function errorHandler(e, next, redirectPath) {
+  try {
+    await MessageBox({
+      title: 'Error',
+      message: 'We got a error when fetching user access.',
+      type: 'error',
+      showClose: false
+    })
+
+    await store.dispatch('login/userLogout')
+    next({
+      path: `/login?redirect=${redirectPath}`,
+      replace: true
+    })
+    NProgress.done()
+    console.error(e)
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function addRoutesToRouter() {
@@ -70,10 +73,11 @@ function createRoutesMap(to, next) {
 /**
  * @description Login state validation
  */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start()
 
   // Jump to target path directly If target path has been included by white list
+  // Should includes redirect page to prevent infinity redirect loop.
   if (WHITELIST.includes(to.path)) {
     return next()
   }
@@ -85,30 +89,40 @@ router.beforeEach((to, from, next) => {
     // browser tab)
 
     if (!store.getters['login/accessToken']) {
-      return store
-        .dispatch('login/fetchUserAccess', tokenFromStorage.getItem())
-        .then(() => {
-          // fill vuex state with user information to prevent infinity loop.
-          store.commit(
-            `login/${loginTypes.SET_ACCESS_TOKEN}`,
-            tokenFromStorage.getItem()
-          )
-          store.commit(
-            `login/${loginTypes.SET_USER_INFO}`,
-            JSON.parse(userInfoFromStorage.getItem())
-          )
-        })
-        .then(() => createRoutesMap(to, next))
-        .catch(e => errorHandler(e, next, to.path))
+      try {
+        await store.dispatch(
+          'login/fetchUserAccess',
+          tokenFromStorage.getItem()
+        )
+
+        // fill vuex state with user information to prevent infinity loop.
+        store.commit(
+          `login/${loginTypes.SET_ACCESS_TOKEN}`,
+          tokenFromStorage.getItem()
+        )
+        store.commit(
+          `login/${loginTypes.SET_USER_INFO}`,
+          JSON.parse(userInfoFromStorage.getItem())
+        )
+
+        createRoutesMap(to, next)
+      } catch (e) {
+        errorHandler(e, next, to.path)
+      }
     }
 
     // step: 1. confirm route access by user access, including global routes creation.
     if (!store.getters['login/accesses'].length) {
       // 2.1 fetch user role, then routes creation based on user role.
-      return store
-        .dispatch('login/fetchUserAccess', tokenFromStorage.getItem())
-        .then(() => createRoutesMap(to, next))
-        .catch(e => errorHandler(e, next, to.path))
+      try {
+        await store.dispatch(
+          'login/fetchUserAccess',
+          tokenFromStorage.getItem()
+        )
+        createRoutesMap(to, next)
+      } catch (e) {
+        errorHandler(e, next, to.path)
+      }
     }
 
     // (step 1.2 optional) Regenerate private routes based on user role when page

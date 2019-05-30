@@ -4,33 +4,30 @@ import router, { resetRouter } from 'ROUTER'
 
 export default {
   userLogin({ commit }, { username, password, vm }) {
-    return (
-      userLogin({
-        username,
-        password
+    return userLogin({
+      username,
+      password
+    })
+      .then(({ user_id: userId, access_token: accessToken }) => {
+        commit(types.SET_USER_INFO, {
+          username,
+          userId
+        })
+        commit(types.SET_ACCESS_TOKEN, accessToken)
+        router.replace('/')
       })
-        // eslint-disable-next-line
-        .then(({ user_id, access_token }) => {
-          commit(types.SET_USER_INFO, {
-            username /* 手机或者是邮箱 */,
-            userId: user_id
+      .catch(e => {
+        if (e.code === 5000) {
+          vm.$_plugins_messageBox.alert('Wrong username or password', {
+            type: 'error',
+            title: 'Error'
           })
-          commit(types.SET_ACCESS_TOKEN, access_token)
-          router.replace('/')
-        })
-        .catch(e => {
-          if (e.code === 5000) {
-            vm.$_plugins_messageBox.alert('Wrong username or password', {
-              type: 'error',
-              title: 'Error'
-            })
-          }
-          // 仅用于触发 afterEach 后置导航守卫，使得顶部进度条 done()
-          // For invoking `router.afterEach` navigation guards including `NProgress.done()`
-          vm.$router.replace('/login')
-          console.error(`[Login error]: ${JSON.stringify(e)}`)
-        })
-    )
+        }
+        // 仅用于触发 afterEach 后置导航守卫，使得顶部进度条 done()
+        // For invoking `router.afterEach` navigation guards including `NProgress.done()`
+        vm.$router.replace('/login')
+        console.error(`[Login error]: ${JSON.stringify(e)}`)
+      })
   },
   userLogout({ dispatch }) {
     dispatch('resetStore', null, { root: true })

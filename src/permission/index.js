@@ -3,9 +3,9 @@ import store from 'STORE'
 import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { tokenFromStorage, userInfoFromStorage } from 'UTILS/storage'
+import { tokenFromStorage } from 'UTILS/storage'
 import { MessageBox } from 'element-ui'
-import createDynamicRoutes, { validateAccess } from './controller/routes'
+import createPrivateRoutes, { validateAccess } from './controller/routes'
 import publicRoutes from 'ROUTER/routes/public'
 
 NProgress.configure({ showSpinner: false })
@@ -46,7 +46,7 @@ function addRoutesToRouter(privateRoutes) {
 }
 
 function createRoutesMap(to, next) {
-  const privateRoutes = createDynamicRoutes(store.getters['login/accessMap'])
+  const privateRoutes = createPrivateRoutes(store.getters['login/accessMap'])
   // To create dashboard aside, store all global routes
   store.commit(`login/${loginTypes.SET_ALL_ROUTES}`, [
     ...publicRoutes,
@@ -74,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
 
   // ! State: User has been logged in (local token).
   if (tokenFromStorage.getItem()) {
-    // step: 1.
+    // step 1
     // create all routes map when no token or no accessMap
     // vuex state is empty string when user activate a new session (eg. new
     // browser tab)
@@ -89,25 +89,15 @@ router.beforeEach(async (to, from, next) => {
           tokenFromStorage.getItem()
         )
 
-        // fill vuex state with user information to prevent infinity loop.
-        store.commit(
-          `login/${loginTypes.SET_ACCESS_TOKEN}`,
-          tokenFromStorage.getItem()
-        )
-        store.commit(
-          `login/${loginTypes.SET_USER_INFO}`,
-          JSON.parse(userInfoFromStorage.getItem() || JSON.stringify(''))
-        )
-
         createRoutesMap(to, next)
       } catch (e) {
         errorHandler(e, next, to.path)
       }
     }
 
-    // (step 1.2 optional) Regenerate private routes based on user role when page
-    // reload, because vuex state will be preserved by vuex-persistedstate when
-    // page reload.
+    /**
+     * (step 1.1) Regenerate private routes based on user access
+     */
     if (store.getters['login/accesses'].length && !HAS_ROUTES_ADDED) {
       console.log(
         '%c[Routes creation]: Activate private routes regeneration process !',

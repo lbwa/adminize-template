@@ -1,14 +1,19 @@
-import routes from 'ROUTER/routes/private'
+import privateRoutes from 'ROUTER/routes/private'
 
 /**
- * @description 根据后端回传的当前用户权限表创建一个用于过滤 routes 的 hashmap
- * @param {Array} accesses 后端回传的当前用户权限表
+ * @description According to user service accesses to create access map used to
+ * query user access conveniently
+ * @param {Array} accesses a list presenting user service accesses, not formatted
+ * accesses sample: ['app.coreService.read', 'app.sampleService.read']
  */
 export function createAccessMap(accesses) {
   return accesses.reduce((accessMap, access) => {
     const accessNameList = access.access.split('.')
-    // accessNameList[1] 表示某个模块的名称，如 device
-    // accessNameList[2] 表示某个模块下的某个特定权限。如 read，write 等
+    /**
+     * 1. accessNameList[1] present a service module name, eg, `device`
+     * 2. accessNameList[2] present an access about a service module.
+     *    eg, read access, `write` access, etc.
+     */
     accessMap[accessNameList[1]] = (accessMap[accessNameList[1]] || []).concat(
       accessNameList[2]
     )
@@ -17,20 +22,21 @@ export function createAccessMap(accesses) {
 }
 
 /**
- * @description 根据重建的当前用户各个模块权限的 hashmap 过滤所有私有路由，得到当前用
- * 户可访问的私有路由
- * @param {Array} routes 所有的私有路由表
- * @param {Object} accessMap 一个对应当前用户各个模块权限的 hashmap
+ * @description Generate a private route based on the current user's access map
+ * @param {Array} routes All private routes used to filter
+ * @param {Object} accessMap A map presenting the service access of current user
  */
-function filterRoutes(routes, accessMap) {
+export default function createPrivateRoutes(accessMap, routes = privateRoutes) {
   return routes.reduce((filteredRoutes, route) => {
     const routeCopy = { ...route } // shallow copy
-    // 2.1 validate private route access
-    // determine whether private route is added to global routes map.
+    /**
+     * validate private route access, determine whether private route is added
+     * to global routes map.
+     */
     if (validateAccess(route, accessMap)) {
       if (routeCopy.children) {
-        // recursive filter
-        routeCopy.children = filterRoutes(routeCopy.children, accessMap)
+        // filter children routes recursively
+        routeCopy.children = createPrivateRoutes(accessMap, routeCopy.children)
       }
 
       if (!(routeCopy.children && !routeCopy.children.length)) {
@@ -42,16 +48,14 @@ function filterRoutes(routes, accessMap) {
 }
 
 /**
- * @description 验证用户是否有权限访问某个私有路由
- * @param {Object} route 某个私有路由对象
- * @param {Array} accessMap 一个对应当前用户各个模块权限的 hashmap
+ * @description validate route access, based on current user access
+ * @param {Object} route one of the private routes
+ * @param {Array} accessMap A map presenting the service access of current user
  */
-// ! 本质问题: 如何确定两个数组是否存在交集
 export function validateAccess(route, accessMap) {
   if (route.meta && route.meta.access) {
     return Object.keys(route.meta.access).every(accessName => {
-      // 在后端回传的权限表中不存在对应 route 所需的最低权限中的一项，
-      // 即不满足 private route 的最低权限需求
+      // Return false when route accesses has not been satisfied
       if (!accessMap[accessName]) return false
 
       return route.meta.access[accessName].every(routeAccess =>
@@ -62,8 +66,4 @@ export function validateAccess(route, accessMap) {
 
   // situation: preset private route has no 'access' field
   return true
-}
-
-export default function createPrivateRoutes(accessMap) {
-  return filterRoutes(routes, accessMap)
 }

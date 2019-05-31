@@ -4,7 +4,7 @@ import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { tokenFromStorage } from 'UTILS/storage'
-import { MessageBox } from 'element-ui'
+import { Notification } from 'element-ui'
 import createPrivateRoutes, { validateAccess } from './controller/routes'
 import publicRoutes from 'ROUTER/routes/public'
 
@@ -17,11 +17,10 @@ let HAS_ROUTES_ADDED = false
 
 async function errorHandler(e, next, redirectPath) {
   try {
-    await MessageBox({
+    await Notification.error({
       title: 'Error',
-      message: 'We got a error when fetching user access.',
-      type: 'error',
-      showClose: false
+      message: 'Access validation failed, please login again.',
+      position: 'bottom-right'
     })
 
     await store.dispatch('login/userLogout')

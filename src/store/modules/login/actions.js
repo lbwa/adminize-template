@@ -1,6 +1,7 @@
 import { userLogin, fetchUserAccess } from 'API'
 import types from './mutations/types'
 import router, { resetRouter } from 'ROUTER'
+import { Notification } from 'element-ui'
 
 export default {
   userLogin({ commit }, { username, password, vm }) {
@@ -18,9 +19,11 @@ export default {
       })
       .catch(e => {
         if (e.code === 5000) {
-          vm.$_plugins_messageBox.alert('Wrong username or password', {
-            type: 'error',
-            title: 'Error'
+          Notification.error({
+            title: 'Error',
+            message: 'Invalid username or password, please check them.',
+            position: 'bottom-right',
+            duration: 6000
           })
         }
         // 仅用于触发 afterEach 后置导航守卫，使得顶部进度条 done()

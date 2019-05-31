@@ -18,7 +18,7 @@ const initialState = Object.keys(modules).reduce((snapshot, moduleName) => {
   snapshot[moduleName] = modules[moduleName].state
   return snapshot
 }, {})
-stateSnapshot.setItem(initialState)
+stateSnapshot.setItem(Object.assign(initialState, state))
 
 /**
  * @description Vuex persisted state

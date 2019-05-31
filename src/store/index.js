@@ -8,6 +8,7 @@ import state from './state'
 import mutations from './mutations'
 import actions from './actions'
 import modules from './modules'
+import { STORE_KEY } from 'UTILS/storage'
 
 /**
  * @description create a global state snapshot to save initial state which is
@@ -27,7 +28,7 @@ const __DEV__ = process.env.NODE_ENV === 'development'
 // https://github.com/robinvdvleuten/vuex-persistedstate
 // https://github.com/js-cookie/js-cookie
 const persistedState = createPersistedState({
-  key: '$_VUEX_STORE',
+  key: STORE_KEY,
   // default: window.localStorage
   storage: {
     getItem: key => Cookies.get(key),

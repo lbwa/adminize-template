@@ -3,7 +3,7 @@ import store from 'STORE'
 import loginTypes from 'STORE/modules/login/mutations/types'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { tokenFromStorage } from 'UTILS/storage'
+import { tokenInCookie } from 'UTILS/storage'
 import { Notification } from 'element-ui'
 import createPrivateRoutes, { validateAccess } from './controller/routes'
 import publicRoutes from 'ROUTER/routes/public'
@@ -72,7 +72,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // ! State: User has been logged in (local token).
-  if (tokenFromStorage.getItem()) {
+  if (tokenInCookie.getItem()) {
     // step 1
     // create all routes map when no token or no accessMap
     // vuex state is empty string when user activate a new session (eg. new
@@ -83,10 +83,7 @@ router.beforeEach(async (to, from, next) => {
       !store.getters['login/accesses'].length
     ) {
       try {
-        await store.dispatch(
-          'login/fetchUserAccess',
-          tokenFromStorage.getItem()
-        )
+        await store.dispatch('login/fetchUserAccess', tokenInCookie.getItem())
 
         createRoutesMap(to, next)
       } catch (e) {

@@ -34,6 +34,7 @@ export default {
   },
   userLogout({ dispatch }) {
     dispatch('resetStore', null, { root: true })
+    localStorage.clear()
     // https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
     // remove all routes which was added by router.addRoutes()
     resetRouter()

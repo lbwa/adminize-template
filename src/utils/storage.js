@@ -1,5 +1,5 @@
-const TOKEN_KEY = '$_tk'
-const USER_INFO_KEY = '$_usi'
+const TOKEN_KEY = '$_ut'
+const USER_INFO_KEY = '$_ui'
 const STATE_SNAPSHOT = '$_snapshot'
 
 function setValueToLocal(key, val, storage) {

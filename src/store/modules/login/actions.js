@@ -2,6 +2,7 @@ import { userLogin, fetchUserAccess } from 'API'
 import types from './mutations/types'
 import router, { resetRouter } from 'ROUTER'
 import { Notification } from 'element-ui'
+import { cleanupCookies } from 'UTILS/storage'
 
 export default {
   userLogin({ commit }, { username, password, vm }) {
@@ -34,7 +35,8 @@ export default {
   },
   userLogout({ dispatch }) {
     dispatch('resetStore', null, { root: true })
-    localStorage.clear()
+    // clean user info
+    cleanupCookies()
     // https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
     // remove all routes which was added by router.addRoutes()
     resetRouter()

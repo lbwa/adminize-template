@@ -13,10 +13,6 @@ export default {
   accessMap(state) {
     return createAccessMap(state.accesses)
   },
-  // used to add user private routes (router.addRoutes) to global routes map.
-  dynamicRoutes(state) {
-    return state.dynamicRoutes
-  },
   // used to create recursive aside.
   allRoutes(state) {
     return state.allRoutes

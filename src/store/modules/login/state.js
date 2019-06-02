@@ -5,6 +5,5 @@ export default {
   },
   accessToken: '',
   accesses: [],
-  dynamicRoutes: [],
   allRoutes: []
 }

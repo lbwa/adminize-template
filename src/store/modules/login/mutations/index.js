@@ -15,9 +15,6 @@ export default {
   [types.SET_USER_ACCESSES](state, accesses) {
     state.accesses = accesses
   },
-  [types.SET_DYNAMIC_ROUTES](state, dynamicRoutes) {
-    state.dynamicRoutes = dynamicRoutes
-  },
   [types.SET_ALL_ROUTES](state, allRoutes) {
     state.allRoutes = allRoutes
   }

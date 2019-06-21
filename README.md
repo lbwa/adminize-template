@@ -1,4 +1,4 @@
-# Adminize template [![CircleCI](https://circleci.com/gh/lbwa/admin-template.svg?style=svg)](https://circleci.com/gh/lbwa/admin-template)
+# Adminize template [![CircleCI](https://circleci.com/gh/lbwa/adminize-template.svg?style=svg)](https://circleci.com/gh/lbwa/adminize-template)
 
 <p align="center">
   <a href="https://lbwa.github.io/adminize-template">Online site</a>

@@ -7,7 +7,7 @@ export default [
     component: plainExport,
     meta: {
       title: 'Private Device',
-      icon: 'el-icon-picture-outline'
+      icon: 'el-icon-picture'
     },
     children: [
       {
@@ -39,7 +39,7 @@ export default [
     component: plainExport,
     meta: {
       title: 'Private App',
-      icon: 'el-icon-mobile-phone'
+      icon: 'el-icon-s-platform'
     },
     children: [
       {

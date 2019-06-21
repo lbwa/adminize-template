@@ -18,7 +18,8 @@ export default [
     name: 'home',
     component: constantComponents.pagesHome,
     meta: {
-      title: 'Home'
+      title: 'Home',
+      icon: 'el-icon-s-home'
     }
   },
   {
@@ -34,7 +35,7 @@ export default [
     component: plainExport,
     meta: {
       title: 'Admin',
-      icon: 'el-icon-view'
+      icon: 'el-icon-user-solid'
     },
     children: [
       {
@@ -65,7 +66,7 @@ export default [
     component: plainExport,
     meta: {
       title: 'Common',
-      icon: 'el-icon-document'
+      icon: 'el-icon-s-promotion'
     },
     children: [
       {
@@ -82,7 +83,7 @@ export default [
     component: constantComponents.pagesNested,
     meta: {
       title: 'Nested',
-      icon: 'el-icon-document'
+      icon: 'el-icon-s-management'
     },
     children: [
       {

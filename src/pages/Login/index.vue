@@ -17,7 +17,7 @@
             :placeholder="$t('login.placeholder.username')"
             clearable
           >
-            <i slot="prefix" class="el-icon-service"></i>
+            <i slot="prefix" class="el-icon-user"></i>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -27,7 +27,7 @@
             type="password"
             clearable
           >
-            <i slot="prefix" class="el-icon-goods"></i>
+            <i slot="prefix" class="el-icon-lock"></i>
           </el-input>
         </el-form-item>
 

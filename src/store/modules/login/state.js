@@ -4,6 +4,6 @@ export default {
     username: ''
   },
   accessToken: '',
-  accesses: [],
-  allRoutes: []
+  accesses: [], // a set of original access which is sent by services
+  allRoutes: [] // to create app aside menu
 }

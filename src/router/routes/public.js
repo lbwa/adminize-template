@@ -5,7 +5,7 @@ import { constantComponents, plainExport } from 'ROUTER/components'
  *   title: 'route title', // Route will be hidden if meta.title is falsy value
  *   icon: '', // title text icon name
  *   layout: '', // layout name, 'plain' or 'dashboard'(default value)
- *   roles: ['admin', 'user'] // current route access
+ *   access: ['manage.device.read'] // current route access, it can be any string
  * }
  */
 export default [
@@ -43,9 +43,11 @@ export default [
         component: constantComponents.pagesAdminDashboard,
         meta: {
           title: 'Dashboard',
-          access: {
-            device: ['read', 'write', 'import']
-          }
+          access: [
+            'manage.device.read',
+            'manage.device.write',
+            'manage.device.import'
+          ]
         }
       },
       {
@@ -54,9 +56,11 @@ export default [
         meta: {
           title: 'Table',
           icon: 'el-icon-tickets',
-          access: {
-            device: ['read', 'write', 'import']
-          }
+          access: [
+            'manage.device.read',
+            'manage.device.write',
+            'manage.device.import'
+          ]
         }
       }
     ]

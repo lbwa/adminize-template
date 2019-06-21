@@ -15,9 +15,11 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'Admin',
-          access: {
-            device: ['read', 'write', 'import']
-          }
+          access: [
+            'manage.device.read',
+            'manage.device.write',
+            'manage.device.import'
+          ]
         }
       },
       {
@@ -25,9 +27,7 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'User',
-          access: {
-            device: ['read']
-          }
+          access: ['manage.device.read']
         }
       }
     ]
@@ -47,9 +47,7 @@ export default [
         component: dynamicComponents.pagesPrivate,
         meta: {
           title: 'Admin',
-          access: {
-            app: ['read', 'write']
-          }
+          access: ['manage.app.read', 'manage.app.write']
         }
       }
     ]

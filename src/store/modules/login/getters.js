@@ -1,17 +1,21 @@
-import { createAccessMap } from 'PERMISSION/controller/routes'
-
 export default {
-  username(state) {
-    return (state.userInfo && state.userInfo.username) || '无用户名'
+  username({ userInfo }) {
+    return (userInfo && userInfo.username) || '无用户名'
   },
-  accessToken(state) {
-    return state.accessToken
+  accessToken({ accessToken }) {
+    return accessToken
   },
-  accesses(state) {
-    return state.accesses
+  accesses({ accesses }) {
+    return accesses
   },
-  accessMap(state) {
-    return createAccessMap(state.accesses)
+  accessMap({ accesses }) {
+    return accesses.reduce(
+      (map, access) => ({
+        ...map,
+        [access['access']]: access
+      }),
+      {}
+    )
   },
   // used to create recursive aside.
   allRoutes(state) {

@@ -10,11 +10,11 @@
         status-icon
         @keyup.enter.native="onSubmit"
       >
-        <h1 class="login__form__title">{{ $t('login.header') }}</h1>
+        <h1 class="login__form__title">{{ $t('header') }}</h1>
         <el-form-item prop="username">
           <el-input
             v-model="userInfo.username"
-            :placeholder="$t('login.placeholder.username')"
+            :placeholder="$t('placeholder.username')"
             clearable
           >
             <i slot="prefix" class="el-icon-user"></i>
@@ -23,7 +23,7 @@
         <el-form-item prop="password">
           <el-input
             v-model="userInfo.password"
-            :placeholder="$t('login.placeholder.password')"
+            :placeholder="$t('placeholder.password')"
             type="password"
             clearable
           >
@@ -37,7 +37,7 @@
             @click="onSubmit"
             class="login__controller__submit"
             :loading="isLoading"
-            >{{ $t('login.submitButton') }}</el-button
+            >{{ $t('submitButton') }}</el-button
           >
         </el-form-item>
       </el-form>
@@ -66,19 +66,21 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      this.switchLoading(true)
-      this.$refs.login
-        .validate()
-        .then(() => ({
-          ...this.userInfo,
-          vm: this
-        }))
+    async onSubmit() {
+      try {
+        this.switchLoading(true)
+        await this.$refs.login.validate()
         // This action has included routes replacement
         // dispatch() will return a Promise instance
-        .then(payload => this.$store.dispatch('login/userLogin', payload))
-        .catch(e => console.error('[Login form]: validate failed !', e))
-        .finally(() => this.switchLoading(false))
+        await this.$store.dispatch('login/userLogin', {
+          ...this.userInfo,
+          vm: this
+        })
+        this.switchLoading(false)
+      } catch (err) {
+        console.error('[Login form]: validate failed !', err)
+        this.switchLoading(false)
+      }
     },
     switchLoading(state) {
       this.isLoading = state
@@ -92,6 +94,35 @@ export default {
 
   components: {
     PageFooter
+  },
+
+  i18n: {
+    messages: {
+      en: {
+        header: 'Adminize console',
+        placeholder: {
+          username: 'Username',
+          password: 'Password'
+        },
+        tips: {
+          username: 'Username is required.',
+          password: 'Password is required.'
+        },
+        submitButton: 'Login'
+      },
+      zh: {
+        header: 'Adminize console',
+        placeholder: {
+          username: '用户名',
+          password: '密码'
+        },
+        tips: {
+          username: '请输入正确的用户名',
+          password: '请输入正确的密码'
+        },
+        submitButton: '登 陆'
+      }
+    }
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template functional>
   <section class="unauthorized">
-    <h2>403</h2>
-    <p>You are unauthorized !</p>
-    <p>If you have any questions, contact tech support !</p>
+    <h2>401</h2>
+    <p>{{ parent.$t('unauthorized.title') }}</p>
+    <p>{{ parent.$t('unauthorized.desc') }}</p>
   </section>
 </template>
 

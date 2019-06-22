@@ -20,9 +20,16 @@ export default {
       })
       .catch(e => {
         if (e.code === 5000) {
+          const h = vm.$createElement.bind(vm)
           Notification.error({
             title: 'Error',
-            message: 'Invalid username or password, please check them.',
+            message: h('div', [
+              h(
+                'div',
+                { style: 'word-break: break-all' },
+                '😢Invalid username or password.'
+              )
+            ]),
             position: 'bottom-right',
             duration: 6000
           })

@@ -1,7 +1,7 @@
 <template functional>
   <section class="not-found">
     <h2>404</h2>
-    <p>Seems nothing could found.</p>
+    <p>{{ parent.$t('notFound') }}</p>
   </section>
 </template>
 

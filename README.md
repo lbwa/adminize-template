@@ -16,7 +16,7 @@
 
    - **Private routes** means these routes are filtered by current user access.
 
-1. The implement of mandatory access control and Optional access control
+1. The implement of mandatory access control and optional access control
 
    You can set up two typical solutions for access verification.
 
@@ -132,36 +132,6 @@
     // ... other routes
   ]
   ```
-
-## Templates
-
-- Home
-
-- Admin (All pages only can be accessed by user named `admin`, otherwise routes will be redirected to **403** page.)
-
-  - Dashboard
-
-  - Table
-
-- Common (No permission page)
-
-  - User
-
-- Nested (recursive rendering)
-
-  - nested-1
-
-    - nested-2
-
-- Private Device
-
-  - Admin (Appears only when user named `admin`)
-
-  - User (Appears only when user named `admin` or `user`)
-
-- Private App (Appears only when user named `admin`)
-
-  - Admin
 
 ## Commands
 

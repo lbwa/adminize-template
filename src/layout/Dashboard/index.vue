@@ -50,53 +50,42 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '~STYLE/layout/aside.scss';
-@import '~STYLE/transition/aside.scss';
+<style lang="sass" scoped>
+@import '~STYLE/layout/aside.scss'
+@import '~STYLE/transition/aside.scss'
 
-.layout__dashboard {
-  &__aside {
-    &-placeholder {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1200;
-      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-    }
-  }
+.layout__dashboard
+  &__aside
+    &-placeholder
+      position: fixed
+      top: 0
+      bottom: 0
+      left: 0
+      z-index: 1200
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35)
 
-  &__placeholder {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    transition: margin $aside-transition-time;
+  &__placeholder
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    transition: margin $aside-transition-time
 
-    &-main {
-      flex: 1;
-    }
-  }
+    &-main
+      flex: 1
 
-  &__footer {
-    line-height: 60px;
-    text-align: center;
-  }
-}
+  &__footer
+    line-height: 60px
+    text-align: center
 
-.collapse-aside {
-  .layout__dashboard__placeholder {
-    margin-left: $collapse-width;
-  }
-}
+.collapse-aside
+  .layout__dashboard__placeholder
+    margin-left: $collapse-width
 
-.expand-aside {
-  .layout__dashboard__placeholder {
-    margin-left: $expand-width;
-  }
-}
+.expand-aside
+  .layout__dashboard__placeholder
+    margin-left: $expand-width
 
-/deep/ .scrollbar-wrapper {
-  overflow-x: hidden !important; // 隐藏横向滚动条
-  background-color: $main-dark;
-}
+/deep/ .scrollbar-wrapper
+  overflow-x: hidden !important // 隐藏横向滚动条
+  background-color: $main-dark
 </style>

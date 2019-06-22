@@ -64,70 +64,55 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '~STYLE/color/background.scss';
-@import '~STYLE/color/font.scss';
-@import '~STYLE/layout/aside.scss';
+<style lang="sass" scoped>
+@import '~STYLE/layout/aside.scss'
 
-.layout__dashboard__aside {
-  min-height: 100vh;
-  transition: width 0.3s;
-  color: white;
-  overflow-x: hidden !important; // 隐藏横向滚动条
+.layout__dashboard__aside
+  min-height: 100vh
+  transition: width 0.3s
+  color: white
+  overflow-x: hidden !important // 隐藏横向滚动条
 
-  &.expand {
-    width: $expand-width;
-  }
+  &.expand
+    width: $expand-width
 
-  &.collapse {
-    width: $collapse-width;
-  }
+  &.collapse
+    width: $collapse-width
 
-  .aside {
-    &__header {
-      padding-left: 24px;
-      overflow: hidden;
-      line-height: 64px;
-      height: 64px;
+  .aside
+    &__header
+      padding-left: 24px
+      overflow: hidden
+      line-height: 64px
+      height: 64px
 
-      &__logo {
-        margin-right: 12px;
-        vertical-align: middle;
-      }
-    }
+      &__logo
+        margin-right: 12px
+        vertical-align: middle
 
-    &__title {
-      display: inline-block;
-      margin: 0;
-      vertical-align: middle;
-      text-transform: capitalize;
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 60px;
-    }
+    &__title
+      display: inline-block
+      margin: 0
+      vertical-align: middle
+      text-transform: capitalize
+      font-size: 20px
+      font-weight: 600
+      line-height: 60px
 
-    &__menu {
-      border: 0;
-    }
-  }
-}
+    &__menu
+      border: 0
 
-/deep/ .el-menu--collapse {
-  width: auto;
-}
-
-/deep/ .el-menu-item {
-  // 当前激活路由背景色
-  &.is-active {
-    // 源 UI 样式为内联样式，故使用 important 提升权重
-    color: $font-selected !important;
-  }
-}
+/deep/ .el-menu--collapse
+  width: auto
 
 /deep/ .el-menu-item,
-/deep/ .el-submenu__title {
-  i {
-    color: $font-white !important;
-  }
-}
+/deep/ .el-submenu__title
+  i
+    color: $font-white !important
+
+/deep/ .el-menu-item
+  // background of current activate route
+  &.is-active,
+  &.is-active i
+    color: $font-selected !important
 </style>

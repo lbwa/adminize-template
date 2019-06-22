@@ -84,16 +84,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="sass">
 /* MUST be global style setting */
-.el-menu--collapse {
-  & .el-submenu {
-    & .el-submenu__title {
+.el-menu--collapse
+  & .el-submenu
+    & .el-submenu__title
       & .el-submenu__icon-arrow,
-      .menu__item__title {
-        display: none;
-      }
-    }
-  }
-}
+      .menu__item__title
+        display: none
 </style>

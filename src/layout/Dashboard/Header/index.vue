@@ -45,42 +45,33 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '~STYLE/color/background.scss';
+<style lang="sass" scoped>
+=user-area
+  float: right
+  height: 60px
 
-@mixin user-area {
-  float: right;
-  height: 60px;
-}
+.layout__dashboard__header
+  padding: 0 24px 0 0
+  position: relative // for box-shadow
+  background-color: $main-white
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08)
 
-.layout__dashboard__header {
-  padding: 0 24px 0 0;
-  position: relative; // for box-shadow
-  background-color: $background-lightest;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  .header
+    &__icon
+      padding: 0 24px
+      line-height: 60px
+      cursor: pointer
+      font-size: 20px
+      transition: all 0.3s, padding 0s
 
-  .header {
-    &__icon {
-      padding: 0 24px;
-      line-height: 60px;
-      cursor: pointer;
-      font-size: 20px;
-      transition: all 0.3s, padding 0s;
-    }
-  }
-
-  .user {
-    @include user-area;
-    margin-right: 15px;
+  .user
+    +user-area;
+    margin-right: 15px
     &__name,
-    &__avatar {
-      line-height: 60px;
-      vertical-align: middle;
-    }
-  }
+    &__avatar
+      line-height: 60px
+      vertical-align: middle
 
-  .logout {
-    @include user-area;
-  }
-}
+  .logout
+    +user-area
 </style>

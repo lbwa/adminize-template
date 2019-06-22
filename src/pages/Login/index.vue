@@ -101,8 +101,7 @@ export default {
   min-height: 100vh
 
 .login
-  background-image: url('~./img/bg.jpg')
-  background-repeat: no-repeat
+  background-color: $main-dark
   background-position: center center
   background-size: cover
 

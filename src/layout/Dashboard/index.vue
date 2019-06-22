@@ -71,6 +71,7 @@ export default {
     transition: margin $aside-transition-time
 
     &-main
+      height: 100%
       flex: 1
 
   &__footer

@@ -58,6 +58,17 @@ module.exports = {
       // https://webpack.js.org/configuration/optimization/#optimizationruntimechunk
       chainConfig.optimization.runtimeChunk('single')
     })
+  },
+  css: {
+    loaderOptions: {
+      /**
+       * @description Set global sass environment variables
+       * https://github.com/webpack-contrib/sass-loader#environment-variables
+       */
+      sass: {
+        data: `@import "STYLE/theme/index.scss";`
+      }
+    }
   }
 }
 

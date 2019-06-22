@@ -66,7 +66,7 @@ export default function createBaseRequest(baseURL) {
                   'Unauthorized request',
                   h('div', { style: 'work-break: break-all' }, url)
                 ]
-              : 'Update data failed'
+              : '😢Update data failed.'
           ),
           position: 'bottom-right'
         })

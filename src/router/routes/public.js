@@ -109,7 +109,8 @@ export default [
     ]
   },
   {
-    path: '/403',
+    // https://tools.ietf.org/html/rfc7235#section-3.1
+    path: '/401',
     component: constantComponents.pagesErrorUnauthorized
   },
   {

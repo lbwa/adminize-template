@@ -1,16 +1,4 @@
 export default {
-  login: {
-    header: 'Adminize',
-    placeholder: {
-      username: 'Username',
-      password: 'Password'
-    },
-    tips: {
-      username: 'Username is required.',
-      password: 'Password is required.'
-    },
-    submitButton: 'Login'
-  },
   aside: {
     header: 'Adminize console'
   },
@@ -20,5 +8,10 @@ export default {
     realTimeVerification:
       'This route has include real-time access verification',
     currentRoute: 'Current route is'
+  },
+  notFound: '😢Seems nothing could found.',
+  unauthorized: {
+    title: '🚫You are unauthorized !',
+    desc: 'If you have any questions, contact tech support !'
   }
 }

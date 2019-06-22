@@ -113,7 +113,7 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else {
       next({
-        path: `/403?redirect=${to.path}`,
+        path: `/401?redirect=${to.path}`,
         replace: true
       })
     }

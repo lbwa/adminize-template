@@ -1,17 +1,13 @@
-<template>
-  <div class="admin__dashboard">
-    Current routes is <strong>{{ $route.path }}</strong
+<template functional>
+  <div class="dashboard">
+    Current routes is
+    <strong>{{ parent.$route.path }}</strong
     >.
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      info: 'this is /pages/admin/dashboard'
-    }
-  }
+  name: 'Dashboard'
 }
 </script>
-<style lang="scss" scoped></style>

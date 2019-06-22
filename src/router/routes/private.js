@@ -6,28 +6,28 @@ export default [
     name: 'private',
     component: plainExport,
     meta: {
-      title: 'Private Device',
+      title: 'Private',
       icon: 'el-icon-picture'
     },
     children: [
       {
         path: 'admin',
-        component: dynamicComponents.pagesPrivate,
+        component: dynamicComponents.pagesPrivateAdmin,
         meta: {
           title: 'Admin',
           access: [
-            'manage.device.read',
-            'manage.device.write',
-            'manage.device.import'
+            'admin.device.read',
+            'admin.device.write',
+            'admin.device.import'
           ]
         }
       },
       {
         path: 'user',
-        component: dynamicComponents.pagesPrivate,
+        component: dynamicComponents.pagesPrivateUser,
         meta: {
           title: 'User',
-          access: ['manage.device.read']
+          access: ['user.device.read']
         }
       }
     ]
@@ -35,19 +35,19 @@ export default [
   // Should be hide all /private/* routes when user access exclude 'admin'
   // Because the only child route can only be accessed by admin
   {
-    path: '/app',
+    path: '/private-one-child',
     component: plainExport,
     meta: {
-      title: 'Private App',
+      title: 'Private Only Child',
       icon: 'el-icon-s-platform'
     },
     children: [
       {
         path: 'admin',
-        component: dynamicComponents.pagesPrivate,
+        component: dynamicComponents.pagesPrivateOnlyChild,
         meta: {
           title: 'Admin',
-          access: ['manage.app.read', 'manage.app.write']
+          access: ['admin.app.read', 'admin.app.write']
         }
       }
     ]

@@ -1,1 +1,5 @@
-export default ['pages/Private']
+export default [
+  'pages/Private/Admin',
+  'pages/Private/User',
+  'pages/PrivateOnlyChild'
+]

@@ -39,27 +39,27 @@ export default [
     },
     children: [
       {
-        path: 'dashboard',
-        component: constantComponents.pagesStaticPrivateDashboard,
+        path: 'admin',
+        component: constantComponents.pagesStaticPrivateAdmin,
         meta: {
-          title: 'Dashboard',
+          title: 'Admin',
           access: [
-            'manage.device.read',
-            'manage.device.write',
-            'manage.device.import'
+            'admin.device.read',
+            'admin.device.write',
+            'admin.device.import'
           ]
         }
       },
       {
-        path: 'table',
-        component: constantComponents.pagesStaticPrivateTable,
+        path: 'user',
+        component: constantComponents.pagesStaticPrivateUser,
         meta: {
-          title: 'Table',
+          title: 'User',
           icon: 'el-icon-tickets',
           access: [
-            'manage.device.read',
-            'manage.device.write',
-            'manage.device.import'
+            'user.device.read',
+            'user.device.write',
+            'user.device.import'
           ]
         }
       }

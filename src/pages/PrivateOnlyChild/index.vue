@@ -1,19 +1,41 @@
-<template functional>
+<template>
   <div class="admin">
     <p>
-      This route with its aside menu title item will
-      <strong>disappear</strong> when current user has correct access.
+      {{ $t('desc[0]') }}
+      <strong>{{ $t('desc[1]') }}</strong
+      >{{ $t('desc[2]') }}
     </p>
     <p>
-      Current route is
-      <strong>{{ parent.$route.path }}</strong>
+      {{ $t('currentRoute') }}
+      <strong>{{ $route.path }}</strong>
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Admin'
+  name: 'Admin',
+
+  i18n: {
+    messages: {
+      en: {
+        currentRoute: 'Current route is',
+        desc: [
+          'This route with its aside menu title item will',
+          'disappear',
+          ' when current user has correct access.'
+        ]
+      },
+      zh: {
+        currentRoute: '当前路由是',
+        desc: [
+          '在当前用户没有包含此路由权限时，侧边栏中仅包含本路由的条目也会一同',
+          '消失。',
+          ' '
+        ]
+      }
+    }
+  }
 }
 </script>
 

@@ -9,12 +9,12 @@ export default {
       username: 'Username is required.',
       password: 'Password is required.'
     },
-    submitButton: 'Log in'
+    submitButton: 'Login'
   },
   aside: {
-    header: 'Adminize',
+    header: 'Adminize console',
     bar: {
-      logout: 'Log out'
+      logout: 'Logout'
     }
   }
 }

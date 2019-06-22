@@ -74,9 +74,42 @@ export default {
       height: 100%
       flex: 1
 
+      &:empty
+        position: relative
+        box-sizing: border-box
+
+        &::before
+          content: ''
+          position: absolute
+          width: 100%
+          height: 100%
+          top: 50%
+          left: 50%
+          transform: translate(-50%, -50%)
+          background-color: $main-white
+
+        &::after
+          content: ''
+          display: block
+          position: absolute
+          left: 50%
+          top: 50%
+          border: 3px solid $main-bg // rgb(217, 236, 255)
+          border-top-color: $main-hover
+          border-radius: 50%
+          width: 1.5em
+          height: 1.5em
+          animation: spin 1s linear infinite
+
   &__footer
     line-height: 60px
     text-align: center
+
+@keyframes spin
+  from
+    transform: translate(-50%, -50%) rotate(0deg)
+  to
+    transform: translate(-50%, -50%) rotate(720deg)
 
 .collapse-aside
   .layout__dashboard__placeholder

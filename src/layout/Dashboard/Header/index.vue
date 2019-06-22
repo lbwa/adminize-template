@@ -5,22 +5,37 @@
     <div class="user">
       <img
         src="~../img/logo.png"
-        height="30%"
+        height="34%"
         alt="avatar"
         class="user__avatar"
       />
       <span class="user__name" :title="username">{{ username }}</span>
 
-      <!-- logout -->
-      <el-button class="logout" type="plain" @click="onLogout" size="mini">{{
-        $t('logout')
-      }}</el-button>
+      <el-dropdown trigger="click" class="lang">
+        <el-button type="text">{{ lang | formatLang }}</el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item
+            ><span class="lang__item" @click="setLocale('zh')"
+              >中文</span
+            ></el-dropdown-item
+          >
+          <el-dropdown-item
+            ><span class="lang__item" @click="setLocale('en')"
+              >EN</span
+            ></el-dropdown-item
+          >
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-button type="text" @click="onLogout" :title="$t('logout')"
+        ><i class="el-icon-switch-button"></i
+      ></el-button>
     </div>
   </el-header>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import lang from 'LANG'
 
 export default {
   name: 'Header',
@@ -31,24 +46,49 @@ export default {
     }
   },
 
+  computed: {
+    lang() {
+      return lang.locale
+    }
+  },
+
   methods: {
-    onLogout() {
-      this.$store
-        .dispatch('login/userLogout')
-        .then(() => this.$router.replace('/login'))
+    async onLogout() {
+      try {
+        await this.$store.dispatch('login/userLogout')
+        this.$router.replace('/login')
+      } catch (err) {
+        console.error(err)
+        this.$_plugins_message.error(this.$t('error'))
+      }
+    },
+    setLocale(type = 'en') {
+      lang.locale = type
     },
     ...mapMutations({
       toggleAside: 'SET_ASIDE_COLLAPSE'
     })
   },
 
+  filters: {
+    formatLang(lang) {
+      const LANG_MAP = {
+        zh: '中文',
+        en: 'English'
+      }
+      return LANG_MAP[lang] || 'Unknown'
+    }
+  },
+
   i18n: {
     messages: {
       en: {
-        logout: 'Logout'
+        logout: 'Logout',
+        error: 'Logout failed, Please try again !'
       },
       zh: {
-        logout: '登出'
+        logout: '登出',
+        error: '登出失败，请重试！'
       }
     }
   }
@@ -80,9 +120,21 @@ export default {
       vertical-align: middle
 
     &__name
-      margin: 0 10px
+      margin: 0 0 0 10px
       display: inline-block
-      width: 90px
+      max-width: 100px
       cursor: pointer
+      text-align: center
       +text-dot
+</style>
+
+<style lang="sass">
+.lang
+  margin: 0 10px
+
+  &__item
+    display: block
+    padding: 0 20px
+    margin: 0 -20px
+    text-align: center
 </style>

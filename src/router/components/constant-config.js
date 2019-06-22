@@ -2,8 +2,8 @@
 export default [
   'pages/Access',
   'pages/Home',
-  'pages/Admin/Dashboard',
-  'pages/Admin/Table',
+  'pages/StaticPrivate/Dashboard',
+  'pages/StaticPrivate/Table',
   'pages/Public/Anyone',
   'pages/Login',
   'pages/Error/NotFound',

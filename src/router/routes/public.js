@@ -31,16 +31,16 @@ export default [
     }
   },
   {
-    path: '/admin',
+    path: '/static-private',
     component: plainExport,
     meta: {
-      title: 'Admin',
+      title: 'StaticPrivate',
       icon: 'el-icon-user-solid'
     },
     children: [
       {
         path: 'dashboard',
-        component: constantComponents.pagesAdminDashboard,
+        component: constantComponents.pagesStaticPrivateDashboard,
         meta: {
           title: 'Dashboard',
           access: [
@@ -52,7 +52,7 @@ export default [
       },
       {
         path: 'table',
-        component: constantComponents.pagesAdminTable,
+        component: constantComponents.pagesStaticPrivateTable,
         meta: {
           title: 'Table',
           icon: 'el-icon-tickets',

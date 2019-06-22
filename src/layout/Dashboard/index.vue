@@ -51,7 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~STYLE/color/background.scss';
 @import '~STYLE/layout/aside.scss';
 @import '~STYLE/transition/aside.scss';
 
@@ -63,6 +62,7 @@ export default {
       bottom: 0;
       left: 0;
       z-index: 1200;
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
     }
   }
 
@@ -97,6 +97,6 @@ export default {
 
 /deep/ .scrollbar-wrapper {
   overflow-x: hidden !important; // 隐藏横向滚动条
-  background-color: $background-dark;
+  background-color: $main-dark;
 }
 </style>

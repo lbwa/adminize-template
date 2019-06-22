@@ -10,8 +10,8 @@
       <img
         class="aside__header__logo"
         src="./logo.png"
-        width="32"
-        height="32"
+        width="20"
+        height="20"
         alt="App logo"
       />
       <h1 class="aside__title">{{ $t('aside.header') }}</h1>
@@ -47,15 +47,17 @@ export default {
     return {
       activeTextColor: '#ffffff',
       textColor: '#ffffff',
-      menuBackgroundColor: '#001529'
+      menuBackgroundColor: '#282c34' // aside text area background
     }
   },
+
   computed: {
     ...mapState(['isAsideCollapse']),
     ...mapGetters('login', {
       routes: 'allRoutes'
     })
   },
+
   components: {
     RecursiveItem
   }
@@ -84,7 +86,6 @@ export default {
   .aside {
     &__header {
       padding-left: 24px;
-      background-color: #002140;
       overflow: hidden;
       line-height: 64px;
       height: 64px;
@@ -115,25 +116,18 @@ export default {
   width: auto;
 }
 
-/deep/ .el-submenu__title {
-  &:hover,
-  &:focus {
-    background-color: $background-dark;
-  }
-}
-
 /deep/ .el-menu-item {
-  background-color: $background-dark;
-
-  &:focus,
-  &:hover {
-    background-color: $background-dark;
-  }
-
   // 当前激活路由背景色
   &.is-active {
     // 源 UI 样式为内联样式，故使用 important 提升权重
-    color: $font-blue-50 !important;
+    color: $font-selected !important;
+  }
+}
+
+/deep/ .el-menu-item,
+/deep/ .el-submenu__title {
+  i {
+    color: $font-white !important;
   }
 }
 </style>

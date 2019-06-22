@@ -1,7 +1,8 @@
 <template functional>
   <div class="admin">
+    <h3>{{ parent.$t('pages.realTimeVerification') }}</h3>
     <p>
-      Current routes is
+      {{ parent.$t('pages.currentRoute') }}
       <strong>{{ parent.$route.path }}</strong
       >.
     </p>

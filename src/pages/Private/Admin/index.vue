@@ -1,7 +1,7 @@
 <template functional>
   <div class="admin">
     <p>
-      Current route is
+      {{ parent.$t('pages.currentRoute') }}
       <strong>{{ parent.$route.path }}</strong>
     </p>
   </div>

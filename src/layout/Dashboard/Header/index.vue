@@ -2,20 +2,19 @@
   <el-header class="layout__dashboard__header">
     <i class="el-icon-menu header__icon" @click="toggleAside"></i>
 
-    <!-- 登出按钮 -->
-    <el-button class="logout" type="text" @click="onLogout">{{
-      $t('aside.bar.logout')
-    }}</el-button>
-
     <div class="user">
-      <!-- 此处用户头像地址应是与用户信息耦合，而不与静态文件耦合 -->
       <img
         src="~../img/logo.png"
-        height="50%"
+        height="30%"
         alt="avatar"
         class="user__avatar"
       />
-      <span class="user__name">{{ username }}</span>
+      <span class="user__name" :title="username">{{ username }}</span>
+
+      <!-- logout -->
+      <el-button class="logout" type="plain" @click="onLogout" size="mini">{{
+        $t('logout')
+      }}</el-button>
     </div>
   </el-header>
 </template>
@@ -41,15 +40,22 @@ export default {
     ...mapMutations({
       toggleAside: 'SET_ASIDE_COLLAPSE'
     })
+  },
+
+  i18n: {
+    messages: {
+      en: {
+        logout: 'Logout'
+      },
+      zh: {
+        logout: '登出'
+      }
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-=user-area
-  float: right
-  height: 60px
-
 .layout__dashboard__header
   padding: 0 24px 0 0
   position: relative // for box-shadow
@@ -65,13 +71,18 @@ export default {
       transition: all 0.3s, padding 0s
 
   .user
-    +user-area;
-    margin-right: 15px
+    float: right
+    height: 60px
+
     &__name,
     &__avatar
       line-height: 60px
       vertical-align: middle
 
-  .logout
-    +user-area
+    &__name
+      margin: 0 10px
+      display: inline-block
+      width: 90px
+      cursor: pointer
+      +text-dot
 </style>

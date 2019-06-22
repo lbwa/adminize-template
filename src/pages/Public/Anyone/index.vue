@@ -1,8 +1,8 @@
 <template functional>
   <div class="anyone">
-    <h3>This route is public without any user access verification.</h3>
+    <h3>{{ parent.$t('pages.withoutVerification') }}</h3>
     <p>
-      Current route is
+      {{ parent.$t('pages.currentRoute') }}
       <strong>{{ parent.$route.path }}</strong>
     </p>
   </div>

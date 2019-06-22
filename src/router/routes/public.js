@@ -66,18 +66,18 @@ export default [
     ]
   },
   {
-    path: '/common',
+    path: '/public',
     component: plainExport,
     meta: {
-      title: 'Common',
+      title: 'Public',
       icon: 'el-icon-s-promotion'
     },
     children: [
       {
-        path: 'user',
-        component: constantComponents.pagesCommonUser,
+        path: 'anyone',
+        component: constantComponents.pagesPublicAnyone,
         meta: {
-          title: 'User'
+          title: 'Anyone'
         }
       }
     ]

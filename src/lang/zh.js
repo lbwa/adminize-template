@@ -12,9 +12,11 @@ export default {
     submitButton: '登 陆'
   },
   aside: {
-    header: 'Adminize',
-    bar: {
-      logout: '登 出'
-    }
+    header: 'Adminize console'
+  },
+  pages: {
+    withoutVerification: '当前路由为不包含任何权限验证的公共路由',
+    realTimeVerification: '当前路由包含了实时权限验证',
+    currentRoute: '当前路由是'
   }
 }

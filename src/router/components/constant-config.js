@@ -1,6 +1,5 @@
 // ! constant component path, based on `/src` directory
 export default [
-  'pages/Access',
   'pages/Home',
   'pages/StaticPrivate/Admin',
   'pages/StaticPrivate/User',

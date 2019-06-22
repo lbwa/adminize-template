@@ -12,9 +12,13 @@ export default {
     submitButton: 'Login'
   },
   aside: {
-    header: 'Adminize console',
-    bar: {
-      logout: 'Logout'
-    }
+    header: 'Adminize console'
+  },
+  pages: {
+    withoutVerification:
+      'This route is public without any user access verification.',
+    realTimeVerification:
+      'This route has include real-time access verification',
+    currentRoute: 'Current route is'
   }
 }

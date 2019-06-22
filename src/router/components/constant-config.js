@@ -4,7 +4,7 @@ export default [
   'pages/Home',
   'pages/Admin/Dashboard',
   'pages/Admin/Table',
-  'pages/Common/User',
+  'pages/Public/Anyone',
   'pages/Login',
   'pages/Error/NotFound',
   'pages/Error/Unauthorized',

@@ -31,30 +31,46 @@
           </el-input>
         </el-form-item>
 
-        <el-form-item>
-          <el-button
-            type="primary"
-            @click="onSubmit"
-            class="login__controller__submit"
-            :loading="isLoading"
-            >{{ $t('submitButton') }}</el-button
-          >
-        </el-form-item>
+        <el-button
+          type="primary"
+          @click="onSubmit"
+          class="login__controller__submit"
+          :loading="isLoading"
+          >{{ $t('submitButton') }}</el-button
+        >
 
-        <div class="login__way">
+        <div class="login__account">
           <el-button
-            class="login__way__item"
+            class="login__account__item"
             size="mini"
             type="text"
             @click="asDefault('admin')"
             >as admin</el-button
           >
           <el-button
-            class="login__way__item"
+            class="login__account__item"
             size="mini"
             type="text"
             @click="asDefault('user')"
             >as user</el-button
+          >
+        </div>
+        <div class="git">
+          <span v-if="lastCommit.author"
+            >Last commit:&nbsp;<a
+              class="git__info"
+              href="https://github.com/lbwa/adminize-template"
+              target="_blank"
+              >{{ lastCommit.author.date | formatDate }}</a
+            ></span
+          >
+          <span v-if="lastRelease"
+            >Last release:&nbsp;<a
+              class="git__info"
+              href="https://github.com/lbwa/adminize-template/releases"
+              target="_blank"
+              >{{ lastRelease.tag_name }}</a
+            ></span
           >
         </div>
       </el-form>
@@ -69,6 +85,8 @@
 import { mapActions } from 'vuex'
 import PageFooter from 'COMPONENTS/PageFooter'
 import createRules from './rules'
+import { fetchCommitList, fetchLastRelease } from 'API'
+import { formatDate } from 'UTILS'
 
 export default {
   data() {
@@ -78,7 +96,9 @@ export default {
         password: ''
       },
       rules: createRules.call(this),
-      isLoading: false
+      isLoading: false,
+      lastCommit: {},
+      lastRelease: null
     }
   },
 
@@ -109,8 +129,24 @@ export default {
     ...mapActions('login', ['userLogout'])
   },
 
-  created() {
+  filters: {
+    formatDate
+  },
+
+  async created() {
     this.userLogout()
+
+    try {
+      const promiseCommitList = fetchCommitList()
+      const promiseLastRelease = fetchLastRelease()
+
+      const [lastCommit] = await promiseCommitList
+      this.lastRelease = await promiseLastRelease
+      this.lastCommit = lastCommit.commit
+    } catch (err) {
+      console.error(err)
+      this.$_plugins_message.error('Fetching release info failed !')
+    }
   },
 
   components: {
@@ -176,14 +212,27 @@ export default {
     border-radius: 5px
 
     &__title
+      margin-top: 0
       text-align: center
       text-transform: capitalize
+
+    .git
+      display: flex
+      justify-content: space-between
+      font-size: $fz-sub
+      color: $font-tips
+
+      &__info
+        +normalize-link
+        font-size: $fz-sub
 
   &__controller
     &__submit
       width: 100%
 
-  &__way
+  &__account
+    margin: 10px 0
+
     &__item
       text-transform: uppercase
 

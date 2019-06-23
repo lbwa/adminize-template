@@ -57,7 +57,7 @@
         </div>
         <div class="git">
           <span v-if="lastCommit.author"
-            >Last commit:&nbsp;<a
+            >{{ $t('latestCommit') }}:&nbsp;<a
               class="git__info"
               href="https://github.com/lbwa/adminize-template"
               target="_blank"
@@ -65,7 +65,7 @@
             ></span
           >
           <span v-if="lastRelease"
-            >Last release:&nbsp;<a
+            >{{ $t('latestRelease') }}:&nbsp;<a
               class="git__info"
               href="https://github.com/lbwa/adminize-template/releases"
               target="_blank"
@@ -165,7 +165,9 @@ export default {
           username: 'Username is required.',
           password: 'Password is required.'
         },
-        submitButton: 'Login'
+        submitButton: 'Login',
+        latestCommit: 'Latest commit:',
+        latestRelease: 'Latest release'
       },
       zh: {
         header: 'Adminize console',
@@ -177,7 +179,9 @@ export default {
           username: '请输入正确的用户名',
           password: '请输入正确的密码'
         },
-        submitButton: '登 陆'
+        submitButton: '登 陆',
+        latestCommit: '最新提交',
+        latestRelease: '最新发布'
       }
     }
   }
@@ -223,6 +227,7 @@ export default {
       color: $font-tips
 
       &__info
+        margin-top: 5px
         +normalize-link
         font-size: $fz-sub
 
@@ -231,7 +236,7 @@ export default {
       width: 100%
 
   &__account
-    margin: 10px 0
+    margin: 10px 0 0
 
     &__item
       text-transform: uppercase

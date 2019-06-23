@@ -22,7 +22,7 @@ export default {
     // simulate data fetching
     this.$__timer__ = setTimeout(() => {
       this.isCompleted = true
-    }, 2000)
+    }, 1000)
   },
 
   beforeDestroy() {

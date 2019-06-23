@@ -26,6 +26,7 @@
             :placeholder="$t('placeholder.password')"
             type="password"
             clearable
+            show-password
           >
             <i slot="prefix" class="el-icon-lock"></i>
           </el-input>
@@ -166,7 +167,7 @@ export default {
           password: 'Password is required.'
         },
         submitButton: 'Login',
-        latestCommit: 'Latest commit:',
+        latestCommit: 'Latest commit',
         latestRelease: 'Latest release'
       },
       zh: {
@@ -225,6 +226,7 @@ export default {
       justify-content: space-between
       font-size: $fz-sub
       color: $font-tips
+      text-transform: capitalize
 
       &__info
         margin-top: 5px

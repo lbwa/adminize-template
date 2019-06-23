@@ -1,4 +1,19 @@
-# Adminize template [![CircleCI](https://circleci.com/gh/lbwa/adminize-template.svg?style=svg)](https://circleci.com/gh/lbwa/adminize-template)
+<h1 align="center">Adminize template</h1>
+
+<p align="center">
+  <a href="https://circleci.com/gh/lbwa/adminize-template">
+    <img alt="Circle CI" src="https://circleci.com/gh/lbwa/adminize-template.svg?style=svg">
+  </a>
+  <a href="https://github.com/lbwa/adminize-template/releases">
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/lbwa/adminize-template.svg?style=flat-square">
+  </a>
+  <a href="https://lbwa.github.io/adminize-template">
+    <img alt="Website" src="https://img.shields.io/website/https/lbwa.github.io/adminize-template.svg?down_message=offline&style=flat-square&up_message=online">
+  </a>
+  <a href="https://github.com/lbwa/adminize-template/commits/dev">
+    <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/lbwa/adminize-template/dev.svg?style=flat-square">
+  </a>
+</p>
 
 <p align="center">
   <a href="https://lbwa.github.io/adminize-template">Online site</a>
@@ -146,3 +161,7 @@ yarn run serve
 ```bash
 yarn run build
 ```
+
+## Other
+
+CHANGELOG is [here](./CHANGELOG.md).

@@ -19,7 +19,7 @@
   <a href="https://lbwa.github.io/adminize-template">Online site</a>
 </p>
 
-> A front-end access control solution, implement by Vuejs 2.0.
+> A front-end access control solution, implemented by Vuejs 2.0.
 
 ## Features
 

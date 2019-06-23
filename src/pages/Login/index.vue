@@ -40,6 +40,23 @@
             >{{ $t('submitButton') }}</el-button
           >
         </el-form-item>
+
+        <div class="login__way">
+          <el-button
+            class="login__way__item"
+            size="mini"
+            type="text"
+            @click="asDefault('admin')"
+            >as admin</el-button
+          >
+          <el-button
+            class="login__way__item"
+            size="mini"
+            type="text"
+            @click="asDefault('user')"
+            >as user</el-button
+          >
+        </div>
       </el-form>
     </div>
     <el-footer class="login__footer">
@@ -84,6 +101,10 @@ export default {
     },
     switchLoading(state) {
       this.isLoading = state
+    },
+    asDefault(type = 'admin') {
+      this.userInfo.username = type
+      this.userInfo.password = type
     },
     ...mapActions('login', ['userLogout'])
   },
@@ -161,6 +182,10 @@ export default {
   &__controller
     &__submit
       width: 100%
+
+  &__way
+    &__item
+      text-transform: uppercase
 
   &__footer
     .author__info

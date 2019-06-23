@@ -11,7 +11,7 @@
     <img alt="Website" src="https://img.shields.io/website/https/lbwa.github.io/adminize-template.svg?down_message=offline&style=flat-square&up_message=online">
   </a>
   <a href="https://github.com/lbwa/adminize-template/commits/dev">
-    <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/lbwa/adminize-template/dev.svg?style=flat-square">
+    <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/lbwa/adminize-template.svg?style=flat-square">
   </a>
 </p>
 

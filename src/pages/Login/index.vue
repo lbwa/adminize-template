@@ -46,14 +46,14 @@
             size="mini"
             type="text"
             @click="asDefault('admin')"
-            >as admin</el-button
+            >{{ $t('asAdmin') }}</el-button
           >
           <el-button
             class="login__account__item"
             size="mini"
             type="text"
             @click="asDefault('user')"
-            >as user</el-button
+            >{{ $t('asUser') }}</el-button
           >
         </div>
         <div class="git">
@@ -167,6 +167,8 @@ export default {
           password: 'Password is required.'
         },
         submitButton: 'Login',
+        asAdmin: 'as admin',
+        asUser: 'as user',
         latestCommit: 'Latest commit',
         latestRelease: 'Latest release'
       },
@@ -180,7 +182,9 @@ export default {
           username: '请输入正确的用户名',
           password: '请输入正确的密码'
         },
-        submitButton: '登 陆',
+        submitButton: '登 录',
+        asAdmin: '管理员登录',
+        asUser: '用户登录',
         latestCommit: '最新提交',
         latestRelease: '最新发布'
       }
@@ -229,6 +233,7 @@ export default {
       text-transform: capitalize
 
       &__info
+        display: inline-block
         margin-top: 5px
         +normalize-link
         font-size: $fz-sub

@@ -20,9 +20,13 @@ export default {
 
   created() {
     // simulate data fetching
-    setTimeout(() => {
+    this.$__timer__ = setTimeout(() => {
       this.isCompleted = true
     }, 2000)
+  },
+
+  beforeDestroy() {
+    clearTimeout(this.$__timer__)
   }
 }
 </script>

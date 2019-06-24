@@ -4,8 +4,7 @@ const PATH = require('./config/path')
 const __DEV__ = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  publicPath:
-    process.env.NODE_ENV === 'production' ? '/adminize-template/' : '/',
+  publicPath: './',
   productionSourceMap: false, // turn off source map
   configureWebpack(config) {
     if (!__DEV__) {

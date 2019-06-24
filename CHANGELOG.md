@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0](https://github.com/lbwa/adminize-template/compare/v0.1.0...v0.2.0) (2019-06-24)
+
+
+### Build System
+
+* mutate publicPath to './' for more flexibility ([6ae3917](https://github.com/lbwa/adminize-template/commit/6ae3917))
+
+
+### Features
+
+* **api:** split api based on api functionality ([d897952](https://github.com/lbwa/adminize-template/commit/d897952))
+* **login:** add commit and release info ([9c0bb71](https://github.com/lbwa/adminize-template/commit/9c0bb71))
+* **request:** rebuild request creator for custom headers ([cab8f0b](https://github.com/lbwa/adminize-template/commit/cab8f0b))
+
+
+
 ## 0.1.0 (2019-06-23)
 
 

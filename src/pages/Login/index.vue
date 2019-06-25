@@ -194,9 +194,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.layout__login
-  min-height: 100vh
-
 .login
   background-color: $main-dark
   background-position: center center

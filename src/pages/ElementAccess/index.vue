@@ -22,21 +22,21 @@
             <el-tag type="info">user</el-tag>
           </div>
 
-          <div v-access.some="'admin.device.read'">
+          <div v-access.some="['admin.device.read']">
             <p>{{ $t('elementAccess.directiveSome') }}</p>
             <el-tag>admin</el-tag>
           </div>
-          <div v-access.some="'user.device.read'">
+          <div v-access.some="['user.device.read']">
             <p>{{ $t('elementAccess.directiveSome') }}</p>
             <el-tag type="info">user</el-tag>
           </div>
 
-          <div v-access.every="'admin.device.read'">
+          <div v-access.every="['admin.device.read']">
             <p>{{ $t('elementAccess.directiveEvery') }}</p>
             <el-tag>admin</el-tag>
           </div>
 
-          <div v-access.every="'user.device.read'">
+          <div v-access.every="['user.device.read']">
             <p>{{ $t('elementAccess.directiveEvery') }}</p>
             <el-tag type="info">user</el-tag>
           </div>

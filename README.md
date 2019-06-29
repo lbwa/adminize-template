@@ -108,7 +108,7 @@
 
 ## Usages
 
-- Routes sample
+- Routes-access control
 
   ```js
   export default [
@@ -120,7 +120,7 @@
          * @description This route will be added to global routes map if user
          * accesses include 'device.read' and 'device.write' access.
          */
-        access: ['manage.device.read', 'manage.device.write']
+        access: ['admin.device.read', 'admin.device.write']
       }
     },
     {
@@ -128,10 +128,9 @@
       components: secondComponent,
       meta: {
         /**
-         * @description Private routes creation will ignore current route,
-         * because current user has no 'mange.device.write' access
+         * @description Current route will be ignored when current user has no 'mange.device.write' access
          */
-        access: ['manage.device.read', 'manage.device.write']
+        access: ['admin.device.read', 'admin.device.write']
       }
     },
     {
@@ -141,12 +140,41 @@
         /**
          * @description Once one of access was matched, private routes will be created.
          */
-        optionalAccess: ['manage.device.read', 'manage.device.write']
+        optionalAccess: ['admin.device.read', 'admin.device.write']
       }
     }
     // ... other routes
   ]
   ```
+
+- Element-access control
+
+
+    - Single access control
+
+      ```html
+      <!-- Element will be disappeared when user has no 'admin.device.read' access -->
+      <AnyElement v-access="admin.device.read" />
+      <AnyElement v-if="$_hasAccess('admin.device.read')" />
+      ```
+
+    - Optional access control
+
+      ```html
+      <!-- The current user's accesses should include at least one of the target access list. -->
+      <AnyElement v-access.some="['admin.device.read', 'admin.device.write']" />
+      <AnyElement v-if="$_hasSomeAccess(['admin.device.read', 'admin.device.write'])" />
+      ```
+
+    - Mandatory access control
+
+      ```html
+      <!-- The current user's accesses should include all accesses in the target access list. -->
+      <AnyElement v-access.every="['admin.device.read', 'admin.device.write']" />
+      <AnyElement v-if="$_hasEveryAccess(['admin.device.read', 'admin.device.write'])" />
+      ```
+
+As you wish, you can use `Vue` prototype function `$_hasAccess`, `$_hasSomeAccess`, `$_hasEveryAccess` to verify any user access without limitation.
 
 ## Commands
 

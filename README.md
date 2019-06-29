@@ -19,7 +19,7 @@
   <a href="https://lbwa.github.io/adminize-template">Online site</a>
 </p>
 
-> A front-end access control solution, implemented by Vuejs 2.0.
+> A front-end access control solution building with Vue.js v2.6+
 
 ## Features
 
@@ -147,6 +147,11 @@
   ]
   ```
 
+| meta field     | description                                                                     |
+| -------------- | ------------------------------------------------------------------------------- |
+| access         | Current user's access list should include all items of access field.            |
+| optionalAccess | Current user's access list include at least one access of optionalAccess field. |
+
 - Element-access control
 
 
@@ -175,6 +180,20 @@
       ```
 
 As you wish, you can use `Vue` prototype function `$_hasAccess`, `$_hasSomeAccess`, `$_hasEveryAccess` to verify any user access without limitation.
+
+> NOTICE: You should use `parent.$_hasAccess` to verify user access in the Vue functional component which has a non-functional parent vue component.
+
+| Vue `v-access` directive with modifiers | description                  |
+| --------------------------------------- | ---------------------------- |
+| `v-access`                              | Single access verification   |
+| `v-access.some`                         | optional access verification |
+| `v-access.every`                        | Mandatory access control     |
+
+| Vue prototype function | description                  |
+| ---------------------- | ---------------------------- |
+| `$_hasAccess`          | Single access verification   |
+| `$_hasSomeAccess`      | Optional access verification |
+| `$_hasEveryAccess`     | Mandatory access control     |
 
 ## Commands
 

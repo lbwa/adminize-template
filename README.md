@@ -23,6 +23,8 @@
 
 ## Features
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lbwa/adminize-template.svg)](https://greenkeeper.io/)
+
 1. Dynamic aside rendering
 
    All of console aside menu items is based on current user global routes which is made of public routes and private routes

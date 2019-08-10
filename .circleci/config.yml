@@ -6,7 +6,7 @@ jobs:
         - gh-pages
 
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:latest
 
     working_directory: ~/repo
 
@@ -31,6 +31,10 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+
+      - run:
+          name: Unit test
+          command: yarn test
 
       - run:
           name: Test generating process

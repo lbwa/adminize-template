@@ -25,7 +25,9 @@ export default {
       state.queue.push(record)
     },
     [types.DEQUEUE](state) {
-      delete state.pathMap[state.queue.shift().path]
+      if (state.queue.length) {
+        delete state.pathMap[state.queue.shift().path]
+      }
     },
     [types.INSERT](state, record) {
       const stateQueue = state.queue

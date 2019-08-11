@@ -39,5 +39,9 @@
     "sass-loader": "^7.0.1",
     "vue-cli-plugin-element": "^1.0.0",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }

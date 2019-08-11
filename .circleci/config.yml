@@ -33,6 +33,10 @@ jobs:
             - ~/.cache/yarn
 
       - run:
+          name: Unit test
+          command: yarn test
+
+      - run:
           name: Test generating process
           command: |
             if [ $CIRCLE_BRANCH != $SOURCE_BRANCH ]; then

@@ -9,14 +9,14 @@ function hasEveryAccess(
   accessMap = store.getters['login/accessMap']
 ) {
   if (Array.isArray(accesses)) {
-    return accesses.every(access => !!accessMap[access])
+    return accesses.every(access => hasAccess(access, accessMap))
   }
   throw new Error(`[hasEveryAccess]: ${accesses} should be a array !`)
 }
 
 function hasSomeAccess(accesses, accessMap = store.getters['login/accessMap']) {
   if (Array.isArray(accesses)) {
-    return accesses.some(access => !!accessMap[access])
+    return accesses.some(access => hasAccess(access, accessMap))
   }
   throw new Error(`[hasSomeAccess]: ${accesses} should be a array !`)
 }

@@ -186,7 +186,7 @@ As you wish, you can use `Vue` prototype function `$_hasAccess`, `$_hasSomeAcces
 | Vue `v-access` directive with modifiers | description                  |
 | --------------------------------------- | ---------------------------- |
 | `v-access`                              | Single access verification   |
-| `v-access.some`                         | optional access verification |
+| `v-access.some`                         | Optional access verification |
 | `v-access.every`                        | Mandatory access control     |
 
 | Vue prototype function | description                  |

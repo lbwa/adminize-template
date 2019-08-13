@@ -13,6 +13,12 @@
   <a href="https://github.com/lbwa/adminize-template/commits/dev">
     <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/lbwa/adminize-template.svg?style=flat-square">
   </a>
+  <a href="https://github.com/lbwa/adminize-template/pulls?q=is%3Apr+is%3Aclosed">
+    <img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/lbwa/adminize-template.svg?logo=github&style=flat-square">
+  </a>
+  <a href="https://greenkeeper.io/">
+    <img alt="Greenkeeper badge" src="https://badges.greenkeeper.io/lbwa/adminize-template.svg">
+  </a>
 </p>
 
 <p align="center">
@@ -22,8 +28,6 @@
 > A front-end access control solution building with Vue.js v2.6+
 
 ## Features
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/lbwa/adminize-template.svg)](https://greenkeeper.io/)
 
 1. Dynamic aside rendering
 

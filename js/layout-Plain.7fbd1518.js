@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["layout-Plain"],{f69d:function(n,i,e){"use strict";e.r(i),i["default"]={name:"AdminizePlain",render:function(){var n=arguments[0];return n("router-view",{class:"adminize__plain"})}}}}]);

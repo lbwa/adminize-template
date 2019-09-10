@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["layout-Dashboard-img-logo-png"],{"316b":function(o,p,n){o.exports=n.p+"img/logo.819e4ae6.png"}}]);

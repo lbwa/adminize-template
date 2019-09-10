@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["async-pages-Login-rules86"],{"5fc9":function(e,s,r){"use strict";function n(){return{username:[{required:!0,message:this.$t("tips.username"),trigger:"blur"}],password:[{required:!0,message:this.$t("tips.password"),trigger:"blur"}]}}r.r(s),r.d(s,"default",function(){return n})}}]);
